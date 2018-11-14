@@ -14,6 +14,6 @@
     ${str}<br>
   </head>
   <body>
-  $END$
+  Hello World!
   </body>
 </html>
