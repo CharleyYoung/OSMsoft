@@ -18,7 +18,7 @@ public class ConnDB {
 	// private static String propFileName = "/com/connDB.properties"; //指定资源文件保存的位置
 	// private static Properties prop = new Properties();
 	private static String dbClassName = "org.postgresql.Driver";
-	private static String url = "jdbc:postgresql://localhost:5432/Bibliosoft";
+	private static String url = "jdbc:postgresql://localhost:5432/osmsoft";
 	private static String user = "postgres";
 	private static String password = "root";
 
