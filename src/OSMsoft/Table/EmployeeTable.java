@@ -18,7 +18,7 @@ public class EmployeeTable {
     private String password;
     private String job;
     private int departmentID;
-
+    private String email;
     public int getEmployeeID() {
         return employeeID;
     }
@@ -97,5 +97,13 @@ public class EmployeeTable {
 
     public void setDepartmentID(int departmentID) {
         this.departmentID = departmentID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
