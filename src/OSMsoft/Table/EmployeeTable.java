@@ -14,7 +14,6 @@ public class EmployeeTable {
     private int age;
     private String gender;
     private int phoneNumber;
-    private String account;
     private String password;
     private String job;
     private int departmentID;
@@ -65,14 +64,6 @@ public class EmployeeTable {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
     }
 
     public String getPassword() {
