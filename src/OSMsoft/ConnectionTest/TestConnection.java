@@ -28,7 +28,7 @@ public class TestConnection {
         AdminDAO adminDAO = new AdminDAO();
         AdminTable adminTable = new AdminTable();
         adminTable = adminDAO.getAdminByAccount("Taiho");
-        if(adminTable.getAccount().equals(null)){
+        if(adminTable.getAccount() == null){
             System.out.println("There is no such admin");
         } else {
             System.out.println(adminTable.getAccount());

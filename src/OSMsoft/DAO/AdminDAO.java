@@ -23,9 +23,14 @@ public class AdminDAO {
         sql = "select * from admin where account = \'" + account + "\'";
         ResultSet rs = conn.executeQuery(sql);
         AdminTable adminTable = new AdminTable();
-        while(rs.next()) {
-            adminTable.setAccount(rs.getString(1));
-            adminTable.setPassword(rs.getString(2));
+        if(rs.next()) {
+            rs.previous();
+            while (rs.next()) {
+                adminTable.setAccount(rs.getString(1));
+                adminTable.setPassword(rs.getString(2));
+            }
+        }else{
+            adminTable.setAccount("no admin");
         }
         //所有操作执行完成后务必关闭数据库连接
         conn.close();
