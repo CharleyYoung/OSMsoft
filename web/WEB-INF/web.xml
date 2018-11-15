@@ -4,6 +4,8 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          metadata-complete="true"
          version="4.0">
+    <!--Admin相关的Servlet配置-->
+    <!--由Taiho维护-->
     <servlet>
         <servlet-name>AdminIndex</servlet-name>
         <servlet-class>OSMsoft.AdminAction.AdminIndex</servlet-class>
