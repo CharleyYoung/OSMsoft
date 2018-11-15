@@ -2,5 +2,22 @@
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         metadata-complete="true"
          version="4.0">
+    <servlet>
+        <servlet-name>AdminIndex</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminIndex</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminIndex</servlet-name>
+        <url-pattern>/AdminIndex</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DestroySession</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DestroySession</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DestroySession</servlet-name>
+        <url-pattern>/DestroySession</url-pattern>
+    </servlet-mapping>
 </web-app>
