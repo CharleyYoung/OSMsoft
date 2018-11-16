@@ -18,6 +18,7 @@ public class EmployeeTable {
     private String job;
     private int departmentID;
     private String email;
+
     public int getEmployeeID() {
         return employeeID;
     }
