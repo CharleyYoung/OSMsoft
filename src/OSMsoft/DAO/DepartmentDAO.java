@@ -1,9 +1,7 @@
 package OSMsoft.DAO;
 
-import OSMsoft.Table.DepartmentTable;
-import OSMsoft.Table.EmployeeTable;
+import OSMsoft.Table.*;
 import OSMsoft.core.ConnDB;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
