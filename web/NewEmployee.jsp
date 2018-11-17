@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
-    <title>Home</title>
+    <title>添加员工</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -98,27 +98,52 @@
         <div class="main-content">
             <div class="container-fluid">
                 <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
-                        </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">添加结果</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
+                    <div class="panel-body no-padding">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>工龄</th>
+                                <th>年龄</th>
+                                <th>密码</th>
+                                <th>邮箱</th>
+                                <th>职位</th>
+                                <th>部门</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            <tr style="font-size:25px;">
+                                <td>1</td>
+                                <td>${newEmployee.getName()}</td>
+                                <td>${newEmployee.getGender()}</td>
+                                <td>${newEmployee.getWorkAge()}</td>
+                                <td>${newEmployee.getAge()}</td>
+                                <td>${newEmployee.getPassword()}</td>
+                                <td>${newEmployee.getEmail()}</td>
+                                <td>${newEmployee.getJob()}</td>
+                                <td>${departmentName}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a href="AdminHomepage.jsp" class="demo-button" >
+                            <button  class="btn btn-success">确认</button>
+                        </a>
                     </div>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT -->
-<!-- END MAIN -->
+    <!-- END MAIN CONTENT -->
+    <!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">

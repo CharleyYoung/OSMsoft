@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
-    <title>Home</title>
+    <title>添加员工</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -61,12 +61,12 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
                                 <li><a href="" class="">管理员工信息</a></li>
                             </ul>
                         </div>
@@ -97,28 +97,54 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
+                <h3 class="page-title">添加员工</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3  class="panel-title">输入</h3>
+                            </div>
+
+                            <form method="POST" action="AddEmployee" >
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" placeholder="姓名" name="name">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="年龄" name="age">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="电话号码" name="tele">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="电子邮箱"name="email">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="职位"name="job">
+                                    <br>
+                                    <select id="部门" name="department" size="value" style="width: 100px;">
+
+                                    </select>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input name="gender" value="male" type="radio">
+                                        <span><i></i>男</span>
+                                    </label>
+                                    <label class="fancy-radio">
+                                        <input name="gender" value="female" type="radio">
+                                        <span><i></i>女</span>
+                                    </label>
+                                    <p class="demo-button">
+                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                    </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT -->
-<!-- END MAIN -->
+    <!-- END MAIN CONTENT -->
+    <!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">

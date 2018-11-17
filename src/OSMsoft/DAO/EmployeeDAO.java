@@ -21,13 +21,13 @@ public class EmployeeDAO {
     public void insertNewEmployee(EmployeeTable employeeTable){
         conn = new ConnDB();
         //定义sql语句
-        sql = "insert into employee(name, workage, age, gender, \"phoneNumber\", password, job, depid, email) "
+        sql = "insert into employee(name, workage, age, gender, phonenumber, password, job, depid, email) "
                 +"values( \'"+employeeTable.getName()+"\', "//员工名
                 +"\'0\', "//新插入的员工work age肯定为0
                 +"\'"+employeeTable.getAge() +"\', "//员工年龄
                 +"\'"+employeeTable.getGender()+"\', "//员工性别
                 +"\'"+employeeTable.getPhoneNumber()+"\', "//员工电话
-                +"\'"+employeeTable.getPassword()+"\', "//员工密码
+                +"\'"+000000+"\', "//员工密码,默认为000000
                 +"\'"+employeeTable.getJob()+"\', "//员工职责
                 +"\'"+employeeTable.getDepartmentID()+"\', "//员工所属部门
                 +"\'"+employeeTable.getEmail()+"\') ";//员工电子邮箱
@@ -39,6 +39,20 @@ public class EmployeeDAO {
         System.out.println("添加employee的语句:"+sql);
     }
 
+    /**
+     * 备用函数，直接展示所有员工
+     * @return 返回一个存储employeeTable的ArrayList，若没有员工，则employee的name属性是“no such employee”
+     */
+    public ArrayList<EmployeeTable> displayAll(){
+        conn = new ConnDB();
+        ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
+        sql = "select * from employee";
+        ResultSet rs = conn.executeQuery(sql);
+        addElements(eList, rs);
+        System.out.println("查询employee的语句："+sql);
+        conn.close();
+        return eList;
+    }
 
     /**
      * 利用id查询employee的方法
@@ -60,7 +74,7 @@ public class EmployeeDAO {
                     employeeTable.setWorkAge(Integer.parseInt(rs.getString(3)));
                     employeeTable.setAge(Integer.parseInt(rs.getString(4)));
                     employeeTable.setGender(rs.getString(5));
-                    employeeTable.setPhoneNumber(Integer.parseInt(rs.getString(6)));
+                    employeeTable.setPhoneNumber(Long.parseLong(rs.getString(6)));
                     employeeTable.setPassword(rs.getString(7));
                     employeeTable.setJob(rs.getString(8));
                     employeeTable.setDepartmentID(Integer.parseInt(rs.getString(9)));
@@ -164,6 +178,23 @@ public class EmployeeDAO {
     }
 
     /**
+     * 利用职位来查找员工
+     * @param job 想要查找的职位
+     * @return 返回一个存放了所有相同职位的员工的ArrayList，若没有一个员工与查询关键词匹配
+     * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
+     */
+    public ArrayList<EmployeeTable> searchEmployeeByJob(String job){
+        conn = new ConnDB();
+        ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
+        sql = "select * from employee where job = \'"+job+"\'";
+        ResultSet rs = conn.executeQuery(sql);
+        addElements(eList, rs);
+        System.out.println("查询employee的语句："+sql);
+        conn.close();
+        return eList;
+    }
+
+    /**
      * 利用员工ID来删除员工
      * @param id 要删除的员工的ID
      * @return 返回一个布尔值，若为true，则删除成功,若为false，则删除失败，可能原因为数据库中不存在该员工
@@ -255,7 +286,7 @@ public class EmployeeDAO {
                     employeeTable.setWorkAge(Integer.parseInt(rs.getString(3)));
                     employeeTable.setAge(Integer.parseInt(rs.getString(4)));
                     employeeTable.setGender(rs.getString(5));
-                    employeeTable.setPhoneNumber(Integer.parseInt(rs.getString(6)));
+                    employeeTable.setPhoneNumber(Long.parseLong(rs.getString(6)));
                     employeeTable.setPassword(rs.getString(7));
                     employeeTable.setJob(rs.getString(8));
                     employeeTable.setDepartmentID(Integer.parseInt(rs.getString(9)));

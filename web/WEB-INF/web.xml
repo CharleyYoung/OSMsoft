@@ -22,4 +22,12 @@
         <servlet-name>DestroySession</servlet-name>
         <url-pattern>/DestroySession</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddEmployee</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AddEmployee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddEmployee</servlet-name>
+        <url-pattern>/AddEmployee</url-pattern>
+    </servlet-mapping>
 </web-app>

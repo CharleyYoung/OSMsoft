@@ -4,12 +4,21 @@ package OSMsoft.Table;
  * @author Taiho
  * DepartmentTable 用于存放从数据库中读取出的Department元素的类
  * @author YocLu
+ * 添加设置departmentID的方法
  * 添加获取departmentID的方法
  */
 public class DepartmentTable {
     private int departmentID;
     private String departmentName;
     private int parentDepartmentID;
+
+    /**
+     *
+     * @param departmentID 要设置的DepartmentID
+     */
+    public void setDepartmentID(int departmentID){
+        this.departmentID = departmentID;
+    }
 
     /**
      *

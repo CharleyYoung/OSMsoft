@@ -39,21 +39,17 @@ public class TestConnection {
 
         //测试Employee相关工作是否正常
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
-        EmployeeTable employeeTable = new EmployeeTable();
-        employeeTable.setName("staff001");
-        employeeTable.setAge(20);
-        employeeTable.setPhoneNumber(136);
-        employeeTable.setEmail("123@163.com");
-        employeeTable.setJob("admin");
-        employeeTable.setGender("male");
-        employeeTable.setDepartmentID(5);
-        employeeTable.setPassword("12345678");
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        //employeeDAO.insertNewEmployee(employeeTable);
-        eList = employeeDAO.searchEmployeeByName("staff002");
+        System.out.println("按性别搜索测试");
+        eList = employeeDAO.searchEmployeeByGender("男");
         for(EmployeeTable et:eList){
             System.out.println("员工姓名"+et.getName());
         }
-
+        System.out.println("----------------------------");
+        System.out.println("按职位搜索测试");
+        eList = employeeDAO.searchEmployeeByJob("经理");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名"+et.getName());
+        }
     }
 }
