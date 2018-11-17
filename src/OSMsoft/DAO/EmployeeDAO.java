@@ -22,15 +22,15 @@ public class EmployeeDAO {
         conn = new ConnDB();
         //定义sql语句
         sql = "insert into employee(name, workage, age, gender, \"phoneNumber\", password, job, depid, email) "
-                +"values( \'"+employeeTable.getName()+"\' "//员工名
-                +"\'0\' "//新插入的员工work age肯定为0
-                +"\'"+employeeTable.getAge() +"\' "//员工年龄
-                +"\'"+employeeTable.getGender()+"\' "//员工性别
-                +"\'"+employeeTable.getPhoneNumber()+"\' "//员工电话
-                +"\'"+employeeTable.getPassword()+"\' "//员工密码
-                +"\'"+employeeTable.getJob()+"\' "//员工职责
-                +"\'"+employeeTable.getDepartmentID()+"\' "//员工所属部门
-                +"\'"+employeeTable.getEmail()+"\' ";//员工电子邮箱
+                +"values( \'"+employeeTable.getName()+"\', "//员工名
+                +"\'0\', "//新插入的员工work age肯定为0
+                +"\'"+employeeTable.getAge() +"\', "//员工年龄
+                +"\'"+employeeTable.getGender()+"\', "//员工性别
+                +"\'"+employeeTable.getPhoneNumber()+"\', "//员工电话
+                +"\'"+employeeTable.getPassword()+"\', "//员工密码
+                +"\'"+employeeTable.getJob()+"\', "//员工职责
+                +"\'"+employeeTable.getDepartmentID()+"\', "//员工所属部门
+                +"\'"+employeeTable.getEmail()+"\') ";//员工电子邮箱
 
         //执行sql语句
         conn.executeQuery(sql);
@@ -84,6 +84,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByName(String name){
+        conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where name = \'"+name+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -100,6 +101,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByWorkAge(int workAge){
+        conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where workage = \'"+workAge+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -116,6 +118,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByAge(int age){
+        conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where age = \'"+age+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -132,6 +135,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByGender(String gender){
+        conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where gender = \'"+gender+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -148,6 +152,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByDepartment(String depName){
+        conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where depid in ( "
             +"select depid from department where depname = \'"+depName+"\')";
@@ -164,6 +169,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则删除成功,若为false，则删除失败，可能原因为数据库中不存在该员工
      */
     public boolean deleteEmployeeByID(int id){
+        conn = new ConnDB();
         //初始化一个int类型的flag
         int flag = 0;
         sql = "delete from employee where employeeid = \'"+id+"\'";
@@ -187,6 +193,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则更新成功,若为false，则更新失败，可能原因为数据库中不存在该员工
      */
     public boolean updateEmployee(EmployeeTable employeeTable){
+        conn = new ConnDB();
         int flag = 0;
         sql = "update employee set name = \'"+employeeTable.getName() + "\', "
                 +"workage = \'"+employeeTable.getWorkAge()+"\', "
@@ -216,6 +223,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则更新成功,若为false，则更新失败，可能原因为数据库中不存在该员工
      */
     public boolean updateEmployeePassword(EmployeeTable employeeTable){
+        conn = new ConnDB();
         int flag = 0;
         sql = "update employee set password = \'"+employeeTable.getPassword()+"\' "
                 +"where employeeid = \'"+employeeTable.getEmployeeID()+"\'";
