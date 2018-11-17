@@ -19,7 +19,7 @@ public class AdminIndex extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         if(request.getParameter("account")=="" || request.getParameter("password") ==""){
-            out.print("<script language='javascript' charset='UTF-8'>alert('账户和密码不能为空');window.location.href='AdminLogin.jsp';</script>");
+            out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><script language='javascript' charset='UTF-8'>alert('账户和密码不能为空');window.location.href='AdminLogin.jsp';</script>");
         } else {
             //获取session，如果session不存在，就创建一个
             HttpSession session = request.getSession(true);
@@ -33,9 +33,9 @@ public class AdminIndex extends HttpServlet {
             try {
                 AdminTable adminTable = adminDAO.getAdminByAccount(account);
                 if(adminTable.getAccount().equals("no admin")){
-                    out.print("<script language='javascript' charset='utf-8'>alert('错误的账户名');window.location.href='AdminLogin.jsp';</script>");
+                    out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <script language='javascript' charset='utf-8'>alert('错误的账户名');window.location.href='AdminLogin.jsp';</script>");
                 } else if(!adminTable.getPassword().equals(password)){
-                    out.print("<script language='javascript' charset='utf-8'>alert('错误的密码');window.location.href='AdminLogin.jsp';</script>");
+                    out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <script language='javascript' charset='utf-8'>alert('错误的密码');window.location.href='AdminLogin.jsp';</script>");
                 } else{
                     //登录成功
                     System.out.println("Log in success");

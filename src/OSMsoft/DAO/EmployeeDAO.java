@@ -60,7 +60,7 @@ public class EmployeeDAO {
                     employeeTable.setWorkAge(Integer.parseInt(rs.getString(3)));
                     employeeTable.setAge(Integer.parseInt(rs.getString(4)));
                     employeeTable.setGender(rs.getString(5));
-                    employeeTable.setPhoneNumber(Integer.parseInt(rs.getString(6)));
+                    employeeTable.setPhoneNumber(Long.parseLong(rs.getString(6)));
                     employeeTable.setPassword(rs.getString(7));
                     employeeTable.setJob(rs.getString(8));
                     employeeTable.setDepartmentID(Integer.parseInt(rs.getString(9)));
@@ -84,6 +84,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByName(String name){
+        conn = new ConnDB();//change by SaulZhang
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where name = \'"+name+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -100,6 +101,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByWorkAge(int workAge){
+        conn = new ConnDB();//change by SaulZhang
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where workage = \'"+workAge+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -116,6 +118,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByAge(int age){
+        conn = new ConnDB();//change by SaulZhang
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where age = \'"+age+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -132,6 +135,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByGender(String gender){
+        conn = new ConnDB();//change by SaulZhang
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where gender = \'"+gender+"\'";
         ResultSet rs = conn.executeQuery(sql);
@@ -148,6 +152,7 @@ public class EmployeeDAO {
      * 将创建一个Table类并setName为“no such employee”并将该Table放入List返回，可由后续程序进行处理
      */
     public ArrayList<EmployeeTable> searchEmployeeByDepartment(String depName){
+        conn = new ConnDB();//change by SaulZhang
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
         sql = "select * from employee where depid in ( "
             +"select depid from department where depname = \'"+depName+"\')";
@@ -164,6 +169,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则删除成功,若为false，则删除失败，可能原因为数据库中不存在该员工
      */
     public boolean deleteEmployeeByID(int id){
+        conn = new ConnDB();//change by SaulZhang
         //初始化一个int类型的flag
         int flag = 0;
         sql = "delete from employee where employeeid = \'"+id+"\'";
@@ -187,6 +193,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则更新成功,若为false，则更新失败，可能原因为数据库中不存在该员工
      */
     public boolean updateEmployee(EmployeeTable employeeTable){
+        conn = new ConnDB();//change by SaulZhang
         int flag = 0;
         sql = "update employee set name = \'"+employeeTable.getName() + "\', "
                 +"workage = \'"+employeeTable.getWorkAge()+"\', "
@@ -216,6 +223,7 @@ public class EmployeeDAO {
      * @return 返回一个布尔值，若为true，则更新成功,若为false，则更新失败，可能原因为数据库中不存在该员工
      */
     public boolean updateEmployeePassword(EmployeeTable employeeTable){
+        conn = new ConnDB();//change by SaulZhang
         int flag = 0;
         sql = "update employee set password = \'"+employeeTable.getPassword()+"\' "
                 +"where employeeid = \'"+employeeTable.getEmployeeID()+"\'";
@@ -247,7 +255,7 @@ public class EmployeeDAO {
                     employeeTable.setWorkAge(Integer.parseInt(rs.getString(3)));
                     employeeTable.setAge(Integer.parseInt(rs.getString(4)));
                     employeeTable.setGender(rs.getString(5));
-                    employeeTable.setPhoneNumber(Integer.parseInt(rs.getString(6)));
+                    employeeTable.setPhoneNumber(Long.parseLong(rs.getString(6)));//change by SaulZhang
                     employeeTable.setPassword(rs.getString(7));
                     employeeTable.setJob(rs.getString(8));
                     employeeTable.setDepartmentID(Integer.parseInt(rs.getString(9)));
