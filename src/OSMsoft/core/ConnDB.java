@@ -20,7 +20,7 @@ public class ConnDB {
 	private static String dbClassName = "org.postgresql.Driver";
 	private static String url = "jdbc:postgresql://localhost:5432/osmsoft";
 	private static String user = "postgres";
-	private static String password = "root";
+	private static String password = "123456";
 
 	public ConnDB() {
 		try {
