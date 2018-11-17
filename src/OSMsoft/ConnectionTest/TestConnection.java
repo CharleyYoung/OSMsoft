@@ -2,6 +2,8 @@ package OSMsoft.ConnectionTest;
 
 import OSMsoft.core.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 import OSMsoft.DAO.*;
 import OSMsoft.Table.*;
 
@@ -34,5 +36,24 @@ public class TestConnection {
             System.out.println(adminTable.getAccount());
             System.out.println(adminTable.getPassword());
         }
+
+        //测试Employee相关工作是否正常
+        ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
+        EmployeeTable employeeTable = new EmployeeTable();
+        employeeTable.setName("staff001");
+        employeeTable.setAge(20);
+        employeeTable.setPhoneNumber(136);
+        employeeTable.setEmail("123@163.com");
+        employeeTable.setJob("admin");
+        employeeTable.setGender("male");
+        employeeTable.setDepartmentID(5);
+        employeeTable.setPassword("12345678");
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        //employeeDAO.insertNewEmployee(employeeTable);
+        eList = employeeDAO.searchEmployeeByName("staff002");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名"+et.getName());
+        }
+
     }
 }
