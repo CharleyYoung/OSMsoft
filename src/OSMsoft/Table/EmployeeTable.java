@@ -1,6 +1,6 @@
 package OSMsoft.Table;
 
-import org.omg.CORBA.StringHolder;
+//import org.omg.CORBA.StringHolder;
 
 /**
  * @author Taiho
