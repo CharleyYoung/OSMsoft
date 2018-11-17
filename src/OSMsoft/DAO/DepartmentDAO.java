@@ -1,10 +1,12 @@
 package OSMsoft.DAO;
 
 import OSMsoft.Table.DepartmentTable;
+import OSMsoft.Table.EmployeeTable;
 import OSMsoft.core.ConnDB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @author YocLu
@@ -147,7 +149,13 @@ public class DepartmentDAO {
      */
     public boolean deleteDepartmentByDepid(int depid){
         boolean flag = true;//函数返回值
-        boolean flag2 = false;//判断待删除部门是否有子部门的标志
+        boolean flag2 = false;//判断待删除部门是否有子部门的标志，true表示没有子部门，false表示有子部门
+
+        //判断待删除部门是否有员工
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        String depname = queryDepartmentByDepid(depid).getDepartmentName();
+        ArrayList<EmployeeTable> eList = employeeDAO.searchEmployeeByDepartment(depname);//获取部门员工列表
+
         int id = 1;
         while (id>0){
             DepartmentTable departmentTable = new DepartmentTable();
@@ -168,7 +176,8 @@ public class DepartmentDAO {
             }
         }
 
-        if (flag2){
+        //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
+        if (flag2 && eList == null){
             sql = "delete from department where depid = \'" + depid + "\'";
             try{
                 conn.executeUpdate(sql);
@@ -193,6 +202,11 @@ public class DepartmentDAO {
     public boolean deleteDepartmentByDepid(String depname){
         boolean flag = true;//函数返回值
         boolean flag2 = false;//判断待删除部门是否有子部门的标志
+
+        //判断待删除部门是否有员工
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        ArrayList<EmployeeTable> eList = employeeDAO.searchEmployeeByDepartment(depname);//获取部门员工列表
+
         DepartmentTable departmentTable2 = queryDepartmentByDepname(depname);
         int depid = departmentTable2.getDepartmentID();//获得待删除部门的ID
         int id = 1;
@@ -214,7 +228,8 @@ public class DepartmentDAO {
             }
         }
 
-        if (flag2){
+        //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
+        if (flag2 && eList == null){
             sql = "delete from department where depid = \'" + depname + "\'";
             try{
                 conn.executeUpdate(sql);
