@@ -3,6 +3,8 @@ package OSMsoft.Table;
 /**
  * @author Taiho
  * DepartmentTable 用于存放从数据库中读取出的Department元素的类
+ * @author YocLu
+ * 添加获取departmentID的方法
  */
 public class DepartmentTable {
     private int departmentID;
@@ -23,6 +25,14 @@ public class DepartmentTable {
      */
     public void setParentDepartmentID(int parentDepartmentID){
         this.parentDepartmentID = parentDepartmentID;
+    }
+
+    /**
+     *
+     * @return 返回当前Department的departmentID
+     */
+    public int getDepartmentID(){
+        return this.departmentID;
     }
 
     /**
