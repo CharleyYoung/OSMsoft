@@ -5,6 +5,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import OSMsoft.DAO.*;
 import OSMsoft.Table.*;
 
@@ -23,6 +25,7 @@ public class AdminIndex extends HttpServlet {
         } else {
             //获取session，如果session不存在，就创建一个
             HttpSession session = request.getSession(true);
+            response.setContentType("text/html");
             //获取cookie，如果cookie不存在，就创建一个
             Cookie[] cookie = request.getCookies();
             //获取输入框中的输入值
@@ -40,9 +43,18 @@ public class AdminIndex extends HttpServlet {
                     //登录成功
                     System.out.println("Log in success");
                     //设置session以维持会话信息
+
                     session.setAttribute("Account",account);
                     session.setAttribute("Password",password);
+
+                    //change by saulzhang
+                    //return the department tree
+                    TreeServiceImp treeServiceImp = new TreeServiceImp();
+                    ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+                    session.setAttribute("depList", treeDep);
+                    System.out.print(treeDep);
                     response.sendRedirect("AdminHomepage.jsp");
+
                 }
             }catch (Exception e){
                 e.printStackTrace();
