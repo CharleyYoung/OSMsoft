@@ -46,8 +46,7 @@ public class EmployeeDAO {
     public ArrayList<EmployeeTable> displayAll(){
         conn = new ConnDB();
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
-        sql = "select employee.*,department.depname " +
-                "from employee left join department on employee.depid = department.depid";
+        sql = "select * from employee";
         ResultSet rs = conn.executeQuery(sql);
         addElements(eList, rs);
         System.out.println("查询employee的语句："+sql);
@@ -64,9 +63,7 @@ public class EmployeeDAO {
     public EmployeeTable searchEmployeeByID(int id){
         conn = new ConnDB();
         EmployeeTable employeeTable = new EmployeeTable();
-        sql = "select employee.*,department.depname " +
-                "from employee left join department on employee.depid = department.depid " +
-                "where employeeid = \'"+id+"\'";
+        sql = "select * from employee where employeeid = \'"+id+"\'";
         ResultSet rs = conn.executeQuery(sql);
         try {
             if (rs.next()) {

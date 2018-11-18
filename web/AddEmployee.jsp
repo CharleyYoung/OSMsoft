@@ -73,7 +73,7 @@
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
-                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
+                                <li><a href="" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -126,9 +126,7 @@
                                     <input type="text" class="form-control" placeholder="职位"name="job">
                                     <br>
                                     <select id="部门" name="department" size="value" style="width: 100px;">
-                                        <c:forEach var="department" items="${departmentList}">
-                                            <option name="department" value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
-                                        </c:forEach>
+
                                     </select>
                                     <br>
                                     <label class="fancy-radio">

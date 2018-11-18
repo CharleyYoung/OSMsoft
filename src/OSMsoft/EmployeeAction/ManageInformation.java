@@ -52,7 +52,7 @@ public class ManageInformation extends HttpServlet {
             if(gender.equals("female")) {
                 gender = "女";
             }
-                System.out.println(request.getParameter("gender"));
+                //System.out.println(request.getParameter("gender"));
             String job = (String) request.getParameter("job");
             int department =  Integer.parseInt(request.getParameter("department"));
             //创建DAO变量，employeeDAO负责执行插入
@@ -70,16 +70,8 @@ public class ManageInformation extends HttpServlet {
             employeeTable.setGender(gender);
             //插入Employee信息
             employeeDAO.updateEmployee(employeeTable);
+            session.setAttribute("Employee",employeeTable);
             session.setAttribute("Account",account);
-            session.setAttribute("Password",employeeTable.getPassword());
-            session.setAttribute("Name",employeeTable.getName());
-            session.setAttribute("WorkAge",employeeTable.getWorkAge());
-            session.setAttribute("Age",employeeTable.getAge());
-            session.setAttribute("Gender",gender);
-            session.setAttribute("PhoneNumber",employeeTable.getPhoneNumber());
-            session.setAttribute("Email",employeeTable.getEmail());
-            session.setAttribute("Job",employeeTable.getJob());
-            session.setAttribute("DepID",employeeTable.getDepartmentID());
             response.sendRedirect("EmployeeHomepage.jsp");
         }
     }
