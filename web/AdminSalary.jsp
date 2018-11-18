@@ -1,7 +1,9 @@
 <%--
-    Created by IntelliJ IDEA.
-    User: Offenbaren
-    Date: 2018/11/15
+  Created by IntelliJ IDEA.
+  User: 82533
+  Date: 2018/11/17
+  Time: 20:05
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -107,10 +109,17 @@
                             <span>${sessionScope.Account}</span>
                         </div>
                     </div>
+                    <form class="form-auth-small" method="post" action="AdminSalary">
                     <div class="panel-body">
                         <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
+                        <h1 align="center" class="page-title"><strong>查询工资</strong></h1>
+                        <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要查询员工的工号</p></div>
+                        <div style="text-align:center; vertical-align:middle;">
+                            <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
+                            <button type="submit" >查询</button>
+                        </div>
                     </div>
+                    </form>
                 </div>
                 <!-- END OVERVIEW -->
             </div>

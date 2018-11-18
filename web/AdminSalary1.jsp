@@ -1,7 +1,9 @@
 <%--
-    Created by IntelliJ IDEA.
-    User: Offenbaren
-    Date: 2018/11/15
+  Created by IntelliJ IDEA.
+  User: 82533
+  Date: 2018/11/17
+  Time: 20:05
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -107,10 +109,10 @@
                             <span>${sessionScope.Account}</span>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
+                        <div class="panel-body">
+                            <div class="profile-detail"></div>
+                            <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
+                        </div>
                 </div>
                 <!-- END OVERVIEW -->
             </div>
@@ -148,3 +150,4 @@
 </body>
 
 </html>
+
