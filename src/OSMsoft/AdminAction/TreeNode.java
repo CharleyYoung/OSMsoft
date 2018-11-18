@@ -77,6 +77,14 @@ public class TreeNode implements Serializable {
     }
 
     public String getUrl() {
+        try {
+            if (url.isEmpty()) {
+                return "no resources";
+            }
+        } catch (Exception e) {
+            return "no resources";
+        }
+
         return url;
     }
 

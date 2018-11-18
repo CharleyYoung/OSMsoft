@@ -13,6 +13,9 @@ import OSMsoft.Table.*;
 /**
  * @author Taiho
  * AdminIndex 该servlet类负责处理用户登录逻辑，并根据用户填写结果跳转到相应界面
+ *
+ * @changed saulzhang
+ * 在session添加了部门的树状结构属性depList
  */
 @WebServlet(name = "/AdminIndex")
 public class AdminIndex extends HttpServlet {

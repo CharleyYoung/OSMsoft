@@ -16,7 +16,6 @@ public class TreeServiceImp {
 
     public DepartmentTreeDAO departmentTreeDAO = new DepartmentTreeDAO();
 
-
     public ArrayList<TreeNode> testQueryDepList() {
         // 原始的数据
         ArrayList<TreeNode> rootDep = departmentTreeDAO.selectAllDep();
@@ -67,10 +66,13 @@ public class TreeServiceImp {
             }
         }
         // 把子菜单的子菜单再循环一遍
-        for (TreeNode dep : childList) {// 没有url子菜单还有子菜单
-            if (dep.getUrl().equals("")) {
+        for (TreeNode depSon : childList) {// 没有url子菜单还有子菜单
+//            System.out.print("second Here:"+depSon+"depSon.getUrl:"+depSon.getUrl()+" ");
+//            System.out.println(depSon.getUrl().isEmpty());
+//            System.out.println();
+            if (depSon.getUrl().equals("no resources")) {
                 // 递归
-                dep.setChildren(getChild(dep.getId(), rootDep));
+                depSon.setChildren(getChild(depSon.getId(), rootDep));
             }
         }
         // 递归退出条件
