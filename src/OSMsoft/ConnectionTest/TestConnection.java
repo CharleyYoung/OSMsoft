@@ -43,16 +43,36 @@ public class TestConnection {
         System.out.println("按性别搜索测试");
         eList = employeeDAO.searchEmployeeByGender("男");
         for(EmployeeTable et:eList){
-            System.out.println("员工姓名"+et.getName());
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
         }
         System.out.println("----------------------------");
         System.out.println("按职位搜索测试");
         eList = employeeDAO.searchEmployeeByJob("经理");
         for(EmployeeTable et:eList){
-            System.out.println("员工姓名"+et.getName());
-        }
-        employeeTable = employeeDAO.searchEmployeeByID(40);
-        employeeTable.setGender("女");
-        employeeDAO.updateEmployee(employeeTable);
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按名称搜索测试");
+        eList = employeeDAO.searchEmployeeByName("张");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按工龄搜索测试");
+        eList = employeeDAO.searchEmployeeByWorkAge(6);
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按年龄搜索测试");
+        eList = employeeDAO.searchEmployeeByAge(28);
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+
     }
 }

@@ -58,12 +58,12 @@ public class AddEmployee extends HttpServlet {
             employeeTable.setJob(job);
             employeeTable.setGender(gender);
             employeeTable.setDepartmentID(departmentTable.getDepartmentID());
+            employeeTable.setDepartmentName(departmentTable.getDepartmentName());
             //插入Employee信息
             employeeDAO.insertNewEmployee(employeeTable);
             employeeTable.setWorkAge(0);
             employeeTable.setPassword("000000");
             request.setAttribute("newEmployee",employeeTable);
-            request.setAttribute("departmentName",department);
             request.getRequestDispatcher("NewEmployee.jsp").forward(request,response);
         }
     }

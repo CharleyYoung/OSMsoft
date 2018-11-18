@@ -5,9 +5,15 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<!--调用自定义标签-->
+<mytag:DepartmentReader></mytag:DepartmentReader>
+<!--利用JSTL生成一个数组-->
+<c:set var="departmentList" scope="page" value="${departmentInformation}" />
 <head>
     <title>添加员工</title>
     <meta charset="utf-8">
@@ -67,7 +73,7 @@
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -120,7 +126,9 @@
                                     <input type="text" class="form-control" placeholder="职位"name="job">
                                     <br>
                                     <select id="部门" name="department" size="value" style="width: 100px;">
-
+                                        <c:forEach var="department" items="${departmentList}">
+                                            <option name="department" value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
+                                        </c:forEach>
                                     </select>
                                     <br>
                                     <label class="fancy-radio">

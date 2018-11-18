@@ -5,7 +5,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
@@ -61,13 +61,13 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="AdminHomepage.jsp" class="active"><i class="active"></i> <span>个人信息</span></a></li>
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
-                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -97,22 +97,84 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
+                <h3 class="page-title"> 管理员工信息</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">搜索员工</h3>
+                            </div>
+
+                            <form method="POST" action="SearchEmployeeForOperate" >
+                                <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <select id="input" name="style" title="请选择搜索模式">
+                                            <option value="id">员工ID</option>
+                                            <option value="name">员工姓名</option>
+                                            <option value="workage">工龄</option>
+                                            <option value="age">年龄</option>
+                                            <option value="gender">性别</option>
+                                            <option value="department">部门</option>
+                                            <option value="job">职位</option>
+                                        </select>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input class="form-control" type="text" placeholder="输入关键词" name="keyWord">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="SUBMIT">搜索</button></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="panel" >
+                            <div class="panel-heading">
+                                <h3 class="panel-title">搜索结果</h3>
+                            </div>
+                            <div class="panel-body no-padding">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>员工ID</th>
+                                        <th>员工姓名</th>
+                                        <th>工龄</th>
+                                        <th>年龄</th>
+                                        <th>性别</th>
+                                        <th>电话号码</th>
+                                        <th>电子邮箱</th>
+                                        <th>职位</th>
+                                        <th>所属部门</th>
+                                    </tr>
+                                    </thead>
+
+                                    <!--用jstl获取查询结果-->
+                                    <c:set var="employeeList" scope="session" value="${searchResult}"></c:set>
+
+                                    <tbody>
+                                    <c:forEach var="item" items="${employeeList}">
+                                        <tr>
+                                            <td>${item.getEmployeeID()}</td>
+                                            <td>${item.getName()}</td>
+                                            <td>${item.getWorkAge()}</td>
+                                            <td>${item.getAge()}</td>
+                                            <td>${item.getGender()}</td>
+                                            <td>${item.getPhoneNumber()}</td>
+                                            <td>${item.getEmail()}</td>
+                                            <td>${item.getJob()}</td>
+                                            <td>${item.getDepartmentName()}</td>
+                                            <th><button type="submit" class="btn btn-primary" onclick="Update()"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
@@ -141,6 +203,26 @@
         if (result == true) {
             window.location.href = "DestroySession";
         } else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Delete() {
+        var result = confirm("确定要删除这个员工吗？");
+        if(result == true){
+            window.location.href ="DeleteEmployee";
+        }else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Update() {
+        var result = confirm("更新该员工信息？");
+        if(result == true){
+            window.location.href ="UpdateEmployeeForAdmin";
+        }else {
 
         }
     }

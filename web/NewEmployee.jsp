@@ -67,7 +67,7 @@
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -129,7 +129,7 @@
                                 <td>${newEmployee.getPassword()}</td>
                                 <td>${newEmployee.getEmail()}</td>
                                 <td>${newEmployee.getJob()}</td>
-                                <td>${departmentName}</td>
+                                <td>${newEmployee.getDepartmentName()}</td>
                             </tr>
                             </tbody>
                         </table>
