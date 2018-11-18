@@ -18,6 +18,7 @@ public class EmployeeTable {
     private String job;
     private int departmentID;
     private String email;
+    private String departmentName;
 
     public int getEmployeeID() {
         return employeeID;
@@ -97,5 +98,13 @@ public class EmployeeTable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }
