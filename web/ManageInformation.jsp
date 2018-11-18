@@ -100,35 +100,35 @@
                                     <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
                                     姓名：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Name}" name="name">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getName()}" name="name">
                                     <br>
                                     工龄：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.WorkAge}"name="workage">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getWorkAge()}"name="workage">
                                     <br>
                                     年龄：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Age}" name="age">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getAge()}" name="age">
                                     <br>
                                     电话：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.PhoneNumber}" name="tele">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
                                     <br>
                                     邮箱：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Email}"name="email">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getEmail()}"name="email">
                                     <br>
                                     职务：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Job}"name="job">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getJob()}"name="job">
                                     <br>
                                     岗位：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.DepID}"name="department">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getDepartmentID()}"name="department">
                                     <br>
                                     性别：
                                     <br>
-                                    <c:if test="${sessionScope.Gender eq '男'}">
+                                    <c:if test="${sessionScope.Employee.getGender() eq '男'}">
                                         <label class="fancy-radio">
                                             <input name="gender" value="male" type="radio" checked="checked">
                                             <span><i></i>男</span>
@@ -138,7 +138,7 @@
                                             <span><i></i>女</span>
                                         </label>
                                     </c:if>
-                                    <c:if test="${sessionScope.Gender eq '女'}">
+                                    <c:if test="${sessionScope.Employee.getGender() eq '女'}">
                                         <label class="fancy-radio">
                                             <input name="gender" value="male" type="radio">
                                             <span><i></i>男</span>
