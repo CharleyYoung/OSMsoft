@@ -68,7 +68,7 @@ public class ConnDB {
 	public int executeUpdate(String sql) {
 		int result = 0;
 		try {
-			conn = getConnection(); // 调用getConnection()方法构造Connection对象的一个实例conn
+			conn = getConnection(); //调用getConnection()方法构造Connection对象的一个实例conn
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			result = stmt.executeUpdate(sql); // 执行更新操作
 		} catch (SQLException ex) {

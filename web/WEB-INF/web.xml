@@ -22,12 +22,4 @@
         <servlet-name>DestroySession</servlet-name>
         <url-pattern>/DestroySession</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AdminSalary</servlet-name>
-        <servlet-class>OSMsoft.AdminAction.AdminSalary</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminSalary</servlet-name>
-        <url-pattern>/AdminSalary</url-pattern>
-    </servlet-mapping>
 </web-app>
