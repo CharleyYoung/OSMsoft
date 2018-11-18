@@ -22,4 +22,16 @@
         <servlet-name>DestroySession</servlet-name>
         <url-pattern>/DestroySession</url-pattern>
     </servlet-mapping>
+
+
+    <!--Department相关的Servlet配置-->
+    <!--由YocLu维护-->
+    <servlet>
+        <servlet-name>SearchDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.SearchDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchDepartment</servlet-name>
+        <url-pattern>/SearchDepartment</url-pattern>
+    </servlet-mapping>
 </web-app>

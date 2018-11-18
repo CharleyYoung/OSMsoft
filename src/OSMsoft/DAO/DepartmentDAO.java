@@ -106,7 +106,7 @@ public class DepartmentDAO {
      * @param parentdepid 根据parentdepid去数据库查询相应department
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
-    public ArrayList<DepartmentTable> queryDepartmentByDepname(int parentdepid){
+    public ArrayList<DepartmentTable> queryDepartmentByParentdepid(int parentdepid){
         conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department where parentdepid = \'" + parentdepid + "\'";
