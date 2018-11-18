@@ -1,13 +1,13 @@
 <%--
     Created by IntelliJ IDEA.
-    User: Offenbaren
+    User: Taiho
     Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
     <title>Home</title>
     <meta charset="utf-8">
@@ -67,7 +67,7 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
                                 <li><a href="" class="">管理员工信息</a></li>
                             </ul>
                         </div>

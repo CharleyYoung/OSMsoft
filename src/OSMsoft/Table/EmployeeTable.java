@@ -1,6 +1,5 @@
 package OSMsoft.Table;
 
-
 //import org.omg.CORBA.StringHolder;
 
 /**
@@ -14,7 +13,7 @@ public class EmployeeTable {
     private int workAge;
     private int age;
     private String gender;
-    private Long phoneNumber;
+    private long phoneNumber;
     private String password;
     private String job;
     private int departmentID;
@@ -60,11 +59,11 @@ public class EmployeeTable {
         this.gender = gender;
     }
 
-    public Long getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
