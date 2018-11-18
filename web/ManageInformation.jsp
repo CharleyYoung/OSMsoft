@@ -97,7 +97,7 @@
                                 <div class="panel-body">
                                     工号：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Account}" name="Account">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
                                     姓名：
                                     <br>
                                     <input type="text" class="form-control" value="${sessionScope.Name}" name="name">
