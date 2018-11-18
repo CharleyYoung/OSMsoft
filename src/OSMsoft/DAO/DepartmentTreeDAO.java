@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 /**
- * 将所有的部门信息组织成为树的节点起来以ArrayList形式返回所有的节点
+ * 将所有的部门信息组织成为树的节点起来以ArrayList形式返回所有的节点。
  *
  * @author saulzhang
  */

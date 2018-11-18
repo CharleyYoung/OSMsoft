@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * 获取DepartmentTreeDao查询到的所有部门节点信息，
- * 利用递归的方法将其组织成为树状的结构
+ * 利用递归的方法将其组织成为树状的结构。
  *
  * @author saulzhang
  */

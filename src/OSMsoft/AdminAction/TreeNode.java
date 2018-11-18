@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class TreeNode implements Serializable {
     /**
      * 树节点id
-     * 为了兼容多种情况，使用String类型
+     * 为了兼容多种情况，使用String类型。
      */
     private String id;
     /**

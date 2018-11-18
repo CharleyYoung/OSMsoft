@@ -159,7 +159,7 @@
             </nav>
         </div>
     </div>
-    <!-- END LEFT SIDEBAR -->
+    <!-- END LEFT SIDEBAR. -->
     <!-- MAIN -->
     <div class="main">
         <!-- MAIN CONTENT -->

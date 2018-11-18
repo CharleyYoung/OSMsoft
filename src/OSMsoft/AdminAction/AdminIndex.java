@@ -42,7 +42,7 @@ public class AdminIndex extends HttpServlet {
                 } else{
                     //登录成功
                     System.out.println("Log in success");
-                    //设置session以维持会话信息
+                    //设置session以维持会话信息、
 
                     session.setAttribute("Account",account);
                     session.setAttribute("Password",password);
