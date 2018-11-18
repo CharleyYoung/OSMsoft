@@ -4,10 +4,10 @@
     Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <head>
     <title>添加员工</title>
     <meta charset="utf-8">
@@ -84,7 +84,8 @@
 
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -133,8 +134,8 @@
                             </tr>
                             </tbody>
                         </table>
-                        <a href="AdminHomepage.jsp" class="demo-button" >
-                            <button  class="btn btn-success">确认</button>
+                        <a href="AdminHomepage.jsp" class="demo-button">
+                            <button class="btn btn-success">确认</button>
                         </a>
                     </div>
                 </div>
@@ -142,8 +143,8 @@
         </div>
     </div>
 </div>
-    <!-- END MAIN CONTENT -->
-    <!-- END MAIN -->
+<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">
