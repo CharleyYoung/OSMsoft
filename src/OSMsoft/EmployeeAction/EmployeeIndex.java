@@ -46,16 +46,11 @@ public class EmployeeIndex extends HttpServlet {
                     //登录成功
                     System.out.println("Log in success");
                     //设置session以维持会话信息
+                    EmployeeTable employee = new EmployeeTable();
+                    //往employeeTable中存储信息
+
+                    session.setAttribute("Employee",employeeTable);
                     session.setAttribute("Account",account);
-                    session.setAttribute("Password",password);
-                    session.setAttribute("Name",employeeTable.getName());
-                    session.setAttribute("WorkAge",employeeTable.getWorkAge());
-                    session.setAttribute("Age",employeeTable.getAge());
-                    session.setAttribute("Gender",employeeTable.getGender());
-                    session.setAttribute("PhoneNumber",employeeTable.getPhoneNumber());
-                    session.setAttribute("Email",employeeTable.getEmail());
-                    session.setAttribute("Job",employeeTable.getJob());
-                    session.setAttribute("DepID",employeeTable.getDepartmentID());
                     response.sendRedirect("EmployeeHomepage.jsp");
                 }
             }catch (Exception e){
