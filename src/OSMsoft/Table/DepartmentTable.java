@@ -10,6 +10,28 @@ public class DepartmentTable {
     private int departmentID;
     private String departmentName;
     private int parentDepartmentID;
+    private String url;//changed by saulzhang 2018-11-18
+    private String icon;//changed by saulzhang 2018-11-18
+
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     /**
      *
@@ -28,10 +50,9 @@ public class DepartmentTable {
     }
 
     /**
-     *
      * @return 返回当前Department的departmentID
      */
-    public int getDepartmentID(){
+    public int getDepartmentID() {
         return this.departmentID;
     }
 

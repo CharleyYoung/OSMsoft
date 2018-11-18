@@ -22,4 +22,15 @@
         <servlet-name>DestroySession</servlet-name>
         <url-pattern>/DestroySession</url-pattern>
     </servlet-mapping>
+
+    <!--add by saulzhang-->
+    <servlet>
+        <servlet-name>DepTree</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DepTreeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DepTree</servlet-name>
+        <url-pattern>/depTree</url-pattern>
+    </servlet-mapping>
+
 </web-app>

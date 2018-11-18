@@ -15,17 +15,17 @@ public class TestConnection {
 
     public static void main(String[] args) throws SQLException {
         ConnDB conn = new ConnDB();
-//        Double jobSalary,workAgeSalary;
-//        String phonenumber;
-//        int i;
-//        ResultSet rs = conn.executeQuery("select * from employee where workage = '3'");
-//
-//        while(rs.next()){
-//            phonenumber = String.valueOf(rs.getString(6));
-//            //workAgeSalary = Double.valueOf(rs.getString(3));
-//            System.out.println("phonenumber: " + phonenumber);
-////            System.out.println("WorkAgeSalary: " + workAgeSalary);
-//        }
+        Double jobSalary, workAgeSalary;
+        String phonenumber;
+        int i;
+        ResultSet rs = conn.executeQuery("select * from employee where workage = '3'");
+
+        while (rs.next()) {
+            phonenumber = String.valueOf(rs.getString(6));
+            //workAgeSalary = Double.valueOf(rs.getString(3));
+            System.out.println("phonenumber: " + phonenumber);
+//            System.out.println("WorkAgeSalary: " + workAgeSalary);
+        }
 
         //ResultSet rs1 = conn.executeQuery("select * from employee");
         EmployeeDAO employeeDAO = new EmployeeDAO();
