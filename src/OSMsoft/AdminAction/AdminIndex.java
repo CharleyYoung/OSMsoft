@@ -22,9 +22,10 @@ public class AdminIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         if(request.getParameter("account")=="" || request.getParameter("password") ==""){
-            out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><script language='javascript' charset='UTF-8'>alert('账户和密码不能为空');window.location.href='AdminLogin.jsp';</script>");
+            out.print("<script language='javascript' charset='UTF-8'>alert('账户和密码不能为空');window.location.href='AdminLogin.jsp';</script>");
         } else {
             //获取session，如果session不存在，就创建一个
             HttpSession session = request.getSession(true);
