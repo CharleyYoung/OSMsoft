@@ -232,7 +232,7 @@ public class EmployeeDAO {
                 +"workage = \'"+employeeTable.getWorkAge()+"\', "
                 +"age = \'"+employeeTable.getAge()+"\', "
                 +"gender = \'"+employeeTable.getGender()+"\', "
-                +"\"phoneNumber\" = \'"+employeeTable.getPhoneNumber()+"\', "
+                +"phonenumber = \'"+employeeTable.getPhoneNumber()+"\', "
                 +"job = \'"+employeeTable.getJob()+"\', "
                 +"depid = \'"+employeeTable.getDepartmentID()+"\', "
                 +"email = \'"+employeeTable.getEmail()+"\' "
