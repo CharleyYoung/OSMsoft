@@ -39,6 +39,7 @@ public class TestConnection {
 
         //测试Employee相关工作是否正常
         ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
+        EmployeeTable employeeTable = new EmployeeTable();
         EmployeeDAO employeeDAO = new EmployeeDAO();
         System.out.println("按性别搜索测试");
         eList = employeeDAO.searchEmployeeByGender("男");
@@ -51,5 +52,8 @@ public class TestConnection {
         for(EmployeeTable et:eList){
             System.out.println("员工姓名"+et.getName());
         }
+        employeeTable = employeeDAO.searchEmployeeByID(40);
+        employeeTable.setGender("女");
+        employeeDAO.updateEmployee(employeeTable);
     }
 }
