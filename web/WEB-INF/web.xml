@@ -61,6 +61,14 @@
         <servlet-name>UpdateEmployeeForAdmin</servlet-name>
         <url-pattern>/UpdateEmployeeForAdmin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DisplayForUpdate</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DisplayForUpdate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayForUpdate</servlet-name>
+        <url-pattern>/DisplayForUpdate</url-pattern>
+    </servlet-mapping>
     <!--Employee相关的Servlet配置-->
     <!--由zzh187维护-->
     <servlet>

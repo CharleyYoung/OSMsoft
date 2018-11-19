@@ -15,7 +15,7 @@
 <!--利用JSTL生成一个数组-->
 <c:set var="departmentList" scope="page" value="${departmentInformation}" />
 <head>
-    <title>添加员工</title>
+    <title>更新员工信息</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -67,13 +67,13 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class="active"><i class="active"></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
-                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -103,44 +103,54 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title">添加员工</h3>
+                <h3 class="page-title">更改员工信息</h3>
                 <div class="row">
                     <div class="col-md-12" >
-
-                        <!-- INPUTS -->
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3  class="panel-title">输入</h3>
+                        <div class="panel" >
+                            <div class="panel-heading" >
+                                <h3 class="panel-title">新信息</h3>
                             </div>
-
-                            <form method="POST" action="AddEmployee" >
+                            <form method="POST" action="UpdateEmployeeForAdmin" >
                                 <div class="panel-body">
-                                    <input type="text" class="form-control" placeholder="姓名" name="name">
+                                    <input type="text" class="form-control" name = "id"
+                                           placeholder="员工ID"  readonly= "true " value="${Employee.getEmployeeID()}">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="年龄" name="age">
+                                    <input type="text" class="form-control" name = "name"
+                                           placeholder="员工姓名" value="${Employee.getName()}">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="电话号码" name="tele">
+                                    <input type="text" class="form-control" name = "workAge"
+                                           placeholder="员工工龄" value="${Employee.getWorkAge()}">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="电子邮箱"name="email">
+                                    <input type="text" class="form-control" name = "age"
+                                           placeholder="员工年龄" value="${Employee.getAge()}">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="职位"name="job">
+                                    <input type="text" class="form-control" name = "tele"
+                                           placeholder="电话号码" value="${Employee.getPhoneNumber()}">
+                                    <br>
+                                    <input type="text" class="form-control" name = "email"
+                                           placeholder="邮箱" value="${Employee.getEmail()}">
+                                    <br>
+                                    <input type="text" class="form-control" name = "job"
+                                           placeholder="职位" value="${Employee.getJob()}">
+                                    <br>
+                                    <input type="text" class="form-control" name = "password"
+                                           placeholder="密码" value="${Employee.getPassword()}">
                                     <br>
                                     <select id="部门" name="department" size="value" style="width: 100px;">
-                                            <c:forEach var="department" items="${departmentList}">
-                                                <option name="department" value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
-                                            </c:forEach>
+                                        <c:forEach var="department" items="${departmentList}">
+                                            <option name="department" value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
+                                        </c:forEach>
                                     </select>
-                                    <br>
                                     <label class="fancy-radio">
-                                        <input name="gender" value="male" type="radio">
+                                        <input name="gender"   value="男" type="radio">
                                         <span><i></i>男</span>
                                     </label>
                                     <label class="fancy-radio">
-                                        <input name="gender" value="female" type="radio">
+                                        <input name="gender"   value="女" type="radio">
                                         <span><i></i>女</span>
                                     </label>
                                     <p class="demo-button">
-                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                        <button type="submit" class="btn btn-success">更新</button>
                                     </p>
                                 </div>
                             </form>
@@ -151,8 +161,8 @@
         </div>
     </div>
 </div>
-    <!-- END MAIN CONTENT -->
-    <!-- END MAIN -->
+<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">
