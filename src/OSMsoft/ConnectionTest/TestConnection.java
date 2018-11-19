@@ -15,38 +15,64 @@ public class TestConnection {
 
     public static void main(String[] args) throws SQLException {
         ConnDB conn = new ConnDB();
-        Double jobSalary, workAgeSalary;
-        String phonenumber;
-        int i;
-        ResultSet rs = conn.executeQuery("select * from employee where workage = '3'");
-
-        while (rs.next()) {
-            phonenumber = String.valueOf(rs.getString(6));
-            //workAgeSalary = Double.valueOf(rs.getString(3));
-            System.out.println("phonenumber: " + phonenumber);
-//            System.out.println("WorkAgeSalary: " + workAgeSalary);
+        Double jobSalary,workAgeSalary;
+        ResultSet rs = conn.executeQuery("select * from salary");
+        while(rs.next()){
+            jobSalary = Double.valueOf(rs.getString(1));
+            workAgeSalary = Double.valueOf(rs.getString(3));
+            System.out.println("JobSalary: " + jobSalary);
+            System.out.println("WorkAgeSalary: " + workAgeSalary);
         }
 
-        //ResultSet rs1 = conn.executeQuery("select * from employee");
-        EmployeeDAO employeeDAO = new EmployeeDAO();
-
-        ArrayList<EmployeeTable> employeeTable = new ArrayList<EmployeeTable>();
-
-        employeeTable = employeeDAO.searchEmployeeByName("ckwk");
-
-        for (EmployeeTable et : employeeTable) {
-            System.out.println(et.getName());
-        }
 
         //测试Admin相关的工作是否正常
-/*        AdminDAO adminDAO = new AdminDAO();
+        AdminDAO adminDAO = new AdminDAO();
         AdminTable adminTable = new AdminTable();
-        adminTable = adminDAO.getAdminByAccount("admin");
+        adminTable = adminDAO.getAdminByAccount("Taiho");
         if(adminTable.getAccount() == null){
             System.out.println("There is no such admin");
         } else {
             System.out.println(adminTable.getAccount());
             System.out.println(adminTable.getPassword());
-        }*/
+        }
+
+        //测试Employee相关工作是否正常
+        ArrayList<EmployeeTable> eList = new ArrayList<EmployeeTable>();
+        EmployeeTable employeeTable = new EmployeeTable();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        System.out.println("按性别搜索测试");
+        eList = employeeDAO.searchEmployeeByGender("男");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        }
+        System.out.println("----------------------------");
+        System.out.println("按职位搜索测试");
+        eList = employeeDAO.searchEmployeeByJob("经理");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按名称搜索测试");
+        eList = employeeDAO.searchEmployeeByName("张");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按工龄搜索测试");
+        eList = employeeDAO.searchEmployeeByWorkAge(6);
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+        System.out.println("----------------------------");
+        System.out.println("按年龄搜索测试");
+        eList = employeeDAO.searchEmployeeByAge(28);
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
+
+
     }
 }

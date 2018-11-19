@@ -22,4 +22,38 @@
         <servlet-name>DestroySession</servlet-name>
         <url-pattern>/DestroySession</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddEmployee</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AddEmployee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddEmployee</servlet-name>
+        <url-pattern>/AddEmployee</url-pattern>
+    </servlet-mapping>
+    <!--Employee相关的Servlet配置-->
+    <!--由zzh187维护-->
+    <servlet>
+        <servlet-name>EmployeeIndex</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.EmployeeIndex</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeIndex</servlet-name>
+        <url-pattern>/EmployeeIndex</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DestroySessionForEmployee</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.DestroySessionForEmployee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DestroySessionForEmployee</servlet-name>
+        <url-pattern>/DestroySessionForEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ManageInformation</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.ManageInformation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageInformation</servlet-name>
+        <url-pattern>/ManageInformation</url-pattern>
+    </servlet-mapping>
 </web-app>
