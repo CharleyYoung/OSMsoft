@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
@@ -98,12 +98,12 @@
                                     <!-- 一级子菜单没有parentId,有url -->
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
-                                            <a href="<c:url value='${dep.url }'/>">
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
                                     </c:if>
-                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <!-- 可展开的一级菜单，没有parentId,没有url -->
                                     <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
                                         <li>
                                             <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
@@ -120,7 +120,7 @@
                                                         <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
                                                         <c:if test="${  secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
                                                             <li>
-                                                                <a href="<c:url value='${secondChild.url }'/>">${secondChild.name }</a>
+                                                                <a href="<c:url value='/depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
                                                             </li>
                                                         </c:if>
                                                         <!-- 二级菜单url为空，表示还有三级菜单 -->
@@ -137,7 +137,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='${thirdChild.url }'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>
@@ -156,7 +156,8 @@
 
 
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -166,64 +167,69 @@
     <!-- END LEFT SIDEBAR. -->
     <!-- MAIN -->
     <div class="main">
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <div class="container-fluid">
-                <center><h4>Employee List:</h4></center><hr><br><br>
-                <table border="2" align = "center" border = 1 cellpadding = 10  cellspacing = 0> <!--设置表格的样式-->
-                    <tr bgcolor = "green">
-                        <td>姓名</td>
-                        <td>岗位</td>
-                        <td>工龄</td>
-                        <td>性别</td>
-                        <td>年龄</td>
-                        <td>联系方式</td>
-                        <td>邮箱</td>
+        <div class="panel">
+            <div class="panel-heading">
+                <center><h1 class="panel-title">${departmentName}</h1></center>
+            </div>
+            <div class="panel-body no-padding">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>岗位</th>
+                        <th>工龄</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>联系方式</th>
+                        <th>邮箱</th>
                     </tr>
-                    <c:forEach var = "employee" items="${employeeList}">
+                    </thead>
+
+                    <tbody>
+                    <c:forEach var="employee" items="${employeeList}">
                         <tr>
                             <td>${employee.name}</td>
                             <td>${employee.job}</td>
-                            <td>${employee.workage}</td>
+                            <td>${employee.workAge}</td>
                             <td>${employee.gender}</td>
                             <td>${employee.age}</td>
-                            <td>${employee.phonenumber}</td>
+                            <td>${employee.phoneNumber}</td>
                             <td>${employee.email}</td>
                         </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
-<!-- END MAIN CONTENT -->
-<!-- END MAIN -->
-<div class="clearfix"></div>
-<footer>
-    <div class="container-fluid">
-        <p class="copyright">Copyright &copy; 2018.Eagle Jump All rights
-            reserved.OSMsoft - Collect from Software</p>
+    <!-- END MAIN CONTENT -->
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">Copyright &copy; 2018.Eagle Jump All rights
+                reserved.OSMsoft - Collect from Software</p>
 
-    </div>
-</footer>
-<!-- END WRAPPER -->
-<!-- Javascript -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-<script src="assets/vendor/chartist/js/chartist.min.js"></script>
-<script src="assets/scripts/klorofil-common.js"></script>
-<script>
-    function logout() {
-        var result = confirm("确定要登出吗？");
-        if (result == true) {
-            window.location.href = "DestroySession";
-        } else {
+        </div>
+    </footer>
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="assets/vendor/chartist/js/chartist.min.js"></script>
+    <script src="assets/scripts/klorofil-common.js"></script>
+    <script>
+        function logout() {
+            var result = confirm("确定要登出吗？");
+            if (result == true) {
+                window.location.href = "DestroySession";
+            } else {
 
+            }
         }
-    }
-</script>
+    </script>
 </body>
 
 </html>

@@ -4,16 +4,16 @@
     Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib uri="MyFirstTag" prefix="mytag"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="MyFirstTag" prefix="mytag" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <!--调用自定义标签-->
 <mytag:DepartmentReader></mytag:DepartmentReader>
 <!--利用JSTL生成一个数组-->
-<c:set var="departmentList" scope="page" value="${departmentInformation}" />
+<c:set var="departmentList" scope="page" value="${departmentInformation}"/>
 <head>
     <title>添加员工</title>
     <meta charset="utf-8">
@@ -90,7 +90,8 @@
 
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -105,15 +106,15 @@
             <div class="container-fluid">
                 <h3 class="page-title">添加员工</h3>
                 <div class="row">
-                    <div class="col-md-12" >
+                    <div class="col-md-12">
 
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
-                                <h3  class="panel-title">输入</h3>
+                                <h3 class="panel-title">输入</h3>
                             </div>
 
-                            <form method="POST" action="AddEmployee" >
+                            <form method="POST" action="AddEmployee">
                                 <div class="panel-body">
                                     <input type="text" class="form-control" placeholder="姓名" name="name">
                                     <br>
@@ -121,9 +122,9 @@
                                     <br>
                                     <input type="text" class="form-control" placeholder="电话号码" name="tele">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="电子邮箱"name="email">
+                                    <input type="text" class="form-control" placeholder="电子邮箱" name="email">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="职位"name="job">
+                                    <input type="text" class="form-control" placeholder="职位" name="job">
                                     <br>
                                     <select id="部门" name="department" size="value" style="width: 100px;">
 
@@ -138,7 +139,7 @@
                                         <span><i></i>女</span>
                                     </label>
                                     <p class="demo-button">
-                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                        <button id="submit" type="submit" class="btn btn-success">添加</button>
                                     </p>
                                 </div>
                             </form>
@@ -149,8 +150,8 @@
         </div>
     </div>
 </div>
-    <!-- END MAIN CONTENT -->
-    <!-- END MAIN -->
+<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">

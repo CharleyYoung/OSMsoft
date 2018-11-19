@@ -100,7 +100,8 @@
                                     <!-- 一级子菜单没有parentId,有url -->
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
-                                            <a href="<c:url value='${dep.url }'/>">
+                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
@@ -120,9 +121,9 @@
                                                     <c:forEach items="${dep.children}" var="secondChild"
                                                                varStatus="status">
                                                         <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
-                                                        <c:if test="${  secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
                                                             <li>
-                                                                <a href="<c:url value='${secondChild.url }'/>">${secondChild.name }</a>
+                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
                                                             </li>
                                                         </c:if>
                                                         <!-- 二级菜单url为空，表示还有三级菜单 -->
@@ -139,7 +140,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='${thirdChild.url }'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>

@@ -87,4 +87,15 @@
         <servlet-name>ManageInformation</servlet-name>
         <url-pattern>/ManageInformation</url-pattern>
     </servlet-mapping>
+    <!--Department相关的Servlet配置-->
+    <!--由saulzhang维护-->
+    <servlet>
+        <servlet-name>depEmployee</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DepEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>depEmployee</servlet-name>
+        <url-pattern>/depEmployeeInfo</url-pattern>
+    </servlet-mapping>
+
 </web-app>
