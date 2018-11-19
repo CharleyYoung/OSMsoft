@@ -30,6 +30,14 @@
         <servlet-name>AddEmployee</servlet-name>
         <url-pattern>/AddEmployee</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchEmployeeForOperate</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.SearchEmployeeForOperate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchEmployeeForOperate</servlet-name>
+        <url-pattern>/SearchEmployeeForOperate</url-pattern>
+    </servlet-mapping>
     <!--Employee相关的Servlet配置-->
     <!--由zzh187维护-->
     <servlet>
@@ -56,4 +64,40 @@
         <servlet-name>ManageInformation</servlet-name>
         <url-pattern>/ManageInformation</url-pattern>
     </servlet-mapping>
+
+    <!--Department相关的Servlet配置-->
+    <!--由YocLu维护-->
+    <servlet>
+        <servlet-name>SearchDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.SearchDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchDepartment</servlet-name>
+        <url-pattern>/SearchDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.AddDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddDepartment</servlet-name>
+        <url-pattern>/AddDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.DeleteDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <url-pattern>/DeleteDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ModDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.ModDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModDepartment</servlet-name>
+        <url-pattern>/ModDepartment</url-pattern>
+    </servlet-mapping>
+
 </web-app>

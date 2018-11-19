@@ -14,13 +14,13 @@ import java.io.PrintWriter;
  * @author YocLu
  * Servlet implementation class modDepartment
  */
-public class modDepartment extends HttpServlet {
+public class ModDepartment extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public modDepartment() {
+    public ModDepartment() {
         super();
         // TODO Auto-generated constructor stub
     }

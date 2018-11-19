@@ -25,14 +25,6 @@ public class DepartmentTable {
 
     /**
      *
-     * @param departmentID 要设置的DepartmentID
-     */
-    public void setDepartmentID(int departmentID){
-        this.departmentID = departmentID;
-    }
-
-    /**
-     *
      * @param departmentName 要设置的DepartmentName
      */
     public void setDepartmentName(String departmentName){

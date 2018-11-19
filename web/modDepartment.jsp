@@ -84,7 +84,7 @@
                         </div>
                     </li>
 
-                    <li><a href="DepartmentInfo.jsp" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
+                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
                     </a>

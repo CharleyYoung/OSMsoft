@@ -18,10 +18,10 @@ public class DepartmentDAO {
      * @param departmentTable 添加的部门信息
      * @throws Exception
      */
-    public void addDepartment(DepartmentTable departmentTable) throws Exception {
+    public void addDepartment(DepartmentTable departmentTable) {
         conn = new ConnDB();
-        sql = "insert into department(depname, parentdepid) values(\'"+departmentTable.getDepartmentName()
-                +"\',\'"+departmentTable.getParentDepartmentID()+"\')";
+        sql = "insert into department(depname, parentdepid, url) values(\'"+departmentTable.getDepartmentName()
+                +"\',\'"+departmentTable.getParentDepartmentID()+"\', \'"+departmentTable.getUrl()+"\')";
         try {
             conn.executeQuery(sql);
         }catch (Exception e){
@@ -180,15 +180,28 @@ public class DepartmentDAO {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         String depname = queryDepartmentByDepid(depid).get(0).getDepartmentName();
         ArrayList<EmployeeTable> eList = employeeDAO.searchEmployeeByDepartment(depname);//获取部门员工列表
+//        if(hasSonDepartment(depid)){
+//            System.out.println("没有子部门");
+//        }else{
+//            System.out.println("有子部门");
+//        }
+//        if( eList.get(0).getName().equals("no such employee")){
+//            System.out.println("没有员工");
+//        }else{
+//            System.out.println("有员工");
+//            System.out.println(eList.get(0).getName());
+//        }
 
         //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
-        if (hasSonDepartment(depid) && eList == null){
+        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")){
             sql = "delete from department where depid = \'" + depid + "\'";
             try{
                 conn.executeUpdate(sql);
+                //System.out.println("删除成功");
             }catch (Exception e){
                 flag = false;
                 e.printStackTrace();
+                //System.out.println("删除失败");
             }finally {
                 conn.close();
             }
@@ -204,7 +217,7 @@ public class DepartmentDAO {
      * @param depname 通过Name删除部门
      * @return 返回一个布尔值
      */
-    public boolean deleteDepartmentByDepid(String depname){
+    public boolean deleteDepartmentByDepname(String depname){
         conn = new ConnDB();
         boolean flag = true;//函数返回值
 
@@ -214,10 +227,11 @@ public class DepartmentDAO {
 
         DepartmentTable departmentTable2 = queryDepartmentByDepname(depname).get(0);
         int depid = departmentTable2.getDepartmentID();//获得待删除部门的ID
+        System.out.println("待删除部门的ID"+depid);
 
         //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
-        if (hasSonDepartment(depid) && eList == null){
-            sql = "delete from department where depid = \'" + depname + "\'";
+        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")){
+            sql = "delete from department where depname = \'" + depname + "\'";
             try{
                 conn.executeUpdate(sql);
             }catch (Exception e){
