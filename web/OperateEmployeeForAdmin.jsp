@@ -6,16 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib uri="MyFirstTag" prefix="mytag"%>
-<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<!--调用自定义标签-->
-<mytag:DepartmentReader></mytag:DepartmentReader>
-<!--利用JSTL生成一个数组-->
-<c:set var="departmentList" scope="page" value="${departmentInformation}" />
 <head>
-    <title>添加员工</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -67,13 +61,13 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class="active"><i class="active"></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -103,45 +97,81 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title">添加员工</h3>
+                <h3 class="page-title"> 管理员工信息</h3>
                 <div class="row">
                     <div class="col-md-12" >
-
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
-                                <h3  class="panel-title">输入</h3>
+                                <h3 class="panel-title">搜索员工</h3>
                             </div>
 
-                            <form method="POST" action="AddEmployee" >
+                            <form method="POST" action="SearchEmployeeForOperate" >
                                 <div class="panel-body">
-                                    <input type="text" class="form-control" placeholder="姓名" name="name">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="年龄" name="age">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="电话号码" name="tele">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="电子邮箱"name="email">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="职位"name="job">
-                                    <br>
-                                    <select id="部门" name="department" size="value" style="width: 100px;">
+                                    <div class="col-md-12">
+                                        <select id="input" name="style" title="请选择搜索模式">
+                                            <option value="id">员工ID</option>
+                                            <option value="name">员工姓名</option>
+                                            <option value="workage">工龄</option>
+                                            <option value="age">年龄</option>
+                                            <option value="gender">性别</option>
+                                            <option value="department">部门</option>
+                                            <option value="job">职位</option>
+                                        </select>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input class="form-control" type="text" placeholder="输入关键词" name="keyWord">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="SUBMIT">搜索</button></span>
+                                        </div>
 
-                                    </select>
-                                    <br>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="male" type="radio">
-                                        <span><i></i>男</span>
-                                    </label>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="female" type="radio">
-                                        <span><i></i>女</span>
-                                    </label>
-                                    <p class="demo-button">
-                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
-                                    </p>
+                                    </div>
                                 </div>
                             </form>
+                        </div>
+
+                        <div class="panel" >
+                            <div class="panel-heading">
+                                <h3 class="panel-title">搜索结果</h3>
+                            </div>
+                            <div class="panel-body no-padding">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>员工ID</th>
+                                        <th>员工姓名</th>
+                                        <th>工龄</th>
+                                        <th>年龄</th>
+                                        <th>性别</th>
+                                        <th>电话号码</th>
+                                        <th>电子邮箱</th>
+                                        <th>职位</th>
+                                        <th>所属部门</th>
+                                    </tr>
+                                    </thead>
+
+                                    <!--用jstl获取查询结果-->
+                                    <c:set var="employeeList" scope="session" value="${searchResult}"></c:set>
+
+                                    <tbody>
+                                    <c:forEach var="item" items="${employeeList}">
+                                        <tr>
+                                            <td>${item.getEmployeeID()}</td>
+                                            <td>${item.getName()}</td>
+                                            <td>${item.getWorkAge()}</td>
+                                            <td>${item.getAge()}</td>
+                                            <td>${item.getGender()}</td>
+                                            <td>${item.getPhoneNumber()}</td>
+                                            <td>${item.getEmail()}</td>
+                                            <td>${item.getJob()}</td>
+                                            <td>${item.getDepartmentName()}</td>
+                                            <th><button type="submit" class="btn btn-primary" onclick="Update()"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,8 +179,8 @@
         </div>
     </div>
 </div>
-    <!-- END MAIN CONTENT -->
-    <!-- END MAIN -->
+<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">
@@ -173,6 +203,26 @@
         if (result == true) {
             window.location.href = "DestroySession";
         } else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Delete() {
+        var result = confirm("确定要删除这个员工吗？");
+        if(result == true){
+            window.location.href ="DeleteEmployee";
+        }else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Update() {
+        var result = confirm("更新该员工信息？");
+        if(result == true){
+            window.location.href ="UpdateEmployeeForAdmin";
+        }else {
 
         }
     }

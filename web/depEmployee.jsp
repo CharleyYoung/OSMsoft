@@ -1,11 +1,9 @@
 <%--
-    Created by IntelliJ IDEA.
-    User: Taiho
-    Date: 2018/11/15
-
-    Changed by saulzhang
-    desctiption:修改了左侧列表显示部门的树状结构
-    Date: 2018/11/18
+  Created by IntelliJ IDEA.
+  User: Jet Zhang
+  Date: 2018-11-19
+  Time: 19:37
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -13,7 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <head>
-    <title>Home</title>
+    <title>Department Employee</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -171,22 +169,29 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
-                </div>
-                <!-- END OVERVIEW -->
+                <center><h4>Employee List:</h4></center><hr><br><br>
+                <table border="2" align = "center" border = 1 cellpadding = 10  cellspacing = 0> <!--设置表格的样式-->
+                    <tr bgcolor = "green">
+                        <td>姓名</td>
+                        <td>岗位</td>
+                        <td>工龄</td>
+                        <td>性别</td>
+                        <td>年龄</td>
+                        <td>联系方式</td>
+                        <td>邮箱</td>
+                    </tr>
+                    <c:forEach var = "employee" items="${employeeList}">
+                        <tr>
+                            <td>${employee.name}</td>
+                            <td>${employee.job}</td>
+                            <td>${employee.workage}</td>
+                            <td>${employee.gender}</td>
+                            <td>${employee.age}</td>
+                            <td>${employee.phonenumber}</td>
+                            <td>${employee.email}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
     </div>

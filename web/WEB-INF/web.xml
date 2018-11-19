@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          metadata-complete="true"
          version="4.0">
+    <!--自定义tag相关-->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>MyFirstTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/MyTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
     <!--Admin相关的Servlet配置-->
     <!--由Taiho维护-->
     <servlet>
@@ -29,6 +36,30 @@
     <servlet-mapping>
         <servlet-name>AddEmployee</servlet-name>
         <url-pattern>/AddEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchEmployeeForOperate</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.SearchEmployeeForOperate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchEmployeeForOperate</servlet-name>
+        <url-pattern>/SearchEmployeeForOperate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DeleteEmployee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployee</servlet-name>
+        <url-pattern>/DeleteEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateEmployeeForAdmin</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.UpdateEmployeeForAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployeeForAdmin</servlet-name>
+        <url-pattern>/UpdateEmployeeForAdmin</url-pattern>
     </servlet-mapping>
     <!--Employee相关的Servlet配置-->
     <!--由zzh187维护-->
