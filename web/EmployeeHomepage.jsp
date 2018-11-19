@@ -4,7 +4,7 @@
     Date: 2018/11/16
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -69,7 +69,8 @@
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>工资记录</span></a></li>
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门信息</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -87,7 +88,8 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
                             <h3 class="name" id="name">${sessionScope.Name}</h3>
                             <span>${sessionScope.Name}</span>
                         </div>
