@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
-    <title>Home</title>
+    <title>管理员工信息</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -154,7 +154,8 @@
                                     <c:set var="employeeList" scope="session" value="${searchResult}"></c:set>
 
                                     <tbody>
-                                    <c:forEach var="item" items="${employeeList}">
+                                    <c:forEach var="items" items="${employeeList}" >
+                                        <c:set var="item" scope="session" value="${items}"></c:set>
                                         <tr>
                                             <td>${item.getEmployeeID()}</td>
                                             <td>${item.getName()}</td>
@@ -165,7 +166,7 @@
                                             <td>${item.getEmail()}</td>
                                             <td>${item.getJob()}</td>
                                             <td>${item.getDepartmentName()}</td>
-                                            <th><button type="submit" class="btn btn-primary" onclick="Update()"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-primary" onclick="Update(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
                                             <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
                                         </tr>
                                     </c:forEach>
@@ -218,10 +219,10 @@
     }
 </script>
 <script type="text/javascript">
-    function Update() {
+    function Update(item) {
         var result = confirm("更新该员工信息？");
         if(result == true){
-            window.location.href ="UpdateEmployeeForAdmin";
+            window.location.href ="DisplayForUpdate?employee="+item;
         }else {
 
         }
