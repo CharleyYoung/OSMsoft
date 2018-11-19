@@ -126,13 +126,15 @@ public class DepartmentDAO {
         conn = new ConnDB();
         boolean flag = true;
         sql = "update department set depname = \'"+departmentTable.getDepartmentName()+
-                "\', parentdepid = \'"+departmentTable.getParentDepartmentID()+
                 "\' where depid = \'"+departmentTable.getDepartmentID()+"\'";
+        System.out.println("更新sql:"+sql);
         try{
             conn.executeUpdate(sql);
+            System.out.println("更新成功");
         }catch (Exception e){
             flag = false;
             e.printStackTrace();
+            System.out.println("更新失败");
         }finally {
             conn.close();
         }

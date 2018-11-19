@@ -1,15 +1,18 @@
 <%--
     Created by IntelliJ IDEA.
     User: YocLu
-    Date: 2018/11/17
+    Date: 2018/11/19
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+
 <head>
-    <title>ManageDepartmentInfo</title>
+    <title>Modify Department</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -163,68 +166,26 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title"> 管理部门信息</h3>
+                <h3 class="page-title">更新部门信息</h3>
                 <div class="row">
                     <div class="col-md-12" >
-                        <!-- INPUTS -->
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">搜索部门</h3>
+                        <div class="panel" >
+                            <div class="panel-heading" >
+                                <h3 class="panel-title">新信息</h3>
                             </div>
-
-                            <form method="POST" action="SearchDepartment" >
+                            <form method="POST" action="UpdateDepartment" >
                                 <div class="panel-body">
-                                    <div class="col-md-12">
-                                        <select id="input" name="style" title="请选择搜索模式">
-                                            <option value="depid">部门ID</option>
-                                            <option value="depname">部门名称</option>
-                                            <option value="parentdepid">上级部门ID</option>
-                                            <option value="parentdename">上级部门名称</option>
-                                        </select>
-                                        <br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input class="form-control" type="text" placeholder="输入关键词" name="keyword">
-                                            <span class="input-group-btn"><button class="btn btn-primary" type="SUBMIT">搜索</button></span>
-                                        </div>
-
-                                    </div>
+                                    <input type="text" class="form-control" name = "depid"
+                                           placeholder="部门ID"  readonly= "true " value="${Department.getDepartmentID()}">
+                                    <br>
+                                    <input type="text" class="form-control" name = "depname"
+                                           placeholder="部门名称" value="${Department.getDepartmentName()}">
+                                    <br>
+                                    <p class="demo-button">
+                                        <button type="submit" class="btn btn-success">更新</button>
+                                    </p>
                                 </div>
                             </form>
-                        </div>
-
-                        <div class="panel" >
-                            <div class="panel-heading">
-                                <h3 class="panel-title">搜索结果</h3>
-                            </div>
-                            <div class="panel-body no-padding">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>部门ID</th>
-                                        <th>部门名称</th>
-                                        <th>上级部门ID</th>
-                                    </tr>
-                                    </thead>
-
-                                    <!--用jstl获取查询结果-->
-                                    <c:set var="departmentList" scope="session" value="${searchResult}"></c:set>
-
-                                    <tbody>
-                                    <c:forEach var="item" items="${departmentList}">
-                                        <tr>
-                                            <td>${item.getDepartmentID()}</td>
-                                            <td>${item.getDepartmentName()}</td>
-                                            <td>${item.getParentDepartmentID()}</td>
-                                            <th><button type="submit" class="btn btn-primary"
-                                                        onclick="Update(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
-                                            <th><button type="submit" class="btn btn-danger"
-                                                        onclick="Delete(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 删除</button></th>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -258,21 +219,6 @@
         } else {
 
         }
-    }
-</script>
-<script type="text/javascript">
-    function Delete(depid) {
-        var result = confirm("确定删除该部门吗？");
-        if(result == true){
-            window.location.href ="DeleteDepartment?depid="+depid;
-        }else {
-
-        }
-    }
-</script>
-<script type="text/javascript">
-    function Update(depid) {
-        window.location.href ="ModDepartment?depid="+depid;
     }
 </script>
 </body>

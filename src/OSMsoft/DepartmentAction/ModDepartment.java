@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @author YocLu
- * Servlet implementation class modDepartment
+ * Servlet implementation class ModDepartment
  */
 public class ModDepartment extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -25,34 +24,20 @@ public class ModDepartment extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int depid =Integer.valueOf(request.getParameter("depid"));
-        String depname=request.getParameter("depname");
-        int parentdepid =Integer.valueOf(request.getParameter("parentdepid"));
-        System.out.println(depname);
-        DepartmentDAO departmentDAO = new DepartmentDAO();
-        DepartmentTable departmentTable = new DepartmentTable();
-        departmentTable.setDepartmentName(depname);
-        departmentTable.setParentDepartmentID(parentdepid);
-        boolean flag = departmentDAO.updateDepartment(departmentTable);
-        PrintWriter out = response.getWriter();
-        if (flag) {
-            out.print("<script>alert('Modify department successfully!');window.location='modDepartment.jsp'</script>");
-        } else {
-            out.print("<script>alert('Modify department unsuccessfully!');window.location='modDepartment.jsp'</script>");
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
 
+        int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
+        DepartmentDAO departmentDAO = new DepartmentDAO();
+        DepartmentTable departmentTable = departmentDAO.queryDepartmentByDepid(depid).get(0);
+        request.setAttribute("Department",departmentTable);
+        request.getRequestDispatcher("ModDepartment.jsp").forward(request,response);
     }
 
 }
