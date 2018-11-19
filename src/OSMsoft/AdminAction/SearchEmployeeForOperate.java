@@ -60,11 +60,16 @@ public class SearchEmployeeForOperate extends HttpServlet {
             out.println("<script>");
             out.println("alert('关键词有误，请确认输入正确的关键词');window.location.href='OperateEmployeeForAdmin.jsp';");
             out.println("</script>");
+        }if(eList.get(0).getName().equals("no such employee")){
+            out.println("<script>");
+            out.println("alert('搜索结果为空，请确认结果');window.location.href='OperateEmployeeForAdmin.jsp';");
+            out.println("</script>");
+        }else {
+            //往request里面存放数据
+            request.setAttribute("searchResult", eList);
+            //进行页面跳转
+            request.getRequestDispatcher("OperateEmployeeForAdmin.jsp").forward(request, response);
         }
-        //往request里面存放数据
-        request.setAttribute("searchResult",eList);
-        //进行页面跳转
-        request.getRequestDispatcher("OperateEmployeeForAdmin.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

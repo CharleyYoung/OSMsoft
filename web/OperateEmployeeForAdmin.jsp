@@ -166,8 +166,10 @@
                                             <td>${item.getEmail()}</td>
                                             <td>${item.getJob()}</td>
                                             <td>${item.getDepartmentName()}</td>
-                                            <th><button type="submit" class="btn btn-primary" onclick="Update(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
-                                            <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
+                                            <th><button type="submit" class="btn btn-primary"
+                                                        onclick="Update(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-danger"
+                                                        onclick="Delete(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 删除</button></th>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -209,10 +211,10 @@
     }
 </script>
 <script type="text/javascript">
-    function Delete() {
+    function Delete(item) {
         var result = confirm("确定要删除这个员工吗？");
         if(result == true){
-            window.location.href ="DeleteEmployee";
+            window.location.href ="DeleteEmployee?employee="+item;
         }else {
 
         }
