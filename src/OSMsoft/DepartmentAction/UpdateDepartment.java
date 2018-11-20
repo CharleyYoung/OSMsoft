@@ -43,13 +43,10 @@ public class UpdateDepartment extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
         //判断输入框是否填满
-        HttpSession session = request.getSession(true);
-        TreeServiceImp treeServiceImp = new TreeServiceImp();
-        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
-        session.setAttribute("depList", treeDep);
         if (request.getParameter("depname") == "") {
-            out.print("<script>alert('请输入部门名称!');window.location='modDepartment.jsp';</script>");
+            out.print("<script>alert('请输入部门名称!');window.location.href='modDepartment.jsp';</script>");
         } else {
             //获取页面输入框信息
             int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
@@ -62,10 +59,16 @@ public class UpdateDepartment extends HttpServlet {
             boolean flag = departmentDAO.updateDepartment(departmentTable);//判断是否更新信息成功
 
             if (flag) {
-                out.print("<script>alert('更新成功!');window.location='ManageDepartmentInfo.jsp';</script>");
+                HttpSession session = request.getSession(true);
+                session.removeAttribute("depList");
+                TreeServiceImp treeServiceImp = new TreeServiceImp();
+                ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+                session.setAttribute("depList", treeDep);
+                out.print("<script>alert('更新成功!');window.location.href='ManageDepartmentInfo.jsp';</script>");
             } else {
-                out.print("<script>alert('更新失败!');window.location='ModDepartment.jsp';</script>");
+                out.print("<script>alert('更新失败!');window.location.href='ModDepartment.jsp';</script>");
             }
         }
+
     }
 }

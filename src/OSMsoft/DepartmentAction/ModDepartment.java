@@ -36,24 +36,19 @@ public class ModDepartment extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        HttpSession session = request.getSession(true);
-
-        TreeServiceImp treeServiceImp = new TreeServiceImp();
-        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
-        session.setAttribute("depList", treeDep);
 
         int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
         DepartmentDAO departmentDAO = new DepartmentDAO();
         DepartmentTable departmentTable = departmentDAO.queryDepartmentByDepid(depid).get(0);
         request.setAttribute("Department", departmentTable);
-        request.getRequestDispatcher("ModDepartment.jsp").forward(request, response);
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        response.sendRedirect("/ManageDepartmentInfo.jsp");
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("depList");
+        TreeServiceImp treeServiceImp = new TreeServiceImp();
+        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+        session.setAttribute("depList", treeDep);
+
+        request.getRequestDispatcher("ModDepartment.jsp").forward(request, response);
     }
 
 }

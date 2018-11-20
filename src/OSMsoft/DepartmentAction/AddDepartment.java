@@ -45,12 +45,6 @@ public class AddDepartment extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-
-        HttpSession session = request.getSession(true);
-        TreeServiceImp treeServiceImp = new TreeServiceImp();
-        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
-        session.setAttribute("depList", treeDep);
-
         //判断所有输入框是否填满
         if (request.getParameter("depname") == "") {
             out.print("<script>alert('请输入部门名称');window.location='AddDepartment.jsp';</script>");
@@ -62,10 +56,23 @@ public class AddDepartment extends HttpServlet {
             //获取页面输入框信息
             DepartmentDAO departmentDAO = new DepartmentDAO();
             String depname = request.getParameter("depname");
-            int parentdepid = 0;
-            String parentdepname = String.valueOf(request.getParameter("parentdepname"));
 
-            parentdepid = departmentDAO.queryDepartmentByDepname(parentdepname).get(0).getDepartmentID();
+            int parentdepid = 0;
+            boolean isParent = false;//标记是否为合法的上级部门
+            String parentdepname = String.valueOf(request.getParameter("parentdepname"));
+            DepartmentTable parentdepartmentTable = departmentDAO.queryDepartmentByDepname(parentdepname).get(0);
+            if (parentdepartmentTable.getDepartmentName().equals(parentdepname)) {//判断是否存在输入的上级部门
+                String url = String.valueOf(parentdepartmentTable.getUrl());
+                if (url.equals("null")) {//通过url判断该上级部门是否允许添加子部门
+                    isParent = true;
+                } else {
+                    out.print("<script>alert('输入的上级部门不允许添加子部门，请重新输入');window.location='AddDepartment.jsp';</script>");
+                }
+            } else {
+                out.print("<script>alert('不存在输入的上级部门名称，请重新输入');window.location='AddDepartment.jsp';</script>");
+            }
+
+            parentdepid = parentdepartmentTable.getDepartmentID();
             System.out.println("上级部门名称: " + parentdepname);
             System.out.println("上级部门ID: " + parentdepid);
 
@@ -79,10 +86,11 @@ public class AddDepartment extends HttpServlet {
                     if (ppparentdepid != 0) {//第一层部门的上级部门ID应该为0
                         flag = false;
                         System.out.println("超过层次结构");
+                        out.print("<script>alert('该部门以下无法再添加子部门（部门层次结构最多为三层），请重新添加');window.location='AddDepartment.jsp';</script>");
                     }
                 }
             }
-            if (flag) {
+            if (isParent && flag) {//如果输入的上级部门合法且未超出层级结构即可进行添加子部门
                 String haveson = (String) request.getParameter("haveson");
 
                 //创建Table变量并存储要用到的信息
@@ -95,14 +103,17 @@ public class AddDepartment extends HttpServlet {
                 }
                 departmentDAO.addDepartment(departmentTable);
                 //request.setAttribute("newDepartment",departmentTable);
-                out.print("<script>alert('添加成功');window.location='AddDepartment.jsp';</script>");
+                HttpSession session = request.getSession(true);
+                session.removeAttribute("depList");
+                TreeServiceImp treeServiceImp = new TreeServiceImp();
+                ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+                session.setAttribute("depList", treeDep);
+                out.print("<script>alert('添加成功');window.location.href='AddDepartment.jsp';</script>");
                 //request.getRequestDispatcher("newDepartment.jsp").forward(request,response);
             } else {
-                out.print("<script>alert('该部门以下无法再添加子部门（部门层次结构最多为三层），请重新添加');window.location='AddDepartment.jsp';</script>");
+                out.print("<script>alert('添加失败，请重新添加');window.location.href='AddDepartment.jsp';</script>");
             }
 
         }
-
     }
-
 }

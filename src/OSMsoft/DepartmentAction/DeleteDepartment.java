@@ -45,23 +45,19 @@ public class DeleteDepartment extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession(true);
-        TreeServiceImp treeServiceImp = new TreeServiceImp();
-        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
-        session.setAttribute("depList", treeDep);
-
-        System.out.println(treeDep);
-
         DepartmentDAO departmentDAO = new DepartmentDAO();
         int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
         Boolean flag = departmentDAO.deleteDepartmentByDepid(depid);
 
         if (flag) {
+            HttpSession session = request.getSession(true);
+            session.removeAttribute("depList");
+            TreeServiceImp treeServiceImp = new TreeServiceImp();
+            ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+            session.setAttribute("depList", treeDep);
             out.print("<script>alert('删除成功');window.location.href='ManageDepartmentInfo.jsp';</script>");
         } else {
-            out.print("<script>alert('删除失败');window.location.href='ManageDepartmentInfo.jsp';</script>");
+            out.print("<script>alert('待删除部门含有子部门，删除失败');window.location.href='ManageDepartmentInfo.jsp';</script>");
         }
-
     }
 }
