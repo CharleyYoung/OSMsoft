@@ -4,7 +4,7 @@
     Date: 2018/11/19
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
@@ -67,7 +67,7 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddDepartment.jsp" class="">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
                                 <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
@@ -156,7 +156,8 @@
 
 
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -172,15 +173,15 @@
             <div class="container-fluid">
                 <h3 class="page-title">添加部门</h3>
                 <div class="row">
-                    <div class="col-md-12" >
+                    <div class="col-md-12">
 
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
-                                <h3  class="panel-title">输入</h3>
+                                <h3 class="panel-title">输入</h3>
                             </div>
 
-                            <form method="POST" action="AddDepartment" >
+                            <form method="POST" action="AddDepartment">
                                 <div class="panel-body">
                                     <input type="text" class="form-control" placeholder="部门名称" name="depname">
                                     <br>
@@ -197,7 +198,7 @@
                                     </label>
                                     <br>
                                     <p class="demo-button">
-                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                        <button id="submit" type="submit" class="btn btn-success">添加</button>
                                     </p>
                                 </div>
                             </form>

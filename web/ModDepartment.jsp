@@ -1,14 +1,15 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: YocLu
-  Date: 2018/11/18
+    Created by IntelliJ IDEA.
+    User: YocLu
+    Date: 2018/11/19
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="OSMsoft.DAO.*" %>
-<%@ page import="java.util.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 
 <head>
     <title>Modify Department</title>
@@ -63,13 +64,13 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="AdminHomepage.jsp" class="active"><i class="active"></i> <span>个人信息</span></a></li>
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -84,9 +85,76 @@
                         </div>
                     </li>
 
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
+                    <li><a href="#subPages3" data-toggle="collapse" class="collapsed"><i
+                            class="images/dep.png fa-fw"></i>
+                        <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages3" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="ManageDepartmentInfo.jsp" class="">管理部门信息</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加部门</a></li>
+                                <c:set var="depList" value="${depList}"/>
+                                <c:forEach items="${depList}" var="dep" varStatus="status">
+                                    <!-- 一级子菜单没有parentId,有url -->
+                                    <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="<c:url value='${dep.url }'/>">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
+                                               class="collapsed">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }<span
+                                                    class="fa arrow"></span>
+                                                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                            </a>
+                                            <div id="subPages3-${status.count+1000}" class="collapse ">
+                                                <ul class="nav nav-second-level">
+
+                                                    <c:forEach items="${dep.children}" var="secondChild"
+                                                               varStatus="status">
+                                                        <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
+                                                        <c:if test="${  secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                            <li>
+                                                                <a href="<c:url value='${secondChild.url }'/>">${secondChild.name }</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <!-- 二级菜单url为空，表示还有三级菜单 -->
+                                                        <c:if test="${secondChild.url eq 'no resources' }">
+                                                            <li>
+                                                                <a href="#subPages3-${status.count+500}"
+                                                                   data-toggle="collapse" class="collapsed">
+                                                                        ${secondChild.name }<span
+                                                                        class="fa arrow"></span><i
+                                                                        class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                                                <div id="subPages3-${status.count+500}"
+                                                                     class="collapse ">
+                                                                    <ul class="nav nav-third-level">
+                                                                        <c:forEach items="${secondChild.children}"
+                                                                                   var="thirdChild" varStatus="status">
+                                                                            <li>
+                                                                                <a href="<c:url value='${thirdChild.url }'/>">${thirdChild.name }</a>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -94,140 +162,66 @@
         </div>
     </div>
     <!-- END LEFT SIDEBAR -->
-
-    <div class="tab-content">
-        <div class="tab-pane active" id="panel-1">
-
-            <!-- MAIN -->
-            <div class="main">
-                <!-- MAIN CONTENT -->
-                <div class="main-content">
-                    <div class="container-fluid">
-                        <h3 class="page-title">Modify Department</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <!-- INPUTS -->
-                                <form method="POST" action="SearchDepartment">
-                                    <div class="panel">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">Input Department ID</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <input class="form-control" type="text" name="depid" placeholder="Department ID">
-                                                    <span class="input-group-btn"><button
-                                                            class="btn btn-primary" type="SUBMIT">Go!</button></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Result Of Finding</h3>
-                                    </div>
-                                    <div class="panel-body no-padding">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Department ID</th>
-                                                <th>Department Name</th>
-                                                <th>Department Parent ID</th>
-                                                <th>Operate</th>
-                                            </tr>
-                                            </thead>
-
-                                            <%
-                                                if(request.getAttribute("depid") != null){
-                                            %>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td><%=request.getAttribute("depid")%></td>
-                                                <td><%=request.getAttribute("depname")%></td>
-                                                <td><%=request.getAttribute("parentdepid")%></td>
-
-                                                <th><button type="button" class="btn btn-primary" onclick="update()">
-                                                    <i class="fa fa-refresh"></i> Update
-                                                </button></th>
-                                            </tr>
-                                            </tbody>
-                                            <%
-                                                }
-                                            %>
-
-                                        </table>
-                                    </div>
-                                </div>
-
-
-                                <%
-                                    if(request.getAttribute("depid") != null){
-                                %>
-                                <form method="POST" action="modDepartment">
-                                    <div class="panel">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">New information</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <input type="text" class="form-control" id="depid" readonly="readonly"
-                                                   placeholder="Department ID"> <br>
-                                            <input type="text" class="form-control" id="name" readonly="readonly"
-                                                   placeholder="book name"> <br>
-                                            <input type="text" class="form-control" id="publisher" readonly="readonly"
-                                                   placeholder="publisher"> <br>
-                                            <input type="text" class="form-control" id="edition" readonly="readonly"
-                                                   placeholder="edition"> <br>
-                                            <input type="text" class="form-control" id="catagory" readonly="readonly"
-                                                   placeholder="catagory"> <br>
-                                            <input type="text" class="form-control" id="location" name="location"
-                                                   placeholder="location"> <br>
-                                            <input class="form-control" type="hidden" name="bookID" value=<%=request.getAttribute("bookID") %>>
-                                            <p class="demo-button">
-                                                <button type="SUBMIT" class="btn btn-success">Update</button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                                <%
-                                    }
-                                %>
-
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <h3 class="page-title">更新部门信息</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">新信息</h3>
                             </div>
+                            <form method="POST" action="UpdateDepartment">
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" name="depid"
+                                           placeholder="部门ID" readonly="true " value="${Department.getDepartmentID()}">
+                                    <br>
+                                    <input type="text" class="form-control" name="depname"
+                                           placeholder="部门名称" value="${Department.getDepartmentName()}">
+                                    <br>
+                                    <p class="demo-button">
+                                        <button type="submit" class="btn btn-success">更新</button>
+                                    </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT -->
-    <div class="clearfix"></div>
-    <footer>
-        <div class="container-fluid">
-            <p class="copyright">
-                Copyright &copy; 2018.Eagle Jump All rights reserved.OSMsoft - Collect from Software
-            </p>
         </div>
-    </footer>
-    <!-- END WRAPPER -->
-    <!-- Javascript -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/vendor/chartist/js/chartist.min.js"></script>
-    <script src="assets/scripts/klorofil-common.js"></script>
-    <script>
-        function logout() {
-            var result = confirm("Please make sure.Logout?");
-            if (result == true) {
-                window.location.href = "DestroySession";
-            } else {
-
-            }
-        }
-    </script>
-
+    </div>
 </div>
+<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
+<div class="clearfix"></div>
+<footer>
+    <div class="container-fluid">
+        <p class="copyright">Copyright &copy; 2018.Eagle Jump All rights
+            reserved.OSMsoft - Collect from Software</p>
+
+    </div>
+</footer>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="assets/vendor/chartist/js/chartist.min.js"></script>
+<script src="assets/scripts/klorofil-common.js"></script>
+<script>
+    function logout() {
+        var result = confirm("确定要登出吗？");
+        if (result == true) {
+            window.location.href = "DestroySession";
+        } else {
+
+        }
+    }
+</script>
 </body>
+
 </html>

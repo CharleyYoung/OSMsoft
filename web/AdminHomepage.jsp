@@ -88,6 +88,8 @@
                         </div>
                     </li>
 
+
+                    <!--显示树状部门列表，由saulzhang维护-->
                     <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -158,7 +160,8 @@
                     </li>
 
 
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
                     </a>
                     </li>

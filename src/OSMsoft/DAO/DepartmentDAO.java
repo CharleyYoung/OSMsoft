@@ -1,9 +1,12 @@
 package OSMsoft.DAO;
 
-import OSMsoft.Table.*;
+import OSMsoft.Table.DepartmentTable;
+import OSMsoft.Table.EmployeeTable;
 import OSMsoft.core.ConnDB;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author YocLu
@@ -20,69 +23,106 @@ public class DepartmentDAO {
      */
     public void addDepartment(DepartmentTable departmentTable) {
         conn = new ConnDB();
-        sql = "insert into department(depname, parentdepid, url) values(\'"+departmentTable.getDepartmentName()
-                +"\',\'"+departmentTable.getParentDepartmentID()+"\', \'"+departmentTable.getUrl()+"\')";
+        sql = "insert into department(depname, parentdepid, url) values(\'" + departmentTable.getDepartmentName()
+                + "\',\'" + departmentTable.getParentDepartmentID() + "\', \'" + departmentTable.getUrl() + "\')";
         try {
             conn.executeQuery(sql);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             conn.close();
         }
-        System.out.println("添加department:"+sql);
+        System.out.println("添加department:" + sql);
     }
 
     /**
      * @param dList 包含DepartmentTable的ArrayList列表
      * @param rs ResultSet
      */
-    private void addElements(ArrayList<DepartmentTable> dList, ResultSet rs){
-        try{
-            if(rs.next()){
+    private void addElements(ArrayList<DepartmentTable> dList, ResultSet rs) {
+        try {
+            if (rs.next()) {
                 rs.previous();
-                while (rs.next()){
+                while (rs.next()) {
                     DepartmentTable departmentTable = new DepartmentTable();
                     departmentTable.setDepartmentID(Integer.parseInt(rs.getString(1)));
                     departmentTable.setDepartmentName(rs.getString(2));
                     departmentTable.setParentDepartmentID(Integer.parseInt(rs.getString(3)));
+                    departmentTable.setUrl(rs.getString(4));
+                    departmentTable.setIcon(rs.getString(5));
                     dList.add(departmentTable);
                 }
-            }else {
+            } else {
                 DepartmentTable departmentTable = new DepartmentTable();
                 departmentTable.setDepartmentName("no such department");
                 dList.add(departmentTable);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 返回不含子部门的department
+     *
+     * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
+     */
+    public ArrayList<DepartmentTable> returnNotHaveSonDepartment() {
+        conn = new ConnDB();
+        ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
+        sql = "select * from department";
+        ResultSet rs = conn.executeQuery(sql);
+        addElements(dList, rs);
+        System.out.println("查询department的语句：" + sql);
+        conn.close();
+
+        Iterator<DepartmentTable> departmentTableIterator = dList.iterator();
+        while (departmentTableIterator.hasNext()) {//遍历dList,如果含有子部门即删除
+            DepartmentTable departmentTable = departmentTableIterator.next();
+            String depname = departmentTable.getDepartmentName();
+            String url = String.valueOf(departmentTable.getUrl());
+
+            System.out.println(depname + " " + url + " ");
+            if (url.equals("null")) {
+                departmentTableIterator.remove();
+                System.out.println("删除成功");
+            }
+
+//            boolean flag = hasSonDepartment(departmentTable.getDepartmentID());//效率太低报错
+//            if(!flag){
+//                departmentTableIterator.remove();
+//            }
+        }
+
+        return dList;
     }
 
     /**
      * 返回所有department
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
-    public ArrayList<DepartmentTable> returnAllDepartment(){
+    public ArrayList<DepartmentTable> returnAllDepartment() {
         conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department";
         ResultSet rs = conn.executeQuery(sql);
         addElements(dList, rs);
-        System.out.println("查询department的语句："+sql);
+        System.out.println("查询department的语句：" + sql);
         conn.close();
-        return  dList;
+        return dList;
     }
 
     /**查询department
      * @param depid 根据depid去数据库查询相应department
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
-    public ArrayList<DepartmentTable> queryDepartmentByDepid(int depid){
+    public ArrayList<DepartmentTable> queryDepartmentByDepid(int depid) {
         conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department where depid = \'" + depid + "\'";
         ResultSet rs = conn.executeQuery(sql);
         addElements(dList, rs);
-        System.out.println("查询department的语句："+sql);
+        System.out.println("查询department的语句：" + sql);
         conn.close();
         return dList;
     }
@@ -91,13 +131,13 @@ public class DepartmentDAO {
      * @param depname 根据depname去数据库查询相应department
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
-    public ArrayList<DepartmentTable> queryDepartmentByDepname(String depname){
+    public ArrayList<DepartmentTable> queryDepartmentByDepname(String depname) {
         conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department where depname = \'" + depname + "\'";
         ResultSet rs = conn.executeQuery(sql);
         addElements(dList, rs);
-        System.out.println("查询department的语句："+sql);
+        System.out.println("查询department的语句：" + sql);
         conn.close();
         return dList;
     }
@@ -106,13 +146,13 @@ public class DepartmentDAO {
      * @param parentdepid 根据parentdepid去数据库查询相应department
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
-    public ArrayList<DepartmentTable> queryDepartmentByParentdepid(int parentdepid){
+    public ArrayList<DepartmentTable> queryDepartmentByParentdepid(int parentdepid) {
         conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department where parentdepid = \'" + parentdepid + "\'";
         ResultSet rs = conn.executeQuery(sql);
         addElements(dList, rs);
-        System.out.println("查询department的语句："+sql);
+        System.out.println("查询department的语句：" + sql);
         conn.close();
         return dList;
     }
@@ -122,12 +162,12 @@ public class DepartmentDAO {
      * @param departmentTable 传入要跟新的部门
      * @return 返回一个布尔值
      */
-    public boolean updateDepartment(DepartmentTable departmentTable){
+    public boolean updateDepartment(DepartmentTable departmentTable) {
         conn = new ConnDB();
         boolean flag = true;
-        sql = "update department set depname = \'"+departmentTable.getDepartmentName()+
-                "\' where depid = \'"+departmentTable.getDepartmentID()+"\'";
-        System.out.println("更新sql:"+sql);
+        sql = "update department set depname = \'" + departmentTable.getDepartmentName() +
+                "\' where depid = \'" + departmentTable.getDepartmentID() + "\'";
+        System.out.println("更新sql:" + sql);
         try{
             conn.executeUpdate(sql);
             System.out.println("更新成功");
@@ -146,21 +186,21 @@ public class DepartmentDAO {
      * @param depid 待判断的部门ID
      * @return 返回一个布尔值
      */
-    public boolean hasSonDepartment(int depid){
+    public boolean hasSonDepartment(int depid) {
         boolean flag = false;//判断待删除部门是否有子部门的标志，true表示没有子部门，false表示有子部门
         int id = 1;
-        while (id>0){
+        while (id > 0) {
             DepartmentTable departmentTable = queryDepartmentByDepid(id).get(0);
-            int parentid= -1;
-            if (departmentTable.getDepartmentName().equals("no such department")){
+            int parentid = -1;
+            if (departmentTable.getDepartmentName().equals("no such department")) {
                 flag = true;
                 break;
             }else{
                 parentid = departmentTable.getParentDepartmentID();
-                if (parentid == depid){//如果有子部门的parentID等于待删除部门的ID
+                if (parentid == depid) {//如果有子部门的parentID等于待删除部门的ID
                     flag = false;
                     break;
-                }else{
+                } else {
                     id ++ ;
                     continue;
                 }
@@ -174,7 +214,7 @@ public class DepartmentDAO {
      * @param depid 通过ID删除部门
      * @return 返回一个布尔值
      */
-    public boolean deleteDepartmentByDepid(int depid){
+    public boolean deleteDepartmentByDepid(int depid) {
         conn = new ConnDB();
         boolean flag = true;//函数返回值,默认删除成功
 
@@ -195,7 +235,7 @@ public class DepartmentDAO {
 //        }
 
         //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
-        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")){
+        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")) {
             sql = "delete from department where depid = \'" + depid + "\'";
             try{
                 conn.executeUpdate(sql);
@@ -219,7 +259,7 @@ public class DepartmentDAO {
      * @param depname 通过Name删除部门
      * @return 返回一个布尔值
      */
-    public boolean deleteDepartmentByDepname(String depname){
+    public boolean deleteDepartmentByDepname(String depname) {
         conn = new ConnDB();
         boolean flag = true;//函数返回值
 
@@ -229,10 +269,10 @@ public class DepartmentDAO {
 
         DepartmentTable departmentTable2 = queryDepartmentByDepname(depname).get(0);
         int depid = departmentTable2.getDepartmentID();//获得待删除部门的ID
-        System.out.println("待删除部门的ID"+depid);
+        System.out.println("待删除部门的ID" + depid);
 
         //当待删除部门既没有子部门又没有员工时可以执行删除的sql语句
-        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")){
+        if (hasSonDepartment(depid) && eList.get(0).getName().equals("no such employee")) {
             sql = "delete from department where depname = \'" + depname + "\'";
             try{
                 conn.executeUpdate(sql);
@@ -245,7 +285,6 @@ public class DepartmentDAO {
         }else{
             flag = false;
         }
-
         return flag;
     }
 }

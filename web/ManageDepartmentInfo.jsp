@@ -4,10 +4,10 @@
     Date: 2018/11/17
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <head>
     <title>ManageDepartmentInfo</title>
     <meta charset="utf-8">
@@ -150,7 +150,8 @@
                         </div>
                     </li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -165,14 +166,14 @@
             <div class="container-fluid">
                 <h3 class="page-title"> 管理部门信息</h3>
                 <div class="row">
-                    <div class="col-md-12" >
+                    <div class="col-md-12">
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">搜索部门</h3>
                             </div>
 
-                            <form method="POST" action="SearchDepartment" >
+                            <form method="POST" action="SearchDepartment">
                                 <div class="panel-body">
                                     <div class="col-md-12">
                                         <select id="input" name="style" title="请选择搜索模式">
@@ -193,7 +194,7 @@
                             </form>
                         </div>
 
-                        <div class="panel" >
+                        <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">搜索结果</h3>
                             </div>
@@ -216,10 +217,18 @@
                                             <td>${item.getDepartmentID()}</td>
                                             <td>${item.getDepartmentName()}</td>
                                             <td>${item.getParentDepartmentID()}</td>
-                                            <th><button type="submit" class="btn btn-primary"
-                                                        onclick="Update(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
-                                            <th><button type="submit" class="btn btn-danger"
-                                                        onclick="Delete(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 删除</button></th>
+                                            <th>
+                                                <button type="submit" class="btn btn-primary"
+                                                        onclick="Update(${item.getDepartmentID()})"><i
+                                                        class="fa fa-refresh"></i> 更新信息
+                                                </button>
+                                            </th>
+                                            <th>
+                                                <button type="submit" class="btn btn-danger"
+                                                        onclick="Delete(${item.getDepartmentID()})"><i
+                                                        class="fa fa-refresh"></i> 删除
+                                                </button>
+                                            </th>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -263,16 +272,16 @@
 <script type="text/javascript">
     function Delete(depid) {
         var result = confirm("确定删除该部门吗？");
-        if(result == true){
-            window.location.href ="DeleteDepartment?depid="+depid;
-        }else {
+        if (result == true) {
+            window.location.href = "DeleteDepartment?depid=" + depid;
+        } else {
 
         }
     }
 </script>
 <script type="text/javascript">
     function Update(depid) {
-        window.location.href ="ModDepartment?depid="+depid;
+        window.location.href = "ModDepartment?depid=" + depid;
     }
 </script>
 </body>

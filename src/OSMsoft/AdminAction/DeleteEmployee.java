@@ -27,10 +27,10 @@ public class DeleteEmployee extends HttpServlet {
         boolean flag = false;
         EmployeeDAO employeeDAO = new EmployeeDAO();
         flag = employeeDAO.deleteEmployeeByID(id);
-        if(flag == true){
+        if (flag == true) {
             out.print("<script language='javascript' charset='UTF-8'>alert('删除成功');" +
                     "window.location.href='OperateEmployeeForAdmin.jsp';</script>");
-        }else{
+        } else {
             out.print("<script language='javascript' charset='UTF-8'>alert('删除失败');" +
                     "window.location.href='OperateEmployeeForAdmin.jsp';</script>");
         }

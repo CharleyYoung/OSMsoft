@@ -56,7 +56,7 @@ public class SearchDepartment extends HttpServlet {
             dList = departmentDAO.queryDepartmentByDepname(name);
         } else if (style.equals("depid")) {
             dList = departmentDAO.queryDepartmentByDepid(Integer.parseInt(name));
-        } else if (style.equals("parentdepid")){
+        } else if (style.equals("parentdepid")) {
             dList = departmentDAO.queryDepartmentByParentdepid(Integer.parseInt(name));
         } else {
             int keyword = departmentDAO.queryDepartmentByDepname(name).get(0).getDepartmentID();
@@ -68,7 +68,7 @@ public class SearchDepartment extends HttpServlet {
             out.print("<script>alert('没有相关的部门! 请重新搜索!');window.location='ManageDepartmentInfo.jsp';</script>");
         } else {
             //session.setAttribute("departmentcount", dList.size());
-            request.setAttribute("searchResult",dList);
+            request.setAttribute("searchResult", dList);
             request.getRequestDispatcher("ManageDepartmentInfo.jsp").forward(request, response);
         }
 

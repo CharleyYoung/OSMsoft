@@ -25,7 +25,7 @@ public class DisplayForUpdate extends HttpServlet {
         //利用该参数值搜索员工
         EmployeeDAO employeeDAO = new EmployeeDAO();
         EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(id);
-        request.setAttribute("Employee",employeeTable);
-        request.getRequestDispatcher("UpEmployeeFAdmin.jsp").forward(request,response);
+        request.setAttribute("Employee", employeeTable);
+        request.getRequestDispatcher("UpEmployeeFAdmin.jsp").forward(request, response);
     }
 }

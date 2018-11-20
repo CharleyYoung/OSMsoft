@@ -4,16 +4,16 @@
     Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib uri="MyFirstTag" prefix="mytag"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="MyFirstTag" prefix="mytag" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <!--调用自定义标签-->
 <mytag:DepartmentReader></mytag:DepartmentReader>
 <!--利用JSTL生成一个数组-->
-<c:set var="departmentList" scope="page" value="${departmentInformation}" />
+<c:set var="departmentList" scope="page" value="${departmentInformation}"/>
 <head>
     <title>更新员工信息</title>
     <meta charset="utf-8">
@@ -90,7 +90,8 @@
 
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -105,48 +106,49 @@
             <div class="container-fluid">
                 <h3 class="page-title">更改员工信息</h3>
                 <div class="row">
-                    <div class="col-md-12" >
-                        <div class="panel" >
-                            <div class="panel-heading" >
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading">
                                 <h3 class="panel-title">新信息</h3>
                             </div>
-                            <form method="POST" action="UpdateEmployeeForAdmin" >
+                            <form method="POST" action="UpdateEmployeeForAdmin">
                                 <div class="panel-body">
-                                    <input type="text" class="form-control" name = "id"
-                                           placeholder="员工ID"  readonly= "true " value="${Employee.getEmployeeID()}">
+                                    <input type="text" class="form-control" name="id"
+                                           placeholder="员工ID" readonly="true " value="${Employee.getEmployeeID()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "name"
+                                    <input type="text" class="form-control" name="name"
                                            placeholder="员工姓名" value="${Employee.getName()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "workAge"
+                                    <input type="text" class="form-control" name="workAge"
                                            placeholder="员工工龄" value="${Employee.getWorkAge()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "age"
+                                    <input type="text" class="form-control" name="age"
                                            placeholder="员工年龄" value="${Employee.getAge()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "tele"
+                                    <input type="text" class="form-control" name="tele"
                                            placeholder="电话号码" value="${Employee.getPhoneNumber()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "email"
+                                    <input type="text" class="form-control" name="email"
                                            placeholder="邮箱" value="${Employee.getEmail()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "job"
+                                    <input type="text" class="form-control" name="job"
                                            placeholder="职位" value="${Employee.getJob()}">
                                     <br>
-                                    <input type="text" class="form-control" name = "password"
+                                    <input type="text" class="form-control" name="password"
                                            placeholder="密码" value="${Employee.getPassword()}">
                                     <br>
                                     <select id="部门" name="department" size="value" style="width: 100px;">
                                         <c:forEach var="department" items="${departmentList}">
-                                            <option name="department" value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
+                                            <option name="department"
+                                                    value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
                                         </c:forEach>
                                     </select>
                                     <label class="fancy-radio">
-                                        <input name="gender"   value="男" type="radio">
+                                        <input name="gender" value="男" type="radio">
                                         <span><i></i>男</span>
                                     </label>
                                     <label class="fancy-radio">
-                                        <input name="gender"   value="女" type="radio">
+                                        <input name="gender" value="女" type="radio">
                                         <span><i></i>女</span>
                                     </label>
                                     <p class="demo-button">

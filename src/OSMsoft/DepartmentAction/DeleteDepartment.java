@@ -1,13 +1,17 @@
 package OSMsoft.DepartmentAction;
 
+import OSMsoft.AdminAction.TreeNode;
+import OSMsoft.AdminAction.TreeServiceImp;
 import OSMsoft.DAO.DepartmentDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * @author YocLu
@@ -41,14 +45,23 @@ public class DeleteDepartment extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+        HttpSession session = request.getSession(true);
+        TreeServiceImp treeServiceImp = new TreeServiceImp();
+        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+        session.setAttribute("depList", treeDep);
+
+        System.out.println(treeDep);
+
         DepartmentDAO departmentDAO = new DepartmentDAO();
         int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
         Boolean flag = departmentDAO.deleteDepartmentByDepid(depid);
 
-        if(flag){
+        if (flag) {
             out.print("<script>alert('删除成功');window.location.href='ManageDepartmentInfo.jsp';</script>");
-        }else{
+        } else {
             out.print("<script>alert('删除失败');window.location.href='ManageDepartmentInfo.jsp';</script>");
         }
+
     }
 }

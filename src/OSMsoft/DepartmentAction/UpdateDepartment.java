@@ -1,5 +1,7 @@
 package OSMsoft.DepartmentAction;
 
+import OSMsoft.AdminAction.TreeNode;
+import OSMsoft.AdminAction.TreeServiceImp;
 import OSMsoft.DAO.DepartmentDAO;
 import OSMsoft.Table.DepartmentTable;
 
@@ -7,8 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * @author YocLu
@@ -40,9 +44,13 @@ public class UpdateDepartment extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         //判断输入框是否填满
-        if (request.getParameter("depname")=="") {
+        HttpSession session = request.getSession(true);
+        TreeServiceImp treeServiceImp = new TreeServiceImp();
+        ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
+        session.setAttribute("depList", treeDep);
+        if (request.getParameter("depname") == "") {
             out.print("<script>alert('请输入部门名称!');window.location='modDepartment.jsp';</script>");
-        }else {
+        } else {
             //获取页面输入框信息
             int depid = Integer.parseInt(String.valueOf(request.getParameter("depid")));
             String depname = request.getParameter("depname");
@@ -59,6 +67,5 @@ public class UpdateDepartment extends HttpServlet {
                 out.print("<script>alert('更新失败!');window.location='ModDepartment.jsp';</script>");
             }
         }
-
     }
 }
