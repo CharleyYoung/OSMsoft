@@ -63,7 +63,7 @@ public class DepartmentTable {
     }
 
     public String getUrl() {
-        return url;
+        return this.url;
     }
 
     public void setUrl(String url) {
@@ -71,7 +71,7 @@ public class DepartmentTable {
     }
 
     public String getIcon() {
-        return icon;
+        return this.icon;
     }
 
     public void setIcon(String icon) {

@@ -111,4 +111,57 @@
         <servlet-name>CheckSalaryRecord</servlet-name>
         <url-pattern>/CheckSalaryRecord</url-pattern>
     </servlet-mapping>
+    <!--Department相关的Servlet配置-->
+    <!--由saulzhang维护-->
+    <servlet>
+        <servlet-name>depEmployee</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DepEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>depEmployee</servlet-name>
+        <url-pattern>/depEmployeeInfo</url-pattern>
+    </servlet-mapping>
+    <!--Department相关的Servlet配置-->
+    <!--由YocLu维护-->
+    <servlet>
+        <servlet-name>SearchDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.SearchDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchDepartment</servlet-name>
+        <url-pattern>/SearchDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.AddDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddDepartment</servlet-name>
+        <url-pattern>/AddDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.DeleteDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <url-pattern>/DeleteDepartment</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ModDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.ModDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModDepartment</servlet-name>
+        <url-pattern>/ModDepartment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateDepartment</servlet-name>
+        <servlet-class>OSMsoft.DepartmentAction.UpdateDepartment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateDepartment</servlet-name>
+        <url-pattern>/UpdateDepartment</url-pattern>
+    </servlet-mapping>
 </web-app>

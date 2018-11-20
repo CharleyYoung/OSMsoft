@@ -15,9 +15,9 @@ public class TestConnection {
 
     public static void main(String[] args) throws SQLException {
         ConnDB conn = new ConnDB();
-        Double jobSalary,workAgeSalary;
+        Double jobSalary, workAgeSalary;
         ResultSet rs = conn.executeQuery("select * from salary");
-        while(rs.next()){
+        while (rs.next()) {
             jobSalary = Double.valueOf(rs.getString(1));
             workAgeSalary = Double.valueOf(rs.getString(3));
             System.out.println("JobSalary: " + jobSalary);
@@ -42,42 +42,47 @@ public class TestConnection {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         System.out.println("按性别搜索测试");
         eList = employeeDAO.searchEmployeeByGender("男");
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
         }
         System.out.println("----------------------------");
         System.out.println("按职位搜索测试");
         eList = employeeDAO.searchEmployeeByJob("经理");
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
-        };
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
+        }
+        ;
 
         System.out.println("----------------------------");
         System.out.println("按名称搜索测试");
         eList = employeeDAO.searchEmployeeByName("张");
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
-        };
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
+        }
+        ;
 
         System.out.println("----------------------------");
         System.out.println("按工龄搜索测试");
         eList = employeeDAO.searchEmployeeByWorkAge(6);
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
-        };
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
+        }
+        ;
 
         System.out.println("----------------------------");
         System.out.println("按年龄搜索测试");
         eList = employeeDAO.searchEmployeeByAge(28);
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
-        };
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
+        }
+        ;
 
         System.out.println("----------------------------");
         System.out.println("按部门搜索测试");
         eList = employeeDAO.searchEmployeeByDepartment("产品部");
-        for(EmployeeTable et:eList){
-            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
-        };
+        for (EmployeeTable et : eList) {
+            System.out.println("员工姓名 :" + et.getName() + "  员工部门 :" + et.getDepartmentName());
+        }
+        ;
     }
 }

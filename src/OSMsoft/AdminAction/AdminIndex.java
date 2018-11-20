@@ -56,7 +56,9 @@ public class AdminIndex extends HttpServlet {
                     TreeServiceImp treeServiceImp = new TreeServiceImp();
                     ArrayList<TreeNode> treeDep = treeServiceImp.testQueryDepList();
                     session.setAttribute("depList", treeDep);
+
                     System.out.print(treeDep);
+
                     response.sendRedirect("AdminHomepage.jsp");
 
                 }
