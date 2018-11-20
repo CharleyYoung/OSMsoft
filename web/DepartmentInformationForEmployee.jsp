@@ -5,7 +5,7 @@
   Time: 15:03
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -60,10 +60,13 @@
                 <ul class="nav">
                     <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
                     <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
-                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看工资记录</span></a></li>
-                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a></li>
+                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>查看工资记录</span></a></li>
+                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a>
+                    </li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -93,8 +96,8 @@
                             </tr>
                             </thead>
                             <c:forEach items="${EmployeeList}" var="Employee">
-                            <tbody>
-                            <tr style="font-size:20px;">
+                                <tbody>
+                                <tr style="font-size:20px;">
 
                                     <td>${Employee.getName()}</td>
                                     <td>${Employee.getJob()}</td>
@@ -103,8 +106,8 @@
                                     <td>${Employee.getAge()}</td>
                                     <td>${Employee.getPhoneNumber()}</td>
                                     <td>${Employee.getEmail()}</td>
-                            </tr>
-                            </tbody>
+                                </tr>
+                                </tbody>
                             </c:forEach>
                         </table>
                         <a href="EmployeeHomepage.jsp" class="demo-button">
