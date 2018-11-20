@@ -1,15 +1,17 @@
 <%--
-    Created by IntelliJ IDEA.
-    User: zzh187
-    Date: 2018/11/16
+  Created by IntelliJ IDEA.
+  User: zzh187
+  Date: 2018/11/19
+  Time: 23:58
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-    <title>EmployeeHome</title>
+    <title>查看工资信息</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -40,9 +42,6 @@
                 <button type="button" class="btn-toggle-fullwidth">
                     <i class="lnr lnr-arrow-left-circle"></i>
                 </button>
-            </div>
-            <div align="right">
-                <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i> <span>修改密码</span></a></li>
             </div>
             <form class="navbar-form navbar-left"></form>
             <div id="navbar-menu">
@@ -77,56 +76,59 @@
         <div class="main-content">
             <div class="container-fluid">
                 <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Employee.getName()}</h3>
-                            <span>${sessionScope.Employee.getName()}</span>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" align="center">工资信息</h3>
+                    </div>
+                        <div class="panel-body">
+                            <div class="profile-detail"></div>
+                            <form class="form-auth-small" method="post" action="CheckSalaryRecord">
+                                <div class="panel-body no-padding">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>岗位工资</th>
+                                                        <th>绩效工资</th>
+                                                        <th>工龄工资</th>
+                                                        <th>津贴补助</th>
+                                                        <th>应得工资</th>
+                                                        <th>个人所得税</th>
+                                                        <th>实得工资</th>
+                                                        <th>年</th>
+                                                        <th>月</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <c:set var="DeservedSalary" scope="page" value="${sessionScope.DeservedSalary}" />
+                                                    <!--调用自定义标签-->
+                                                    <mytag:ObtainPersonalIncomeTaxAndActualSalary></mytag:ObtainPersonalIncomeTaxAndActualSalary>
+                                                    <!--利用JSTL获取员工的个人所得税和实得工资-->
+                                                    <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}" />
+                                                    <c:set var="ActualSalary1" scope="page" value="${ActualSalary}" />
+                                                    <tr style="font-size:20px;">
+                                                        <td>${sessionScope.salary.getJobSalary()}</td>
+                                                        <td>${sessionScope.salary.getPerformanceSalary()}</td>
+                                                        <td>${sessionScope.salary.getWorkAgeSalary()} </td>
+                                                        <td>${sessionScope.salary.getSubsideAllowance()}</td>
+                                                        <td>${sessionScope.DeservedSalary}</td>
+                                                        <td>${PersonalIncomeTax1}</td>
+                                                        <td>${ActualSalary1}</td>
+                                                        <td>${sessionScope.salary.getYear()} </td>
+                                                        <td>${sessionScope.salary.getMonth()} </td>
+                                                    </tr>
+                                                </table>
+                                            <td width="100px"height=64p>
+                                                <select id="salarytime" name="salarytime">
+                                                    <c:forEach items ="${sessionScope.time}" var = "item">
+                                                        <option value ="${item.year},${item.month}">${item.year}-${item.month}</option>
+                                                    </c:forEach >
+                                                </select>
+                                            </td>
+                                            <div align="center">
+                                                <button class="btn btn-success" type="submit" >查询</button>
+                                            </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，${sessionScope.Employee.getName()}！</h1>
-                    </div>
-                </div>
-                <!-- END OVERVIEW -->
-                <div class="panel-body">
-                    工号：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
-                    姓名：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getName()}" name="name">
-                    <br>
-                    工龄：
-                    <br>
-                    <input type="text"  readonly="readonly" class="form-control" value="${sessionScope.Employee.getWorkAge()}"name="workage">
-                    <br>
-                    年龄：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getAge()}" name="age">
-                    <br>
-                    性别：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getGender()}"name="gender">
-                    <br>
-                    电话：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
-                    <br>
-                    邮箱：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getEmail()}"name="email">
-                    <br>
-                    职务：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getJob()}"name="job">
-                    <br>
-                    岗位：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getDepartmentName()}"name="department">
                 </div>
             </div>
         </div>

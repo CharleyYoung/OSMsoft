@@ -61,6 +61,14 @@
         <servlet-name>UpdateEmployeeForAdmin</servlet-name>
         <url-pattern>/UpdateEmployeeForAdmin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DisplayForUpdate</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DisplayForUpdate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayForUpdate</servlet-name>
+        <url-pattern>/DisplayForUpdate</url-pattern>
+    </servlet-mapping>
     <!--Employee相关的Servlet配置-->
     <!--由zzh187维护-->
     <servlet>
@@ -86,6 +94,22 @@
     <servlet-mapping>
         <servlet-name>ManageInformation</servlet-name>
         <url-pattern>/ManageInformation</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckSalaryRecord</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.CheckSalaryRecord</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckSalaryRecord</servlet-name>
+        <url-pattern>/CheckSalaryRecord</url-pattern>
     </servlet-mapping>
     <!--Department相关的Servlet配置-->
     <!--由saulzhang维护-->
@@ -140,5 +164,4 @@
         <servlet-name>UpdateDepartment</servlet-name>
         <url-pattern>/UpdateDepartment</url-pattern>
     </servlet-mapping>
-
 </web-app>

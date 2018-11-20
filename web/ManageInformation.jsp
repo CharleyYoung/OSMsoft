@@ -5,7 +5,7 @@
   Time: 0:11
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -59,21 +59,11 @@
             <nav>
                 <ul class="nav">
                     <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
-                        <span>个人信息</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-                        <div id="subPages1" class="collapse ">
-                            <ul class="nav">
-                                <li><a href="ManageInformation.jsp" class="">管理个人信息</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>工资记录</span></a></li>
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门信息</span></a></li>
+                    <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
+                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看工资记录</span></a></li>
+                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
-                    </li>
-                    </a>
-                    </li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -86,54 +76,46 @@
             <div class="container-fluid">
                 <h3 class="page-title">修改个人信息</h3>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" >
 
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
-                                <h3 class="panel-title">修改</h3>
+                                <h3  class="panel-title">修改</h3>
                             </div>
 
-                            <form method="POST" action="ManageInformation">
+                            <form method="POST" action="ManageInformation" >
                                 <div class="panel-body">
                                     工号：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control"
-                                           value="${sessionScope.Account}" name="Account">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
                                     姓名：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Employee.getName()}"
-                                           name="name">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getName()}" name="name">
                                     <br>
                                     工龄：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control"
-                                           value="${sessionScope.Employee.getWorkAge()}" name="workage">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getWorkAge()}"name="workage">
                                     <br>
                                     年龄：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Employee.getAge()}"
-                                           name="age">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getAge()}" name="age">
                                     <br>
                                     电话：
                                     <br>
-                                    <input type="text" class="form-control"
-                                           value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
                                     <br>
                                     邮箱：
                                     <br>
-                                    <input type="text" class="form-control" value="${sessionScope.Employee.getEmail()}"
-                                           name="email">
+                                    <input type="text" class="form-control" value="${sessionScope.Employee.getEmail()}"name="email">
                                     <br>
                                     职务：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control"
-                                           value="${sessionScope.Employee.getJob()}" name="job">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getJob()}"name="job">
                                     <br>
                                     岗位：
                                     <br>
-                                    <input type="text" readonly="readonly" class="form-control"
-                                           value="${sessionScope.Employee.getDepartmentID()}" name="department">
+                                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getDepartmentID()}"name="department">
                                     <br>
                                     性别：
                                     <br>
@@ -157,30 +139,30 @@
                                             <span><i></i>女</span>
                                         </label>
                                     </c:if>
-                                    <%--                                    <c:choose>
-                                                                            <c:when test="${sessionScope.Gender eq '男'}">
-                                                                                <label class="fancy-radio">
-                                                                                    <input name="gender" value="male" type="radio" checked="checked">
-                                                                                    <span><i></i>男</span>
-                                                                                </label>
-                                                                                <label class="fancy-radio">
-                                                                                    <input name="gender" value="female" type="radio">
-                                                                                    <span><i></i>女</span>
-                                                                                </label>
-                                                                            </c:when>
-                                                                            <c:when test="${sessionScope.Gender eq '女'}">
-                                                                                <label class="fancy-radio">
-                                                                                    <input name="gender" value="male" type="radio">
-                                                                                    <span><i></i>男</span>
-                                                                                </label>
-                                                                                <label class="fancy-radio">
-                                                                                    <input name="gender" value="female" type="radio" checked="checked">
-                                                                                    <span><i></i>女</span>
-                                                                                </label>
-                                                                            </c:when>
-                                                                        </c:choose>--%>
+<%--                                    <c:choose>
+                                        <c:when test="${sessionScope.Gender eq '男'}">
+                                            <label class="fancy-radio">
+                                                <input name="gender" value="male" type="radio" checked="checked">
+                                                <span><i></i>男</span>
+                                            </label>
+                                            <label class="fancy-radio">
+                                                <input name="gender" value="female" type="radio">
+                                                <span><i></i>女</span>
+                                            </label>
+                                        </c:when>
+                                        <c:when test="${sessionScope.Gender eq '女'}">
+                                            <label class="fancy-radio">
+                                                <input name="gender" value="male" type="radio">
+                                                <span><i></i>男</span>
+                                            </label>
+                                            <label class="fancy-radio">
+                                                <input name="gender" value="female" type="radio" checked="checked">
+                                                <span><i></i>女</span>
+                                            </label>
+                                        </c:when>
+                                    </c:choose>--%>
                                     <p class="demo-button">
-                                        <button id="submit" type="submit" class="btn btn-success">保存</button>
+                                        <button id="submit" type="submit"  class="btn btn-success">保存</button>
                                     </p>
                                 </div>
                             </form>

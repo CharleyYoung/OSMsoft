@@ -41,9 +41,6 @@
                     <i class="lnr lnr-arrow-left-circle"></i>
                 </button>
             </div>
-            <div align="right">
-                <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i> <span>修改密码</span></a></li>
-            </div>
             <form class="navbar-form navbar-left"></form>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
@@ -76,57 +73,35 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Employee.getName()}</h3>
-                            <span>${sessionScope.Employee.getName()}</span>
+                <h3 class="page-title">修改密码</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                            </div>
+                            <form method="POST" action="ChangePassword" >
+                                <div class="panel-body">
+                                    输入旧密码：
+                                    <br>
+                                    <input type="password" class="form-control" name="oldpassword">
+                                    <br>
+                                    输入新密码：
+                                    <br>
+                                    <input type="password" class="form-control" name="newpassword">
+                                    <br>
+                                    确认新密码：
+                                    <br>
+                                    <input type="password" class="form-control" name="againnewpassword">
+                                    <br>
+                                    <p class="demo-button">
+                                        <button id="submit" type="submit"  class="btn btn-success">确认修改</button>
+                                    </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，${sessionScope.Employee.getName()}！</h1>
-                    </div>
-                </div>
-                <!-- END OVERVIEW -->
-                <div class="panel-body">
-                    工号：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
-                    姓名：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getName()}" name="name">
-                    <br>
-                    工龄：
-                    <br>
-                    <input type="text"  readonly="readonly" class="form-control" value="${sessionScope.Employee.getWorkAge()}"name="workage">
-                    <br>
-                    年龄：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getAge()}" name="age">
-                    <br>
-                    性别：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getGender()}"name="gender">
-                    <br>
-                    电话：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
-                    <br>
-                    邮箱：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getEmail()}"name="email">
-                    <br>
-                    职务：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getJob()}"name="job">
-                    <br>
-                    岗位：
-                    <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getDepartmentName()}"name="department">
                 </div>
             </div>
         </div>
