@@ -18,7 +18,7 @@ public class DepartmentReader extends SimpleTagSupport {
     //采用doTag方法实现从DAO中读取department信息
     public void doTag() throws JspException, IOException {
         DepartmentDAO departmentDAO = new DepartmentDAO();
-        ArrayList<DepartmentTable> dList = departmentDAO.returnAllDepartment();
+        ArrayList<DepartmentTable> dList = departmentDAO.returnNotHaveSonDepartment();
         for (DepartmentTable dTable : dList) {
             System.out.println(dTable.getDepartmentName());
         }
