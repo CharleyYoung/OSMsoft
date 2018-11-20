@@ -95,4 +95,20 @@
         <servlet-name>ManageInformation</servlet-name>
         <url-pattern>/ManageInformation</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckSalaryRecord</servlet-name>
+        <servlet-class>OSMsoft.EmployeeAction.CheckSalaryRecord</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckSalaryRecord</servlet-name>
+        <url-pattern>/CheckSalaryRecord</url-pattern>
+    </servlet-mapping>
 </web-app>

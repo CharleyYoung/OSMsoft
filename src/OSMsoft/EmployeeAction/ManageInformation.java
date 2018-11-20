@@ -19,6 +19,7 @@ public class ManageInformation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         //获取session，如果session不存在，就创建一个
         HttpSession session = request.getSession(true);
@@ -41,7 +42,6 @@ public class ManageInformation extends HttpServlet {
                 account=0;
             }
             String name = request.getParameter("name");
-            int workage = Integer.parseInt(request.getParameter("workage"));
             int age = Integer.parseInt(String.valueOf(request.getParameter("age")));
             long phoneNumber = Long.parseLong((String)request.getParameter("tele"));
             String email = (String) request.getParameter("email");
@@ -54,19 +54,16 @@ public class ManageInformation extends HttpServlet {
             }
                 //System.out.println(request.getParameter("gender"));
             String job = (String) request.getParameter("job");
-            int department =  Integer.parseInt(request.getParameter("department"));
             //创建DAO变量，employeeDAO负责执行插入
             EmployeeDAO employeeDAO = new EmployeeDAO();
             //创建Table变量并存储要用到的信息
             EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(account);
             //往employeeTable中存储信息
             employeeTable.setName(name);
-            employeeTable.setWorkAge(workage);
             employeeTable.setAge(age);
             employeeTable.setPhoneNumber(phoneNumber);
             employeeTable.setEmail(email);
             employeeTable.setJob(job);
-            employeeTable.setDepartmentID(department);
             employeeTable.setGender(gender);
             //插入Employee信息
             employeeDAO.updateEmployee(employeeTable);

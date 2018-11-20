@@ -59,20 +59,11 @@
             <nav>
                 <ul class="nav">
                     <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
-                        <span>个人信息</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-                        <div id="subPages1" class="collapse ">
-                            <ul class="nav">
-                                <li><a href="ManageInformation.jsp" class="">管理个人信息</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>工资记录</span></a></li>
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门信息</span></a></li>
+                    <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
+                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看工资记录</span></a></li>
+                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
-                    </a>
-                    </li>
                 </ul>
             </nav>
         </div>
