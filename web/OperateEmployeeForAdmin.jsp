@@ -4,12 +4,12 @@
     Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
-    <title>Home</title>
+    <title>管理员工信息</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -84,8 +84,7 @@
 
                     <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
-                    </li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
                     </a>
                     </li>
                 </ul>
@@ -100,14 +99,14 @@
             <div class="container-fluid">
                 <h3 class="page-title"> 管理员工信息</h3>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" >
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">搜索员工</h3>
                             </div>
 
-                            <form method="POST" action="SearchEmployeeForOperate">
+                            <form method="POST" action="SearchEmployeeForOperate" >
                                 <div class="panel-body">
                                     <div class="col-md-12">
                                         <select id="input" name="style" title="请选择搜索模式">
@@ -131,7 +130,7 @@
                             </form>
                         </div>
 
-                        <div class="panel">
+                        <div class="panel" >
                             <div class="panel-heading">
                                 <h3 class="panel-title">搜索结果</h3>
                             </div>
@@ -155,7 +154,8 @@
                                     <c:set var="employeeList" scope="session" value="${searchResult}"></c:set>
 
                                     <tbody>
-                                    <c:forEach var="item" items="${employeeList}">
+                                    <c:forEach var="items" items="${employeeList}" >
+                                        <c:set var="item" scope="session" value="${items}"></c:set>
                                         <tr>
                                             <td>${item.getEmployeeID()}</td>
                                             <td>${item.getName()}</td>
@@ -166,16 +166,10 @@
                                             <td>${item.getEmail()}</td>
                                             <td>${item.getJob()}</td>
                                             <td>${item.getDepartmentName()}</td>
-                                            <th>
-                                                <button type="submit" class="btn btn-primary" onclick="Update()"><i
-                                                        class="fa fa-refresh"></i> 更新信息
-                                                </button>
-                                            </th>
-                                            <th>
-                                                <button type="submit" class="btn btn-danger" onclick="Delete()"><i
-                                                        class="fa fa-refresh"></i> 删除
-                                                </button>
-                                            </th>
+                                            <th><button type="submit" class="btn btn-primary"
+                                                        onclick="Update(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-danger"
+                                                        onclick="Delete(${item.getEmployeeID()})"><i class="fa fa-refresh"></i> 删除</button></th>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -217,21 +211,21 @@
     }
 </script>
 <script type="text/javascript">
-    function Delete() {
+    function Delete(item) {
         var result = confirm("确定要删除这个员工吗？");
-        if (result == true) {
-            window.location.href = "DeleteEmployee";
-        } else {
+        if(result == true){
+            window.location.href ="DeleteEmployee?employee="+item;
+        }else {
 
         }
     }
 </script>
 <script type="text/javascript">
-    function Update() {
+    function Update(item) {
         var result = confirm("更新该员工信息？");
-        if (result == true) {
-            window.location.href = "UpdateEmployeeForAdmin";
-        } else {
+        if(result == true){
+            window.location.href ="DisplayForUpdate?employee="+item;
+        }else {
 
         }
     }

@@ -1,15 +1,15 @@
 package OSMsoft.AdminAction;
 
-import OSMsoft.DAO.*;
-import OSMsoft.Table.*;
+import OSMsoft.DAO.DepartmentDAO;
+import OSMsoft.DAO.EmployeeDAO;
+import OSMsoft.Table.DepartmentTable;
+import OSMsoft.Table.EmployeeTable;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

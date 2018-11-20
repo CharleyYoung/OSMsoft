@@ -1,11 +1,7 @@
 <%--
     Created by IntelliJ IDEA.
-    User: Taiho
-    Date: 2018/11/15
-
-    Changed by saulzhang
-    desctiption:修改了左侧列表显示部门的树状结构
-    Date: 2018/11/18
+    User: YocLu
+    Date: 2018/11/19
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -13,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
 <head>
-    <title>Home</title>
+    <title>Add Department</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -71,7 +67,7 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加员工</a></li>
                                 <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
@@ -88,6 +84,8 @@
                         </div>
                     </li>
 
+                    <!--Change by saulzhang，部门管理树状由saulzhang维护-->
+
                     <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -100,8 +98,7 @@
                                     <!-- 一级子菜单没有parentId,有url -->
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
-                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
-                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                            <a href="<c:url value='${dep.url }'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
@@ -121,9 +118,9 @@
                                                     <c:forEach items="${dep.children}" var="secondChild"
                                                                varStatus="status">
                                                         <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
-                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                        <c:if test="${  secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
                                                             <li>
-                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                                <a href="<c:url value='${secondChild.url }'/>">${secondChild.name }</a>
                                                             </li>
                                                         </c:if>
                                                         <!-- 二级菜单url为空，表示还有三级菜单 -->
@@ -140,7 +137,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='${thirdChild.url }'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>
@@ -167,33 +164,52 @@
         </div>
     </div>
     <!-- END LEFT SIDEBAR. -->
+    <!-- END MAIN -->
     <!-- MAIN -->
     <div class="main">
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
+                <h3 class="page-title">添加部门</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3  class="panel-title">输入</h3>
+                            </div>
+
+                            <form method="POST" action="AddDepartment" >
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" placeholder="部门名称" name="depname">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="上级部门名称" name="parentdepname">
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input name="haveson" value="have" type="radio">
+                                        <span><i></i>含有子部门</span>
+                                    </label>
+                                    <br>
+                                    <label class="fancy-radio">
+                                        <input name="haveson" value="nothave" type="radio">
+                                        <span><i></i>不含子部门</span>
+                                    </label>
+                                    <br>
+                                    <p class="demo-button">
+                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                    </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
 </div>
 <!-- END MAIN CONTENT -->
-
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">

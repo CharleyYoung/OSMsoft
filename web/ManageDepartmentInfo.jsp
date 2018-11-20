@@ -1,19 +1,15 @@
 <%--
     Created by IntelliJ IDEA.
-    User: Taiho
-    Date: 2018/11/15
-
-    Changed by saulzhang
-    desctiption:修改了左侧列表显示部门的树状结构
-    Date: 2018/11/18
+    User: YocLu
+    Date: 2018/11/17
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <head>
-    <title>Home</title>
+    <title>ManageDepartmentInfo</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -65,18 +61,16 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
-
+                    <li><a href="AdminHomepage.jsp" class="active"><i class="active"></i> <span>个人信息</span></a></li>
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
-                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
-
                     <li>
                         <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class=""></i>
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -88,7 +82,7 @@
                         </div>
                     </li>
 
-                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                    <li><a href="#subPages3" data-toggle="collapse" class="collapsed"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages3" class="collapse ">
@@ -100,8 +94,7 @@
                                     <!-- 一级子菜单没有parentId,有url -->
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
-                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
-                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                            <a href="<c:url value='${dep.url }'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
@@ -121,9 +114,9 @@
                                                     <c:forEach items="${dep.children}" var="secondChild"
                                                                varStatus="status">
                                                         <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
-                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                        <c:if test="${  secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
                                                             <li>
-                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                                <a href="<c:url value='${secondChild.url }'/>">${secondChild.name }</a>
                                                             </li>
                                                         </c:if>
                                                         <!-- 二级菜单url为空，表示还有三级菜单 -->
@@ -140,7 +133,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='${thirdChild.url }'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>
@@ -156,8 +149,6 @@
                             </ul>
                         </div>
                     </li>
-
-
                     <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
                     </a>
@@ -166,34 +157,83 @@
             </nav>
         </div>
     </div>
-    <!-- END LEFT SIDEBAR. -->
+    <!-- END LEFT SIDEBAR -->
     <!-- MAIN -->
     <div class="main">
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
+                <h3 class="page-title"> 管理部门信息</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">搜索部门</h3>
+                            </div>
+
+                            <form method="POST" action="SearchDepartment" >
+                                <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <select id="input" name="style" title="请选择搜索模式">
+                                            <option value="depid">部门ID</option>
+                                            <option value="depname">部门名称</option>
+                                            <option value="parentdepid">上级部门ID</option>
+                                            <option value="parentdename">上级部门名称</option>
+                                        </select>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input class="form-control" type="text" placeholder="输入关键词" name="keyword">
+                                            <span class="input-group-btn"><button class="btn btn-primary" type="SUBMIT">搜索</button></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="panel" >
+                            <div class="panel-heading">
+                                <h3 class="panel-title">搜索结果</h3>
+                            </div>
+                            <div class="panel-body no-padding">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>部门ID</th>
+                                        <th>部门名称</th>
+                                        <th>上级部门ID</th>
+                                    </tr>
+                                    </thead>
+
+                                    <!--用jstl获取查询结果-->
+                                    <c:set var="departmentList" scope="session" value="${searchResult}"></c:set>
+
+                                    <tbody>
+                                    <c:forEach var="item" items="${departmentList}">
+                                        <tr>
+                                            <td>${item.getDepartmentID()}</td>
+                                            <td>${item.getDepartmentName()}</td>
+                                            <td>${item.getParentDepartmentID()}</td>
+                                            <th><button type="submit" class="btn btn-primary"
+                                                        onclick="Update(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                            <th><button type="submit" class="btn btn-danger"
+                                                        onclick="Delete(${item.getDepartmentID()})"><i class="fa fa-refresh"></i> 删除</button></th>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title">欢迎您，管理员！</h1>
-                    </div>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
 </div>
 <!-- END MAIN CONTENT -->
-
+<!-- END MAIN -->
 <div class="clearfix"></div>
 <footer>
     <div class="container-fluid">
@@ -218,6 +258,21 @@
         } else {
 
         }
+    }
+</script>
+<script type="text/javascript">
+    function Delete(depid) {
+        var result = confirm("确定删除该部门吗？");
+        if(result == true){
+            window.location.href ="DeleteDepartment?depid="+depid;
+        }else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Update(depid) {
+        window.location.href ="ModDepartment?depid="+depid;
     }
 </script>
 </body>

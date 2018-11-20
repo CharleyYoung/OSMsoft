@@ -77,6 +77,11 @@ public class TestConnection {
         }
         ;
 
-
+        System.out.println("----------------------------");
+        System.out.println("按部门搜索测试");
+        eList = employeeDAO.searchEmployeeByDepartment("产品部");
+        for(EmployeeTable et:eList){
+            System.out.println("员工姓名 :"+et.getName() +"  员工部门 :"+et.getDepartmentName());
+        };
     }
 }
