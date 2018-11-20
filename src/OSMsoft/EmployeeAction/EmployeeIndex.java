@@ -2,12 +2,15 @@ package OSMsoft.EmployeeAction;
 
 import OSMsoft.DAO.EmployeeDAO;
 import OSMsoft.Table.EmployeeTable;
+import OSMsoft.Table.SalaryTable;
+import OSMsoft.DAO.SalaryDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * @author zzh187
@@ -18,6 +21,7 @@ public class EmployeeIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         if(request.getParameter("account").equals("") || request.getParameter("password").equals("")){
             out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><script language='javascript' charset='UTF-8'>alert('账户和密码不能为空');window.location.href='EmployeeLogin.jsp';</script>");
@@ -45,12 +49,24 @@ public class EmployeeIndex extends HttpServlet {
                 } else{
                     //登录成功
                     System.out.println("Log in success");
+                    //存储该员工的部门员工信息，并存储到session中去。
+                    String DepName = employeeTable.getDepartmentName();
+                    ArrayList<EmployeeTable> employee_list = employeeDAO.searchEmployeeByDepartment(DepName);
+                    //获取该员工本月或上月的工资记录
+                    SalaryDao salaryDao=new SalaryDao();
+                    SalaryTable salaryTable=salaryDao.getSalarytableByIdAndTimeRencently(account);
+                    //计算获得应得工资
+                    double DeservedSalary = salaryTable.getJobSalary() + salaryTable.getPerformanceSalary()
+                            + salaryTable.getSubsideAllowance() + salaryTable.getWorkAgeSalary();
+                    //获取该员工获取工资的所有年月份
+                    ArrayList<SalaryTable> SalaryList=salaryDao.returnAllSalaryTableById(account);
                     //设置session以维持会话信息
-                    EmployeeTable employee = new EmployeeTable();
-                    //往employeeTable中存储信息
-
+                    session.setAttribute("EmployeeList",employee_list);
                     session.setAttribute("Employee",employeeTable);
                     session.setAttribute("Account",account);
+                    session.setAttribute("time",SalaryList);
+                    session.setAttribute("salary",salaryTable);
+                    session.setAttribute("DeservedSalary",DeservedSalary);
                     response.sendRedirect("EmployeeHomepage.jsp");
                 }
             }catch (Exception e){

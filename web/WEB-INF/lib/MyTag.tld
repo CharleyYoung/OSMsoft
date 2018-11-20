@@ -14,4 +14,9 @@ PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
   <tag-class>OSMsoft.tag.DepartmentReader</tag-class>
   <body-content>empty</body-content>
 </tag>
+  <tag>
+    <name>ObtainPersonalIncomeTaxAndActualSalary</name>
+    <tag-class>OSMsoft.tag.ObtainPersonalIncomeTaxAndActualSalary</tag-class>
+    <body-content>empty</body-content>
+  </tag>
 </taglib>
