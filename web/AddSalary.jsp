@@ -1,17 +1,21 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: 82533
-  Date: 2018/11/17
-  Time: 20:05
-  To change this template use File | Settings | File Templates.
+    Created by IntelliJ IDEA.
+    User: Taiho
+    Date: 2018/11/15
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<!--调用自定义标签-->
+<mytag:DepartmentReader></mytag:DepartmentReader>
+<!--利用JSTL生成一个数组-->
+<c:set var="departmentList" scope="page" value="${departmentInformation}" />
 <head>
-    <title>Home</title>
+    <title>添加员工</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -63,13 +67,13 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -78,8 +82,8 @@
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
-                                <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
+                                <li><a href="" class="">查询工资</a></li>
+                                <li><a href="" class="">添加工资信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -99,39 +103,59 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <!-- OVERVIEW -->
-                <div class="panel panel-headline">
-                    <div class="profile-header">
-                        <div class="overlay"></div>
-                        <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
-                            <h3 class="name" id="name">${sessionScope.Account}</h3>
-                            <span>${sessionScope.Account}</span>
+                <h3 class="page-title">添加Salary</h3>
+                <div class="row">
+                    <div class="col-md-12" >
+
+                        <!-- INPUTS -->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3  class="panel-title">输入</h3>
+                            </div>
+
+                            <form method="POST" action="AddSalary" >
+                                <div class="panel-body">
+                                    <h4>工号</h4>
+                                    <input type="text" class="form-control" placeholder="工号" name="employeeID">
+                                    <br>
+                                    <h4>岗位工资</h4>
+                                    <input type="text" class="form-control" placeholder="岗位工资" name="jobSalary">
+                                    <br>
+                                    <h4>绩效工资</h4>
+                                    <input type="text" class="form-control" placeholder="绩效工资" name="performanceSalary">
+                                    <br>
+                                    <h4>工龄工资</h4>
+                                    <input type="text" class="form-control" placeholder="工龄工资"name="workAgeSalary">
+                                    <br>
+                                    <h4>津贴补助</h4>
+                                    <input type="text" class="form-control" placeholder="津贴补助"name="subsideAllowance">
+                                    <br>
+                                    <h4>年</h4>
+                                    <input type="text" class="form-control" placeholder="年"name="year">
+                                    <br>
+                                    <h4>月</h4>
+                                    <select id="月" name="month" size="value" style="width: 100px;">
+                                        <option name="1" value="1">1</option>
+                                        <option name="2" value="2">2</option>
+                                        <option name="3" value="3">3</option>
+                                        <option name="4" value="4">4</option>
+                                        <option name="5" value="5">5</option>
+                                        <option name="6" value="6">6</option>
+                                        <option name="7" value="7">7</option>
+                                        <option name="8" value="8">8</option>
+                                        <option name="9" value="9">9</option>
+                                        <option name="10" value="10">10</option>
+                                        <option name="11" value="11">11</option>
+                                        <option name="12" value="12">12</option>
+                                    </select>
+                                    <p class="demo-button">
+                                        <button id="submit" type="submit"  class="btn btn-success">添加</button>
+                                    </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <form class="form-auth-small" method="post" action="AdminSalary2">
-                        <div class="panel-body">
-                            <div class="profile-detail"></div>
-                            <h1 align="center" class="page-title"><strong>修改工资</strong></h1>
-                            <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要修改工资的员工的工号</p></div>
-                            <div style="text-align:center; vertical-align:middle;">
-                                <table align="center">
-                                    <tr>
-                                        <td width=350px height=64px>
-                                            <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
-                                        </td>
-                                        <td width=100px height=64px>
-                                            <button type="submit" >查询</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <button type="button" class="btn btn-danger" onclick="window.location.href='AddSalary.jsp'">添加Salary</button></i>
-                                <%--<input type="button" name="register" value ="添加Salary" onclick="window.location.href='AddSalary.jsp'"/>--%>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>

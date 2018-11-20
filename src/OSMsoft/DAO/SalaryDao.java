@@ -37,7 +37,7 @@ public class SalaryDao {
     }
     public void AddSalary(SalaryTable salaryTable) {
         conn = new ConnDB();
-        sql = "insert into department values(\'" + salaryTable.getJobSalary()
+        sql = "insert into salary values(\'" + salaryTable.getJobSalary()
                 + "\',\'" + salaryTable.getPerformanceSalary() + "\',\'" + salaryTable.getWorkAgeSalary() + "\',\'" + salaryTable.getSubsideAllowance() + "\'" +
                 ",\'" + salaryTable.getMonth() + "\',\'" + salaryTable.getYear() + "\',\'" + salaryTable.getEmployeeID() + "\')";
         try {
@@ -47,18 +47,21 @@ public class SalaryDao {
         } finally {
             conn.close();
         }
-        System.out.println("添加department:" + sql);
+        System.out.println("添加salary:" + sql);
     }
-    public boolean updateSalary(SalaryTable salaryTable)
+    public boolean updateSalary(SalaryTable salaryTable,int accont,int year,int month)
     {
         conn = new ConnDB();
         boolean flag = true;
-        sql = "update salary jobsalary = \'" + salaryTable.getJobSalary()+
+        sql = "update salary set jobsalary = \'" + salaryTable.getJobSalary()+
                 "\', performancesalary = \'" + salaryTable.getPerformanceSalary() +
-                "\', workAgesalary = \'" + salaryTable.getWorkAgeSalary() +
-                "\', subsideallowance = \'" + salaryTable.getSubsideAllowance() +
-                "\' where employeeid = \'" + salaryTable.getEmployeeID() + "\'"+"and month=\'"+salaryTable.getYear()+
-                "and month=\'"+salaryTable.getMonth();
+                "\', workagesalary = \'" + salaryTable.getWorkAgeSalary() +
+                "\', subsidyallowance = \'" + salaryTable.getSubsideAllowance() +
+                "\', employeeid = \'" + salaryTable.getEmployeeID() +
+                "\', year = \'" + salaryTable.getYear() +
+                "\', month = \'" + salaryTable.getMonth() +
+                "\' where employeeid = \'" + accont + "\'"+"and year=\'"+year+
+                "\'and month=\'"+month+"\'";
         try{
             conn.executeUpdate(sql);
         }catch (Exception e){
@@ -69,7 +72,7 @@ public class SalaryDao {
         }
         return flag;
     }
-    public boolean deleteSalary(String employeeid,int year,int month)
+    public boolean deleteSalary(int employeeid,int year,int month)
     {
         conn = new ConnDB();
         boolean flag = true;
@@ -83,6 +86,21 @@ public class SalaryDao {
     }finally {
         conn.close();
     }
+        return flag;
+    }
+    public boolean deleteallSalary(int employeeid)
+    {
+        conn = new ConnDB();
+        boolean flag = true;
+        sql = "delete from Salary where employeeid="+"\'"+employeeid+"\'";
+        try{
+            conn.executeUpdate(sql);
+        }catch (Exception e){
+            flag = false;
+            e.printStackTrace();
+        }finally {
+            conn.close();
+        }
         return flag;
     }
     private void addElements(ArrayList<SalaryTable> dList, ResultSet rs) {

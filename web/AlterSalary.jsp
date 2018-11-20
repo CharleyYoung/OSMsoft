@@ -112,7 +112,6 @@
                     <div class="panel-body">
                         <div class="profile-detail"></div>
                         <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
-                        <form class="form-auth-small" method="post" action="AdminSalary1">
                             <style type="text/css">
                                 table.gridtable {
                                     font-family: verdana,arial,sans-serif;
@@ -147,6 +146,7 @@
                                                     <th>Year</th><th>Month</th><th>Alter</th><th>Delete</th>
                                                 </tr>
                                                     <c:forEach items ="${time}" var = "item">
+                                                        <c:set var="item" scope="session" value="${items}"></c:set>
                                                 <tr>
                                                         <td>${item.employeeID} </td>
                                                         <td>${item.jobSalary}</td>
@@ -156,17 +156,16 @@
                                                         <td>0</td>
                                                         <td>${item.year} </td>
                                                         <td>${item.month} </td>
-                                                        <th><button type="submit" class="btn btn-primary" onclick="Update()"><i class="fa fa-refresh"></i> 更新信息</button></th>
-                                                        <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
+                                                        <th><button class="btn btn-primary" onclick="Update(${item.employeeID},${item.jobSalary},${item.performanceSalary},${item.workAgeSalary},${item.subsideAllowance},${item.month},${item.year})"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                                        <th><button class="btn btn-danger" onclick="Delete(${item.employeeID},${item.year},${item.month})"><i class="fa fa-refresh"></i> 删除</button></th>
                                                 </tr>
                                                     </c:forEach>
                                             </table>
                                         </td>
                                     </tr>
                                 </table>
-                                <button type="submit" class="btn btn-danger" onclick="DeleteAll()"><i class="fa fa-refresh"></i> 清空</button>
+                                <button  class="btn btn-danger" onclick="DeleteAll(${account})"><i class="fa fa-refresh"></i> 清空</button>
                             </div>
-                        </form>
                     </div>
                 </div>
                 <!-- END OVERVIEW -->
@@ -203,36 +202,37 @@
     }
 </script>
 <script type="text/javascript">
-    function Update() {
-        var result = confirm("更新该工资信息？");
+    function Delete(account,year,month) {
+        var result = confirm("确定要删除这个Salary吗？");
         if(result == true){
-            window.location.href ="UpdateEmployeeForAdmin";
+            window.location.href ="DeleteSalary?account="+account+"&year="+year+"&month="+month;
         }else {
 
         }
     }
 </script>
 <script type="text/javascript">
-    function Delete() {
-        var result = confirm("删除该工资信息？");
+    function Update(employeeID,jobSalary,performanceSalary,workAgeSalary,subsideAllowance,month,year) {
+        var result = confirm("更新该Salary信息？");
         if(result == true){
-            window.location.href ="UpdateEmployeeForAdmin";
+            window.location.href ="UpdateSalaryForAdmin?account="+employeeID+"&jobSalary="+jobSalary+"&performanceSalary="+performanceSalary
+                +"&workAgeSalary="+workAgeSalary+"&subsideAllowance="+subsideAllowance+"&month="+month+"&year="+year;
         }else {
 
         }
     }
 </script>
+
 <script type="text/javascript">
-    function DeleteAll() {
-        var result = confirm("清除所有工资信息？");
+    function DeleteAll(account) {
+        var result = confirm("清空该员工所有的Salary？");
         if(result == true){
-            window.location.href ="UpdateEmployeeForAdmin";
+            window.location.href ="DeleteAllSalary?account="+account;
         }else {
 
         }
     }
 </script>
 </body>
-
 </html>
 
