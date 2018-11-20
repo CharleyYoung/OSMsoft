@@ -1,4 +1,4 @@
-<%--
+<%@ page import="OSMsoft.Table.SalaryTable" %><%--
   Created by IntelliJ IDEA.
   User: 82533
   Date: 2018/11/17
@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -109,25 +109,65 @@
                             <span>${sessionScope.Account}</span>
                         </div>
                     </div>
-                    <form class="form-auth-small" method="post" action="AdminSalary">
                     <div class="panel-body">
                         <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title"><strong>查询工资</strong></h1>
-                        <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要查询员工的工号</p></div>
-                        <div style="text-align:center; vertical-align:middle;">
-                        <table align="center">
-                            <tr>
-                                <td width=350px height=64px>
-                                        <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
-                                </td>
-                                <td width=100px height=64px>
-                                        <button type="submit" >查询</button>
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
+                        <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
+                        <form class="form-auth-small" method="post" action="AdminSalary1">
+                            <style type="text/css">
+                                table.gridtable {
+                                    font-family: verdana,arial,sans-serif;
+                                    font-size:11px;
+                                    color:#333333;
+                                    border-width: 1px;
+                                    border-color: #666666;
+                                    border-collapse: collapse;
+                                }
+                                table.gridtable th {
+                                    border-width: 1px;
+                                    padding: 8px;
+                                    border-style: solid;
+                                    border-color: #666666;
+                                    background-color: #dedede;
+                                }
+                                table.gridtable td {
+                                    border-width: 1px;
+                                    padding: 8px;
+                                    border-style: solid;
+                                    border-color: #666666;
+                                    background-color: #ffffff;
+                                }
+                            </style>
+                            <div align="center">
+                                <table align="center">
+                                    <tr>
+                                        <td width=350px height=64px>
+                                            <table class="gridtable">
+                                                <tr>
+                                                    <th>EmloyeeID</th><th>JobSalary</th><th>PerformanceSalary</th><th>WorkageSalary</th><th>SubsidyAllowance</th><th>Tax</th>
+                                                    <th>Year</th><th>Month</th><th>Alter</th><th>Delete</th>
+                                                </tr>
+                                                    <c:forEach items ="${time}" var = "item">
+                                                <tr>
+                                                        <td>${item.employeeID} </td>
+                                                        <td>${item.jobSalary}</td>
+                                                        <td>${item.performanceSalary}</td>
+                                                        <td>${item.workAgeSalary} </td>
+                                                        <td>${item.subsideAllowance}</td>
+                                                        <td>0</td>
+                                                        <td>${item.year} </td>
+                                                        <td>${item.month} </td>
+                                                        <th><button type="submit" class="btn btn-primary" onclick="Update()"><i class="fa fa-refresh"></i> 更新信息</button></th>
+                                                        <th><button type="submit" class="btn btn-danger" onclick="Delete()"><i class="fa fa-refresh"></i> 删除</button></th>
+                                                </tr>
+                                                    </c:forEach>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <button type="submit" class="btn btn-danger" onclick="DeleteAll()"><i class="fa fa-refresh"></i> 清空</button>
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
                 <!-- END OVERVIEW -->
             </div>
@@ -162,6 +202,37 @@
         }
     }
 </script>
+<script type="text/javascript">
+    function Update() {
+        var result = confirm("更新该工资信息？");
+        if(result == true){
+            window.location.href ="UpdateEmployeeForAdmin";
+        }else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Delete() {
+        var result = confirm("删除该工资信息？");
+        if(result == true){
+            window.location.href ="UpdateEmployeeForAdmin";
+        }else {
+
+        }
+    }
+</script>
+<script type="text/javascript">
+    function DeleteAll() {
+        var result = confirm("清除所有工资信息？");
+        if(result == true){
+            window.location.href ="UpdateEmployeeForAdmin";
+        }else {
+
+        }
+    }
+</script>
 </body>
 
 </html>
+

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class AdminSalary extends HttpServlet{
+public class AdminSalary2 extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -29,7 +29,7 @@ public class AdminSalary extends HttpServlet{
             int accountint=Integer.parseInt(account);
             System.out.println(accountint);
             EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(accountint);
-                try {
+            try {
                 if(employeeTable.getName().equals("no such employee")){
                     out.print("<script language='javascript' charset='UTF-8'>alert('错误的员工号');" +
                             "window.location.href='AdminSalary.jsp';</script>");
@@ -40,7 +40,7 @@ public class AdminSalary extends HttpServlet{
                     session.setAttribute("account",account);
                     session.setAttribute("time",SalaryList);
                     session.setAttribute("salary",salaryTable);
-                    response.sendRedirect("AdminSalary1.jsp");
+                    response.sendRedirect("AlterSalary.jsp");
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -56,3 +56,4 @@ public class AdminSalary extends HttpServlet{
 
     }
 }
+

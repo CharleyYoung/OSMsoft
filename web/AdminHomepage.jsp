@@ -83,7 +83,7 @@
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
                             </ul>
                         </div>
                     </li>

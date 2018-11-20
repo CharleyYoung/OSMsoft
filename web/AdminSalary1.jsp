@@ -1,4 +1,4 @@
-<%--
+<%@ page import="OSMsoft.Table.SalaryTable" %><%--
   Created by IntelliJ IDEA.
   User: 82533
   Date: 2018/11/17
@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -79,7 +79,7 @@
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -112,6 +112,61 @@
                         <div class="panel-body">
                             <div class="profile-detail"></div>
                             <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
+                            <form class="form-auth-small" method="post" action="AdminSalary1">
+                            <style type="text/css">
+                                table.gridtable {
+                                    font-family: verdana,arial,sans-serif;
+                                    font-size:11px;
+                                    color:#333333;
+                                    border-width: 1px;
+                                    border-color: #666666;
+                                    border-collapse: collapse;
+                                }
+                                table.gridtable th {
+                                    border-width: 1px;
+                                    padding: 8px;
+                                    border-style: solid;
+                                    border-color: #666666;
+                                    background-color: #dedede;
+                                }
+                                table.gridtable td {
+                                    border-width: 1px;
+                                    padding: 8px;
+                                    border-style: solid;
+                                    border-color: #666666;
+                                    background-color: #ffffff;
+                                }
+                            </style>
+                            <div align="center">
+                                <table align="center">
+                                    <tr>
+                                        <td width="100px"height=64p>
+                                            <select id="salarytime" name="salarytime">
+                                                <c:forEach items ="${time}" var = "item">
+                                                    <option value ="${item.year},${item.month}">${item.year}-${item.month}</option>
+                                                </c:forEach >
+                                            </select>
+                                        </td>
+                                        <td width=350px height=64px>
+                            <table class="gridtable">
+                                <tr>
+                                    <th>EmloyeeID</th><th>JobSalary</th><th>PerformanceSalary</th><th>WorkageSalary</th><th>SubsidyAllowance</th><th>Tax</th>
+                                    <th>Year</th><th>Month</th>
+                                </tr>
+                                <tr>
+                                    <td>${salary.employeeID} </td> <td>${salary.jobSalary}</td> <td>${salary.performanceSalary}</td>
+                                    <td>${salary.workAgeSalary} </td><td>${salary.subsideAllowance}</td> <td>0</td>
+                                    <td>${salary.year} </td> <td>${salary.month} </td>
+                                </tr>
+                            </table>
+                                        </td>
+                                        <td width="100px"height=64p>
+                                            <button type="submit" >查询</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </form>
                         </div>
                 </div>
                 <!-- END OVERVIEW -->

@@ -95,4 +95,20 @@
         <servlet-name>AdminSalary</servlet-name>
         <url-pattern>/AdminSalary</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminSalary1</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminSalary1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSalary1</servlet-name>
+        <url-pattern>/AdminSalary1</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminSalary2</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminSalary2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSalary2</servlet-name>
+        <url-pattern>/AdminSalary2</url-pattern>
+    </servlet-mapping>
 </web-app>

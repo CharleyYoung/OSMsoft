@@ -109,24 +109,24 @@
                             <span>${sessionScope.Account}</span>
                         </div>
                     </div>
-                    <form class="form-auth-small" method="post" action="AdminSalary">
-                    <div class="panel-body">
-                        <div class="profile-detail"></div>
-                        <h1 align="center" class="page-title"><strong>查询工资</strong></h1>
-                        <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要查询员工的工号</p></div>
-                        <div style="text-align:center; vertical-align:middle;">
-                        <table align="center">
-                            <tr>
-                                <td width=350px height=64px>
-                                        <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
-                                </td>
-                                <td width=100px height=64px>
-                                        <button type="submit" >查询</button>
-                                </td>
-                            </tr>
-                        </table>
+                    <form class="form-auth-small" method="post" action="AdminSalary2">
+                        <div class="panel-body">
+                            <div class="profile-detail"></div>
+                            <h1 align="center" class="page-title"><strong>修改工资</strong></h1>
+                            <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要修改工资的员工的工号</p></div>
+                            <div style="text-align:center; vertical-align:middle;">
+                                <table align="center">
+                                    <tr>
+                                        <td width=350px height=64px>
+                                            <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
+                                        </td>
+                                        <td width=100px height=64px>
+                                            <button type="submit" >查询</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
                 <!-- END OVERVIEW -->
