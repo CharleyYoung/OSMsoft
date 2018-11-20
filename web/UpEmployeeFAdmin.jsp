@@ -82,14 +82,86 @@
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
-                                <li><a href="" class="">查询工资</a></li>
-                                <li><a href="" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
+
+                    <!--显示树状部门列表，由saulzhang维护-->
+                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                            class="images/dep.png fa-fw"></i>
+                        <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages3" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="ManageDepartmentInfo.jsp" class="">管理部门信息</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加部门</a></li>
+                                <c:set var="depList" value="${depList}"/>
+                                <c:forEach items="${depList}" var="dep" varStatus="status">
+                                    <!-- 一级子菜单没有parentId,有url -->
+                                    <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
+                                        <li>
+                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
+                                               class="collapsed">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }<span
+                                                    class="fa arrow"></span>
+                                                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                            </a>
+                                            <div id="subPages3-${status.count+1000}" class="collapse ">
+                                                <ul class="nav nav-second-level">
+
+                                                    <c:forEach items="${dep.children}" var="secondChild"
+                                                               varStatus="status">
+                                                        <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
+                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                            <li>
+                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <!-- 二级菜单url为空，表示还有三级菜单 -->
+                                                        <c:if test="${secondChild.url eq 'no resources' }">
+                                                            <li>
+                                                                <a href="#subPages3-${status.count+500}"
+                                                                   data-toggle="collapse" class="collapsed">
+                                                                        ${secondChild.name }<span
+                                                                        class="fa arrow"></span><i
+                                                                        class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                                                <div id="subPages3-${status.count+500}"
+                                                                     class="collapse ">
+                                                                    <ul class="nav nav-third-level">
+                                                                        <c:forEach items="${secondChild.children}"
+                                                                                   var="thirdChild" varStatus="status">
+                                                                            <li>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
                     </li>
                     </a>

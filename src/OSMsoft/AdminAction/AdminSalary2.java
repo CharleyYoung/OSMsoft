@@ -1,4 +1,5 @@
 package OSMsoft.AdminAction;
+
 import OSMsoft.DAO.AdminDAO;
 import OSMsoft.DAO.EmployeeDAO;
 import OSMsoft.DAO.SalaryDao;
@@ -14,39 +15,41 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class AdminSalary2 extends HttpServlet{
+public class AdminSalary2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
-        String account=request.getParameter("salary1");
+        String account = request.getParameter("salary1");
         PrintWriter out = response.getWriter();
-        EmployeeDAO employeeDAO=new EmployeeDAO();
-        SalaryDao salaryDao=new SalaryDao();
-        Boolean number =account.matches("[0-9]+");
-        if(number)
-        {
-            int accountint=Integer.parseInt(account);
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        SalaryDao salaryDao = new SalaryDao();
+        Boolean number = account.matches("[0-9]+");
+        if (number) {
+            int accountint = Integer.parseInt(account);
             System.out.println(accountint);
             EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(accountint);
             try {
-                if(employeeTable.getName().equals("no such employee")){
+                if (employeeTable.getName().equals("no such employee")) {
                     out.print("<script language='javascript' charset='UTF-8'>alert('错误的员工号');" +
                             "window.location.href='AdminSalary.jsp';</script>");
-                } else{
+                } else {
                     System.out.println("查询成功");
-                    SalaryTable salaryTable=salaryDao.getSalarytableByIdAndTimeRencently(accountint);
-                    ArrayList<SalaryTable> SalaryList=salaryDao.returnAllSalaryTableById(accountint);
-                    session.setAttribute("account",account);
-                    session.setAttribute("time",SalaryList);
-                    session.setAttribute("salary",salaryTable);
+                    SalaryTable salaryTable = salaryDao.getSalarytableByIdAndTimeRencently(accountint);
+                    ArrayList<SalaryTable> SalaryList = salaryDao.returnAllSalaryTableById(accountint);
+                    session.setAttribute("account", account);
+                    session.setAttribute("time", SalaryList);
+                    //计算获得应得工资
+                    double DeservedSalary = salaryTable.getJobSalary() + salaryTable.getPerformanceSalary()
+                            + salaryTable.getSubsideAllowance() + salaryTable.getWorkAgeSalary();
+                    session.setAttribute("DeservedSalary", DeservedSalary);
+                    session.setAttribute("salary", salaryTable);
                     response.sendRedirect("AlterSalary.jsp");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else
-        {
+        } else {
             out.print("<script language='javascript' charset='UTF-8'>alert('输入不是数字');" +
                     "window.location.href='AdminSalary.jsp';</script>");
         }

@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -68,8 +69,8 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -79,14 +80,86 @@
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+
+                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                            class="images/dep.png fa-fw"></i>
+                        <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages3" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="ManageDepartmentInfo.jsp" class="">管理部门信息</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加部门</a></li>
+                                <c:set var="depList" value="${depList}"/>
+                                <c:forEach items="${depList}" var="dep" varStatus="status">
+                                    <!-- 一级子菜单没有parentId,有url -->
+                                    <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
+                                        <li>
+                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
+                                               class="collapsed">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }<span
+                                                    class="fa arrow"></span>
+                                                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                            </a>
+                                            <div id="subPages3-${status.count+1000}" class="collapse ">
+                                                <ul class="nav nav-second-level">
+
+                                                    <c:forEach items="${dep.children}" var="secondChild"
+                                                               varStatus="status">
+                                                        <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
+                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                            <li>
+                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <!-- 二级菜单url为空，表示还有三级菜单 -->
+                                                        <c:if test="${secondChild.url eq 'no resources' }">
+                                                            <li>
+                                                                <a href="#subPages3-${status.count+500}"
+                                                                   data-toggle="collapse" class="collapsed">
+                                                                        ${secondChild.name }<span
+                                                                        class="fa arrow"></span><i
+                                                                        class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                                                <div id="subPages3-${status.count+500}"
+                                                                     class="collapse ">
+                                                                    <ul class="nav nav-third-level">
+                                                                        <c:forEach items="${secondChild.children}"
+                                                                                   var="thirdChild" varStatus="status">
+                                                                            <li>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -104,7 +177,8 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
                             <h3 class="name" id="name">${sessionScope.Account}</h3>
                             <span>${sessionScope.Account}</span>
                         </div>
@@ -112,60 +186,90 @@
                     <div class="panel-body">
                         <div class="profile-detail"></div>
                         <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
-                            <style type="text/css">
-                                table.gridtable {
-                                    font-family: verdana,arial,sans-serif;
-                                    font-size:11px;
-                                    color:#333333;
-                                    border-width: 1px;
-                                    border-color: #666666;
-                                    border-collapse: collapse;
-                                }
-                                table.gridtable th {
-                                    border-width: 1px;
-                                    padding: 8px;
-                                    border-style: solid;
-                                    border-color: #666666;
-                                    background-color: #dedede;
-                                }
-                                table.gridtable td {
-                                    border-width: 1px;
-                                    padding: 8px;
-                                    border-style: solid;
-                                    border-color: #666666;
-                                    background-color: #ffffff;
-                                }
-                            </style>
-                            <div align="center">
-                                <table align="center">
-                                    <tr>
-                                        <td width=350px height=64px>
-                                            <table class="gridtable">
+                        <style type="text/css">
+                            table.gridtable {
+                                font-family: verdana, arial, sans-serif;
+                                font-size: 11px;
+                                color: #333333;
+                                border-width: 1px;
+                                border-color: #666666;
+                                border-collapse: collapse;
+                            }
+
+                            table.gridtable th {
+                                border-width: 1px;
+                                padding: 8px;
+                                border-style: solid;
+                                border-color: #666666;
+                                background-color: #dedede;
+                            }
+
+                            table.gridtable td {
+                                border-width: 1px;
+                                padding: 8px;
+                                border-style: solid;
+                                border-color: #666666;
+                                background-color: #ffffff;
+                            }
+                        </style>
+                        <c:set var="DeservedSalary" scope="page" value="${sessionScope.DeservedSalary}"/>
+                        <!--调用自定义标签-->
+                        <mytag:ObtainPersonalIncomeTaxAndActualSalary></mytag:ObtainPersonalIncomeTaxAndActualSalary>
+                        <!--利用JSTL获取员工的个人所得税和实得工资-->
+                        <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}"/>
+                        <c:set var="ActualSalary1" scope="page" value="${ActualSalary}"/>
+                        <div align="center">
+                            <table align="center">
+                                <tr>
+                                    <td width=350px height=64px>
+                                        <table class="gridtable">
+                                            <tr>
+                                                <th>EmloyeeID</th>
+                                                <th>JobSalary</th>
+                                                <th>PerformanceSalary</th>
+                                                <th>WorkageSalary</th>
+                                                <th>SubsidyAllowance</th>
+                                                <th>Tax</th>
+                                                <th>Year</th>
+                                                <th>Month</th>
+                                                <th>Alter</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            <c:forEach items="${time}" var="item">
+                                                <c:set var="item" scope="session" value="${items}"></c:set>
                                                 <tr>
-                                                    <th>EmloyeeID</th><th>JobSalary</th><th>PerformanceSalary</th><th>WorkageSalary</th><th>SubsidyAllowance</th><th>Tax</th>
-                                                    <th>Year</th><th>Month</th><th>Alter</th><th>Delete</th>
+                                                    <td>${item.employeeID} </td>
+                                                    <td>${item.jobSalary}</td>
+                                                    <td>${item.performanceSalary}</td>
+                                                    <td>${item.workAgeSalary} </td>
+                                                    <td>${item.subsideAllowance}</td>
+                                                    <td>${sessionScope.DeservedSalary}</td>
+                                                    <td>${PersonalIncomeTax1}</td>
+                                                    <td>${ActualSalary1}</td>
+                                                    <td>${item.year} </td>
+                                                    <td>${item.month} </td>
+                                                    <th>
+                                                        <button class="btn btn-primary"
+                                                                onclick="Update(${item.employeeID},${item.jobSalary},${item.performanceSalary},${item.workAgeSalary},${item.subsideAllowance},${item.month},${item.year})">
+                                                            <i class="fa fa-refresh"></i> 更新信息
+                                                        </button>
+                                                    </th>
+                                                    <th>
+                                                        <button class="btn btn-danger"
+                                                                onclick="Delete(${item.employeeID},${item.year},${item.month})">
+                                                            <i class="fa fa-refresh"></i> 删除
+                                                        </button>
+                                                    </th>
                                                 </tr>
-                                                    <c:forEach items ="${time}" var = "item">
-                                                        <c:set var="item" scope="session" value="${items}"></c:set>
-                                                <tr>
-                                                        <td>${item.employeeID} </td>
-                                                        <td>${item.jobSalary}</td>
-                                                        <td>${item.performanceSalary}</td>
-                                                        <td>${item.workAgeSalary} </td>
-                                                        <td>${item.subsideAllowance}</td>
-                                                        <td>0</td>
-                                                        <td>${item.year} </td>
-                                                        <td>${item.month} </td>
-                                                        <th><button class="btn btn-primary" onclick="Update(${item.employeeID},${item.jobSalary},${item.performanceSalary},${item.workAgeSalary},${item.subsideAllowance},${item.month},${item.year})"><i class="fa fa-refresh"></i> 更新信息</button></th>
-                                                        <th><button class="btn btn-danger" onclick="Delete(${item.employeeID},${item.year},${item.month})"><i class="fa fa-refresh"></i> 删除</button></th>
-                                                </tr>
-                                                    </c:forEach>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <button  class="btn btn-danger" onclick="DeleteAll(${account})"><i class="fa fa-refresh"></i> 清空</button>
-                            </div>
+                                            </c:forEach>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="btn btn-danger" onclick="DeleteAll(${account})"><i class="fa fa-refresh"></i>
+                                清空
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <!-- END OVERVIEW -->
@@ -202,22 +306,22 @@
     }
 </script>
 <script type="text/javascript">
-    function Delete(account,year,month) {
+    function Delete(account, year, month) {
         var result = confirm("确定要删除这个Salary吗？");
-        if(result == true){
-            window.location.href ="DeleteSalary?account="+account+"&year="+year+"&month="+month;
-        }else {
+        if (result == true) {
+            window.location.href = "DeleteSalary?account=" + account + "&year=" + year + "&month=" + month;
+        } else {
 
         }
     }
 </script>
 <script type="text/javascript">
-    function Update(employeeID,jobSalary,performanceSalary,workAgeSalary,subsideAllowance,month,year) {
+    function Update(employeeID, jobSalary, performanceSalary, workAgeSalary, subsideAllowance, month, year) {
         var result = confirm("更新该Salary信息？");
-        if(result == true){
-            window.location.href ="UpdateSalaryForAdmin?account="+employeeID+"&jobSalary="+jobSalary+"&performanceSalary="+performanceSalary
-                +"&workAgeSalary="+workAgeSalary+"&subsideAllowance="+subsideAllowance+"&month="+month+"&year="+year;
-        }else {
+        if (result == true) {
+            window.location.href = "UpdateSalaryForAdmin?account=" + employeeID + "&jobSalary=" + jobSalary + "&performanceSalary=" + performanceSalary
+                + "&workAgeSalary=" + workAgeSalary + "&subsideAllowance=" + subsideAllowance + "&month=" + month + "&year=" + year;
+        } else {
 
         }
     }
@@ -226,9 +330,9 @@
 <script type="text/javascript">
     function DeleteAll(account) {
         var result = confirm("清空该员工所有的Salary？");
-        if(result == true){
-            window.location.href ="DeleteAllSalary?account="+account;
-        }else {
+        if (result == true) {
+            window.location.href = "DeleteAllSalary?account=" + account;
+        } else {
 
         }
     }

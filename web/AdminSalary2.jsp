@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -68,8 +68,8 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -79,14 +79,85 @@
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                            class="images/dep.png fa-fw"></i>
+                        <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages3" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="ManageDepartmentInfo.jsp" class="">管理部门信息</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加部门</a></li>
+                                <c:set var="depList" value="${depList}"/>
+                                <c:forEach items="${depList}" var="dep" varStatus="status">
+                                    <!-- 一级子菜单没有parentId,有url -->
+                                    <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
+                                        <li>
+                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
+                                               class="collapsed">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }<span
+                                                    class="fa arrow"></span>
+                                                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                            </a>
+                                            <div id="subPages3-${status.count+1000}" class="collapse ">
+                                                <ul class="nav nav-second-level">
+
+                                                    <c:forEach items="${dep.children}" var="secondChild"
+                                                               varStatus="status">
+                                                        <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
+                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                            <li>
+                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <!-- 二级菜单url为空，表示还有三级菜单 -->
+                                                        <c:if test="${secondChild.url eq 'no resources' }">
+                                                            <li>
+                                                                <a href="#subPages3-${status.count+500}"
+                                                                   data-toggle="collapse" class="collapsed">
+                                                                        ${secondChild.name }<span
+                                                                        class="fa arrow"></span><i
+                                                                        class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                                                <div id="subPages3-${status.count+500}"
+                                                                     class="collapse ">
+                                                                    <ul class="nav nav-third-level">
+                                                                        <c:forEach items="${secondChild.children}"
+                                                                                   var="thirdChild" varStatus="status">
+                                                                            <li>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -104,7 +175,8 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
                             <h3 class="name" id="name">${sessionScope.Account}</h3>
                             <span>${sessionScope.Account}</span>
                         </div>
@@ -113,19 +185,25 @@
                         <div class="panel-body">
                             <div class="profile-detail"></div>
                             <h1 align="center" class="page-title"><strong>修改工资</strong></h1>
-                            <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">输入想要修改工资的员工的工号</p></div>
+                            <div style="text-align:center; vertical-align:middle;"><p style="font-size: 30px">
+                                输入想要修改工资的员工的工号</p></div>
                             <div style="text-align:center; vertical-align:middle;">
                                 <table align="center">
                                     <tr>
                                         <td width=350px height=64px>
-                                            <input type="text" name="salary1" id="salary1" style="color:#CCC; font-size:18px" size=35 placeholder="员工工号" maxlength="32"/>
+                                            <input type="text" name="salary1" id="salary1"
+                                                   style="color:#CCC; font-size:18px" size=35 placeholder="员工工号"
+                                                   maxlength="32"/>
                                         </td>
                                         <td width=100px height=64px>
-                                            <button type="submit" >查询</button>
+                                            <button type="submit">查询</button>
                                         </td>
                                     </tr>
                                 </table>
-                                <button type="button" class="btn btn-danger" onclick="window.location.href='AddSalary.jsp'">添加Salary</button></i>
+                                <button type="button" class="btn btn-danger"
+                                        onclick="window.location.href='AddSalary.jsp'">添加Salary
+                                </button>
+                                </i>
                                 <%--<input type="button" name="register" value ="添加Salary" onclick="window.location.href='AddSalary.jsp'"/>--%>
                             </div>
                         </div>

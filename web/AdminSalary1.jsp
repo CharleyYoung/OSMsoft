@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="MyFirstTag" prefix="mytag" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -68,8 +69,8 @@
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="" class="">添加员工</a></li>
-                                <li><a href="" class="">管理员工信息</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -79,14 +80,86 @@
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li><a href="" class="collapsed"><i class="collapsed"></i><span>部门管理</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+
+                    <!--显示树状部门列表，由saulzhang维护-->
+                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                            class="images/dep.png fa-fw"></i>
+                        <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages3" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="ManageDepartmentInfo.jsp" class="">管理部门信息</a></li>
+                                <li><a href="AddDepartment.jsp" class="">添加部门</a></li>
+                                <c:set var="depList" value="${depList}"/>
+                                <c:forEach items="${depList}" var="dep" varStatus="status">
+                                    <!-- 一级子菜单没有parentId,有url -->
+                                    <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
+                                        <li>
+                                                <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
+                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <!-- 可展开的一级菜单，没有parentId,有url -->
+                                    <c:if test="${dep.parentId eq '0' and  dep.url eq 'no resources'}">
+                                        <li>
+                                            <a href="#subPages3-${status.count+1000}" data-toggle="collapse"
+                                               class="collapsed">
+                                                <i class="${dep.icon } fa-fw"></i> ${dep.name }<span
+                                                    class="fa arrow"></span>
+                                                <i class="icon-submenu lnr lnr-chevron-left"></i>
+                                            </a>
+                                            <div id="subPages3-${status.count+1000}" class="collapse ">
+                                                <ul class="nav nav-second-level">
+
+                                                    <c:forEach items="${dep.children}" var="secondChild"
+                                                               varStatus="status">
+                                                        <!-- 有url的没有子菜单直接输出到li中，没有url的是可扩展二级菜单 -->
+                                                        <c:if test="${secondChild.parentId != '0' and  secondChild.url != 'no resources'}">
+                                                            <li>
+                                                                <a href="<c:url value='depEmployeeInfo?depid=${secondChild.id}&departmentName=${secondChild.name}'/>">${secondChild.name }</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <!-- 二级菜单url为空，表示还有三级菜单 -->
+                                                        <c:if test="${secondChild.url eq 'no resources' }">
+                                                            <li>
+                                                                <a href="#subPages3-${status.count+500}"
+                                                                   data-toggle="collapse" class="collapsed">
+                                                                        ${secondChild.name }<span
+                                                                        class="fa arrow"></span><i
+                                                                        class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                                                <div id="subPages3-${status.count+500}"
+                                                                     class="collapse ">
+                                                                    <ul class="nav nav-third-level">
+                                                                        <c:forEach items="${secondChild.children}"
+                                                                                   var="thirdChild" varStatus="status">
+                                                                            <li>
+                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                            </li>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                     </a>
                     </li>
                 </ul>
@@ -104,24 +177,26 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
                             <h3 class="name" id="name">${sessionScope.Account}</h3>
                             <span>${sessionScope.Account}</span>
                         </div>
                     </div>
-                        <div class="panel-body">
-                            <div class="profile-detail"></div>
-                            <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
-                            <form class="form-auth-small" method="post" action="AdminSalary1">
+                    <div class="panel-body">
+                        <div class="profile-detail"></div>
+                        <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
+                        <form class="form-auth-small" method="post" action="AdminSalary1">
                             <style type="text/css">
                                 table.gridtable {
-                                    font-family: verdana,arial,sans-serif;
-                                    font-size:11px;
-                                    color:#333333;
+                                    font-family: verdana, arial, sans-serif;
+                                    font-size: 11px;
+                                    color: #333333;
                                     border-width: 1px;
                                     border-color: #666666;
                                     border-collapse: collapse;
                                 }
+
                                 table.gridtable th {
                                     border-width: 1px;
                                     padding: 8px;
@@ -129,6 +204,7 @@
                                     border-color: #666666;
                                     background-color: #dedede;
                                 }
+
                                 table.gridtable td {
                                     border-width: 1px;
                                     padding: 8px;
@@ -140,34 +216,56 @@
                             <div align="center">
                                 <table align="center">
                                     <tr>
-                                        <td width="100px"height=64p>
+                                        <td width="100px" height=64p>
                                             <select id="salarytime" name="salarytime">
-                                                <c:forEach items ="${time}" var = "item">
-                                                    <option value ="${item.year},${item.month}">${item.year}-${item.month}</option>
-                                                </c:forEach >
+                                                <c:forEach items="${time}" var="item">
+                                                    <option value="${item.year},${item.month}">${item.year}-${item.month}</option>
+                                                </c:forEach>
                                             </select>
                                         </td>
+                                        <c:set var="DeservedSalary" scope="page"
+                                               value="${sessionScope.DeservedSalary}"/>
+                                        <!--调用自定义标签-->
+                                        <mytag:ObtainPersonalIncomeTaxAndActualSalary></mytag:ObtainPersonalIncomeTaxAndActualSalary>
+                                        <!--利用JSTL获取员工的个人所得税和实得工资-->
+                                        <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}"/>
+                                        <c:set var="ActualSalary1" scope="page" value="${ActualSalary}"/>
                                         <td width=350px height=64px>
-                            <table class="gridtable">
-                                <tr>
-                                    <th>EmloyeeID</th><th>JobSalary</th><th>PerformanceSalary</th><th>WorkageSalary</th><th>SubsidyAllowance</th><th>Tax</th>
-                                    <th>Year</th><th>Month</th>
-                                </tr>
-                                <tr>
-                                    <td>${salary.employeeID} </td> <td>${salary.jobSalary}</td> <td>${salary.performanceSalary}</td>
-                                    <td>${salary.workAgeSalary} </td><td>${salary.subsideAllowance}</td> <td>0</td>
-                                    <td>${salary.year} </td> <td>${salary.month} </td>
-                                </tr>
-                            </table>
+                                            <table class="gridtable">
+                                                <tr>
+                                                    <th>EmloyeeID</th>
+                                                    <th>JobSalary</th>
+                                                    <th>PerformanceSalary</th>
+                                                    <th>WorkageSalary</th>
+                                                    <th>SubsidyAllowance</th>
+                                                    <th>DeservedSalary</th>
+                                                    <th>Tax</th>
+                                                    <th>ActualSalary</th>
+                                                    <th>Year</th>
+                                                    <th>Month</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>${salary.employeeID} </td>
+                                                    <td>${salary.jobSalary}</td>
+                                                    <td>${salary.performanceSalary}</td>
+                                                    <td>${salary.workAgeSalary} </td>
+                                                    <td>${salary.subsideAllowance}</td>
+                                                    <td>${sessionScope.DeservedSalary}</td>
+                                                    <td>${PersonalIncomeTax1}</td>
+                                                    <td>${ActualSalary1}</td>
+                                                    <td>${salary.year} </td>
+                                                    <td>${salary.month} </td>
+                                                </tr>
+                                            </table>
                                         </td>
-                                        <td width="100px"height=64p>
-                                            <button type="submit" >查询</button>
+                                        <td width="100px" height=64p>
+                                            <button type="submit">查询</button>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            </form>
-                        </div>
+                        </form>
+                    </div>
                 </div>
                 <!-- END OVERVIEW -->
             </div>

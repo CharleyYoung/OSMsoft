@@ -31,13 +31,13 @@ public class UpdateSalaryForAdmin extends HttpServlet {
         //获取上一个页面传递的参数值
         int id = Integer.parseInt(String.valueOf(request.getParameter("account")));
         System.out.println(id);
-        float Js=Float.parseFloat(String.valueOf(request.getParameter("jobSalary")));
+        float Js = Float.parseFloat(String.valueOf(request.getParameter("jobSalary")));
         System.out.println(Js);
-        float Ps=Float.parseFloat(String.valueOf(request.getParameter("performanceSalary")));
+        float Ps = Float.parseFloat(String.valueOf(request.getParameter("performanceSalary")));
         System.out.println(Ps);
-        float Ws=Float.parseFloat(String.valueOf(request.getParameter("workAgeSalary")));
+        float Ws = Float.parseFloat(String.valueOf(request.getParameter("workAgeSalary")));
         System.out.println(Ws);
-        float Ss=Float.parseFloat(String.valueOf(request.getParameter("subsideAllowance")));
+        float Ss = Float.parseFloat(String.valueOf(request.getParameter("subsideAllowance")));
         System.out.println(Ss);
         int year = Integer.parseInt(String.valueOf(request.getParameter("year")));
         System.out.println(year);
@@ -45,7 +45,7 @@ public class UpdateSalaryForAdmin extends HttpServlet {
         System.out.println(month);
         //利用该参数值删除员工并给出反馈
         SalaryDao salaryDao = new SalaryDao();
-        SalaryTable salaryTable=new SalaryTable();
+        SalaryTable salaryTable = new SalaryTable();
         salaryTable.setEmployeeID(id);
         salaryTable.setJobSalary(Js);
         salaryTable.setPerformanceSalary(Ps);
@@ -53,7 +53,7 @@ public class UpdateSalaryForAdmin extends HttpServlet {
         salaryTable.setSubsideAllowance(Ss);
         salaryTable.setYear(year);
         salaryTable.setMonth(month);
-        session.setAttribute("old",salaryTable);
+        session.setAttribute("old", salaryTable);
         response.sendRedirect("AlterSalary1.jsp");
     }
 }

@@ -27,11 +27,16 @@ public class ObtainPersonalIncomeTaxAndActualSalary extends SimpleTagSupport {
             PersonalIncomeTax = ExceedSalary * 0.30;
         } else if (ExceedSalary <= 80000) {
             PersonalIncomeTax = ExceedSalary * 0.35;
-        } else {
+        } else if (ExceedSalary > 80000) {
             PersonalIncomeTax = ExceedSalary * 0.45;
         }
+
         //利用jspContext来设置Attribute,作用范围为page
         double ActualSalary = DeservedSalary - PersonalIncomeTax;
+        if (ExceedSalary < 0) {
+            ActualSalary = 0;
+            PersonalIncomeTax = 0;
+        }
         BigDecimal a = new BigDecimal(ActualSalary);
         ActualSalary = a.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         BigDecimal b = new BigDecimal(PersonalIncomeTax);

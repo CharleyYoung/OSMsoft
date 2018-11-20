@@ -132,7 +132,7 @@ public class DepartmentDAO {
      * @return dList 返回包含查询到的department信息的ArrayList<DepartmentTable>
      */
     public ArrayList<DepartmentTable> queryDepartmentByDepname(String depname) {
-            conn = new ConnDB();
+        conn = new ConnDB();
         ArrayList<DepartmentTable> dList = new ArrayList<DepartmentTable>();
         sql = "select * from department where depname = \'" + depname + "\'";
         ResultSet rs = conn.executeQuery(sql);

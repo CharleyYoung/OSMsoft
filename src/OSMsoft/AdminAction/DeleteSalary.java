@@ -31,11 +31,11 @@ public class DeleteSalary extends HttpServlet {
         //利用该参数值删除员工并给出反馈
         boolean flag = false;
         SalaryDao salaryDao = new SalaryDao();
-        flag = salaryDao.deleteSalary(id,year,month);
-        if(flag == true){
+        flag = salaryDao.deleteSalary(id, year, month);
+        if (flag == true) {
             out.print("<script language='javascript' charset='UTF-8'>alert('删除成功');" +
                     "window.location.href='AdminSalary2.jsp';</script>");
-        }else{
+        } else {
             out.print("<script language='javascript' charset='UTF-8'>alert('删除失败');" +
                     "window.location.href='AdminSalary2.jsp';</script>");
         }

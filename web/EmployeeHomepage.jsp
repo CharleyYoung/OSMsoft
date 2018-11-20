@@ -41,9 +41,6 @@
                     <i class="lnr lnr-arrow-left-circle"></i>
                 </button>
             </div>
-            <div align="right">
-                <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i> <span>修改密码</span></a></li>
-            </div>
             <form class="navbar-form navbar-left"></form>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
@@ -60,13 +57,15 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
-                    <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
+                    <li><a href="EmployeeHomepage.jsp" class="active"><i class="active"></i> <span>主页</span></a></li>
+                    <li><a href="ManageInformation.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>管理个人信息</span></a></li>
                     <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i
                             class="collapsed"></i><span>查看工资记录</span></a></li>
                     <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a>
                     </li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
                     </li>
                 </ul>
@@ -93,6 +92,10 @@
                     <div class="panel-body">
                         <div class="profile-detail"></div>
                         <h1 align="center" class="page-title">欢迎您，${sessionScope.Employee.getName()}！</h1>
+                        <div align="right">
+                            <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i>
+                                <span>修改密码</span></a></li>
+                        </div>
                     </div>
                 </div>
                 <!-- END OVERVIEW -->
