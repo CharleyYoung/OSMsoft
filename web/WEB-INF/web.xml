@@ -96,6 +96,70 @@
         <url-pattern>/ManageInformation</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>AdminSalary</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminSalary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSalary</servlet-name>
+        <url-pattern>/AdminSalary</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminSalary1</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminSalary1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSalary1</servlet-name>
+        <url-pattern>/AdminSalary1</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminSalary2</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AdminSalary2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSalary2</servlet-name>
+        <url-pattern>/AdminSalary2</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddSalary</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AddSalary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSalary</servlet-name>
+        <url-pattern>/AddSalary</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteSalary</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DeleteSalary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteSalary</servlet-name>
+        <url-pattern>/DeleteSalary</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteAllSalary</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.DeleteAllSalary</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteAllSalary</servlet-name>
+        <url-pattern>/DeleteAllSalary</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateSalaryForAdmin</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.UpdateSalaryForAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateSalaryForAdmin</servlet-name>
+        <url-pattern>/UpdateSalaryForAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddSalary1</servlet-name>
+        <servlet-class>OSMsoft.AdminAction.AddSalary1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddSalary1</servlet-name>
+        <url-pattern>/AddSalary1</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>OSMsoft.EmployeeAction.ChangePassword</servlet-class>
     </servlet>
