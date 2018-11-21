@@ -64,7 +64,7 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="AdminHomepage.jsp" class="collapsed"><i class=""></i> <span>个人信息</span></a></li>
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
@@ -75,7 +75,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class=""></i>
+                        <a href="#subPages2" data-toggle="collapse" class="active"><i class=""></i>
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">

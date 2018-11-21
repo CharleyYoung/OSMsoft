@@ -19,6 +19,7 @@ public class AdminSalary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
         HttpSession session = request.getSession(true);
         String account = request.getParameter("salary1");
         PrintWriter out = response.getWriter();

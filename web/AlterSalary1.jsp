@@ -66,23 +66,23 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class="collapse"><i class="collapse"></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="collapse"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
                                 <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class=""></i>
+                        <a href="#subPages2" data-toggle="collapse" class="active"><i class=""></i>
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="active">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>

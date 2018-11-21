@@ -61,7 +61,7 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="AdminHomepage.jsp" class="collapse"><i class=""></i> <span>个人信息</span></a></li>
 
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -86,7 +86,7 @@
 
                     <!--Change by saulzhang，部门管理树状由saulzhang维护-->
 
-                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                    <li><a href="##subPages3" data-toggle="collapse" class="active"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages3" class="collapse ">

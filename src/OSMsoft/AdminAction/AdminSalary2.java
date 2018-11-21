@@ -19,6 +19,7 @@ public class AdminSalary2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
         HttpSession session = request.getSession(true);
         String account = request.getParameter("salary1");
         PrintWriter out = response.getWriter();
@@ -32,7 +33,7 @@ public class AdminSalary2 extends HttpServlet {
             try {
                 if (employeeTable.getName().equals("no such employee")) {
                     out.print("<script language='javascript' charset='UTF-8'>alert('错误的员工号');" +
-                            "window.location.href='AdminSalary.jsp';</script>");
+                            "window.location.href='AdminSalary2.jsp';</script>");
                 } else {
                     System.out.println("查询成功");
                     SalaryTable salaryTable = salaryDao.getSalarytableByIdAndTimeRencently(accountint);
@@ -51,7 +52,7 @@ public class AdminSalary2 extends HttpServlet {
             }
         } else {
             out.print("<script language='javascript' charset='UTF-8'>alert('输入不是数字');" +
-                    "window.location.href='AdminSalary.jsp';</script>");
+                    "window.location.href='AdminSalary2.jsp';</script>");
         }
     }
 

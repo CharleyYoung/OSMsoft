@@ -17,14 +17,34 @@ public class DepartmentDAO {
     ConnDB conn;
 
     /**
-     * 添加department
+     * 添加不含子部门的department
      * @param departmentTable 添加的部门信息
      * @throws Exception
      */
-    public void addDepartment(DepartmentTable departmentTable) {
+    public void addNotHaveSonDepartment(DepartmentTable departmentTable) {
         conn = new ConnDB();
         sql = "insert into department(depname, parentdepid, url) values(\'" + departmentTable.getDepartmentName()
                 + "\',\'" + departmentTable.getParentDepartmentID() + "\', \'" + departmentTable.getUrl() + "\')";
+        try {
+            conn.executeQuery(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        System.out.println("添加department:" + sql);
+    }
+
+    /**
+     * 添加含有子部门的department
+     *
+     * @param departmentTable 添加的部门信息
+     * @throws Exception
+     */
+    public void addHaveSonDepartment(DepartmentTable departmentTable) {
+        conn = new ConnDB();
+        sql = "insert into department(depname, parentdepid) values(\'" + departmentTable.getDepartmentName()
+                + "\',\'" + departmentTable.getParentDepartmentID() + "\')";
         try {
             conn.executeQuery(sql);
         } catch (Exception e) {

@@ -30,23 +30,23 @@ public class AddSalary extends HttpServlet {
         Boolean e = isNumber(request.getParameter("performanceSalary"));
         Boolean f = isNumber(request.getParameter("workAgeSalary"));
         Boolean g = isNumber(request.getParameter("subsideAllowance"));
-        System.out.println(123);
+//        System.out.println(123);
         //判断所有输入框是否填满
         if (request.getParameter("employeeID") == "" || request.getParameter("jobSalary") == "" || request.getParameter("performanceSalary") == ""
                 || request.getParameter("workAgeSalary") == "" || request.getParameter("subsideAllowance") == "" ||
                 request.getParameter("year") == "" || request.getParameter("month") == "") {
-            out.print("<script language='javascript' charset='UTF-8'>alert('请填写全部信息');" +
+            out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <script language='javascript' charset='UTF-8'>alert('请填写全部信息');" +
                     "window.location.href='AddSalary.jsp';</script>");
         }//判断年龄信息是否填写正确
         else if (a == false || b == false || c == false || d == false || e == false || f == false || g == false) {
-            out.print("<script language='javascript' charset='UTF-8'>alert('请填写正确的信息格式');" +
+            out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <script language='javascript' charset='UTF-8'>alert('请填写正确的信息格式');" +
                     "window.location.href='AddSalary.jsp';</script>");
         } else {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             int s1 = Integer.parseInt(String.valueOf(request.getParameter("employeeID")));
             EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(s1);
             if (employeeTable.getName().equals("no such employee")) {
-                out.print("<script language='javascript' charset='UTF-8'>alert('错误的员工号');" +
+                out.print("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <script language='javascript' charset='UTF-8'>alert('错误的员工号');" +
                         "window.location.href='AddSalary.jsp';</script>");
             } else {
                 double s2 = Double.parseDouble(String.valueOf(request.getParameter("jobSalary")));
