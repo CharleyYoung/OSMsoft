@@ -44,11 +44,12 @@ public class ChangePassword extends HttpServlet {
             out.print("<script language='javascript' charset='UTF-8'>alert('输入内容不能为空！');" +
                     "window.location.href='ChangePasswordForEmployee.jsp';</script>");
         }//判断旧密码是否填写正确
-        else if (!String.valueOf(request.getParameter("newpassword")).equals(String.valueOf(request.getParameter("againnewpassword")))) {
-            out.print("<script language='javascript' charset='UTF-8'>alert('两次新密码不匹配');" +
-                    "window.location.href='ChangePasswordForEmployee.jsp';</script>");
-        } else if (!String.valueOf(request.getParameter("oldpassword")).equals(password)) {
+        else if (!String.valueOf(request.getParameter("oldpassword")).equals(password)) {
             out.print("<script language='javascript' charset='UTF-8'>alert('旧密码输入错误');" +
+                    "window.location.href='ChangePasswordForEmployee.jsp';</script>");
+         //判断两次密码是否填写正确
+        } else if (!String.valueOf(request.getParameter("newpassword")).equals(String.valueOf(request.getParameter("againnewpassword")))) {
+            out.print("<script language='javascript' charset='UTF-8'>alert('两次新密码不匹配');" +
                     "window.location.href='ChangePasswordForEmployee.jsp';</script>");
         } else {
             employeeTable.setPassword(String.valueOf(request.getParameter("newpassword")));
