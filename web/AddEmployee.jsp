@@ -204,11 +204,11 @@
                                     </select>
                                     <br>
                                     <label class="fancy-radio">
-                                        <input name="gender" value="male" type="radio">
+                                        <input name="gender" value="男" type="radio">
                                         <span><i></i>男</span>
                                     </label>
                                     <label class="fancy-radio">
-                                        <input name="gender" value="female" type="radio">
+                                        <input name="gender" value="女" type="radio">
                                         <span><i></i>女</span>
                                     </label>
                                     <p class="demo-button">
