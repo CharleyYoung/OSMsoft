@@ -229,7 +229,9 @@
                                                 <th>PerformanceSalary</th>
                                                 <th>WorkageSalary</th>
                                                 <th>SubsidyAllowance</th>
-                                                <th>Tax</th>
+                                                <th>DeservedSalary</th>
+                                                <th>PersonalIncomeTax</th>
+                                                <th>ActualSalary</th>
                                                 <th>Year</th>
                                                 <th>Month</th>
                                                 <th>Alter</th>

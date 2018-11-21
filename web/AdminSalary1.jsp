@@ -239,7 +239,7 @@
                                                     <th>WorkageSalary</th>
                                                     <th>SubsidyAllowance</th>
                                                     <th>DeservedSalary</th>
-                                                    <th>Tax</th>
+                                                    <th>PersonalIncomeTax</th>
                                                     <th>ActualSalary</th>
                                                     <th>Year</th>
                                                     <th>Month</th>
