@@ -5,8 +5,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib uri="MyFirstTag" prefix="mytag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
@@ -67,23 +66,23 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class="collapse"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="collapse"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
                                 <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class=""></i>
+                        <a href="#subPages2" data-toggle="collapse" class="active"><i class=""></i>
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
                                 <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
-                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
+                                <li><a href="AdminSalary2.jsp" class="active">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -158,6 +157,7 @@
                         </div>
                     </li>
 
+
                     <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
                             class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
@@ -174,7 +174,7 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title">添加员工</h3>
+                <h3 class="page-title">添加Salary</h3>
                 <div class="row">
                     <div class="col-md-12">
 
@@ -184,33 +184,41 @@
                                 <h3 class="panel-title">输入</h3>
                             </div>
 
-                            <form method="POST" action="AddEmployee">
+                            <form method="POST" action="AddSalary">
                                 <div class="panel-body">
-                                    <input type="text" class="form-control" placeholder="姓名" name="name">
+                                    <h4>工号</h4>
+                                    <input type="text" class="form-control" placeholder="工号" name="employeeID">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="年龄" name="age">
+                                    <h4>岗位工资</h4>
+                                    <input type="text" class="form-control" placeholder="岗位工资" name="jobSalary">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="电话号码" name="tele">
+                                    <h4>绩效工资</h4>
+                                    <input type="text" class="form-control" placeholder="绩效工资" name="performanceSalary">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="电子邮箱" name="email">
+                                    <h4>工龄工资</h4>
+                                    <input type="text" class="form-control" placeholder="工龄工资" name="workAgeSalary">
                                     <br>
-                                    <input type="text" class="form-control" placeholder="职位" name="job">
+                                    <h4>津贴补助</h4>
+                                    <input type="text" class="form-control" placeholder="津贴补助" name="subsideAllowance">
                                     <br>
-                                    <select id="部门" name="department" size="value" style="width: 100px;">
-                                        <c:forEach var="department" items="${departmentList}">
-                                            <option name="department"
-                                                    value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
-                                        </c:forEach>
+                                    <h4>年</h4>
+                                    <input type="text" class="form-control" placeholder="年" name="year">
+                                    <br>
+                                    <h4>月</h4>
+                                    <select id="月" name="month" size="value" style="width: 100px;">
+                                        <option name="1" value="1">1</option>
+                                        <option name="2" value="2">2</option>
+                                        <option name="3" value="3">3</option>
+                                        <option name="4" value="4">4</option>
+                                        <option name="5" value="5">5</option>
+                                        <option name="6" value="6">6</option>
+                                        <option name="7" value="7">7</option>
+                                        <option name="8" value="8">8</option>
+                                        <option name="9" value="9">9</option>
+                                        <option name="10" value="10">10</option>
+                                        <option name="11" value="11">11</option>
+                                        <option name="12" value="12">12</option>
                                     </select>
-                                    <br>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="male" type="radio">
-                                        <span><i></i>男</span>
-                                    </label>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="female" type="radio">
-                                        <span><i></i>女</span>
-                                    </label>
                                     <p class="demo-button">
                                         <button id="submit" type="submit" class="btn btn-success">添加</button>
                                     </p>

@@ -7,29 +7,29 @@ import OSMsoft.core.*;
 public class SalaryDao {
     String sql = "";
     ConnDB conn = new ConnDB();
-    public SalaryTable getSalarytableByIdAndTime(int employeeid,int year,int month)
-    {
+
+    public SalaryTable getSalarytableByIdAndTime(int employeeid, int year, int month) {
         conn = new ConnDB();
-        sql="select * from  salary where employeeid="+"\'"+employeeid+"\'"+
-                "and year="+"\'"+year+"\'"+"and month="+"\'"+month+"\'";
+        sql = "select * from  salary where employeeid=" + "\'" + employeeid + "\'" +
+                "and year=" + "\'" + year + "\'" + "and month=" + "\'" + month + "\'";
         ResultSet rs = conn.executeQuery(sql);
-        SalaryTable salaryTable=new SalaryTable();
+        SalaryTable salaryTable = new SalaryTable();
         try {
-        if(rs.next()) {
-            rs.previous();
-            while (rs.next()) {
-                salaryTable.setJobSalary(rs.getDouble(1));
-                salaryTable.setPerformanceSalary(rs.getDouble(2));
-                salaryTable.setWorkAgeSalary(rs.getDouble(3));
-                salaryTable.setSubsideAllowance(rs.getDouble(4));
-                salaryTable.setMonth(rs.getInt(5));
-                salaryTable.setYear(rs.getInt(6));
-                salaryTable.setEmployeeID(rs.getInt(7));
+            if (rs.next()) {
+                rs.previous();
+                while (rs.next()) {
+                    salaryTable.setJobSalary(rs.getDouble(1));
+                    salaryTable.setPerformanceSalary(rs.getDouble(2));
+                    salaryTable.setWorkAgeSalary(rs.getDouble(3));
+                    salaryTable.setSubsideAllowance(rs.getDouble(4));
+                    salaryTable.setMonth(rs.getInt(5));
+                    salaryTable.setYear(rs.getInt(6));
+                    salaryTable.setEmployeeID(rs.getInt(7));
+                }
+            } else {
+                salaryTable.setEmployeeID(-1);
             }
-        }else{
-            salaryTable.setEmployeeID(-1);
-        }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         conn.close();
@@ -49,44 +49,62 @@ public class SalaryDao {
         }
         System.out.println("添加salary:" + sql);
     }
-    public boolean updateSalary(SalaryTable salaryTable)
-    {
+
+    public boolean updateSalary(SalaryTable salaryTable, int accont, int year, int month) {
         conn = new ConnDB();
         boolean flag = true;
-        sql = "update salary jobsalary = \'" + salaryTable.getJobSalary()+
+        sql = "update salary set jobsalary = \'" + salaryTable.getJobSalary() +
                 "\', performancesalary = \'" + salaryTable.getPerformanceSalary() +
-                "\', workAgesalary = \'" + salaryTable.getWorkAgeSalary() +
-                "\', subsideallowance = \'" + salaryTable.getSubsideAllowance() +
-                "\' where employeeid = \'" + salaryTable.getEmployeeID() + "\'"+"and month=\'"+salaryTable.getYear()+
-                "and month=\'"+salaryTable.getMonth();
-        try{
+                "\', workagesalary = \'" + salaryTable.getWorkAgeSalary() +
+                "\', subsidyallowance = \'" + salaryTable.getSubsideAllowance() +
+                "\', employeeid = \'" + salaryTable.getEmployeeID() +
+                "\', year = \'" + salaryTable.getYear() +
+                "\', month = \'" + salaryTable.getMonth() +
+                "\' where employeeid = \'" + accont + "\'" + "and year=\'" + year +
+                "\'and month=\'" + month + "\'";
+        try {
             conn.executeUpdate(sql);
-        }catch (Exception e){
+        } catch (Exception e) {
             flag = false;
             e.printStackTrace();
-        }finally {
+        } finally {
             conn.close();
         }
         return flag;
     }
-    public boolean deleteSalary(int employeeid,int year,int month)
-    {
+
+    public boolean deleteSalary(int employeeid, int year, int month) {
         conn = new ConnDB();
         boolean flag = true;
-        sql = "delete from Salary where employeeid="+"\'"+employeeid+"\'"+
-                "and year="+"\'"+year+"\'"+"and month="+"\'"+month+"\'";
-        try{
-        conn.executeUpdate(sql);
-    }catch (Exception e){
-        flag = false;
-        e.printStackTrace();
-    }finally {
-        conn.close();
+        sql = "delete from Salary where employeeid=" + "\'" + employeeid + "\'" +
+                "and year=" + "\'" + year + "\'" + "and month=" + "\'" + month + "\'";
+        try {
+            conn.executeUpdate(sql);
+        } catch (Exception e) {
+            flag = false;
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+        return flag;
     }
+
+    public boolean deleteallSalary(int employeeid) {
+        conn = new ConnDB();
+        boolean flag = true;
+        sql = "delete from Salary where employeeid=" + "\'" + employeeid + "\'";
+        try {
+            conn.executeUpdate(sql);
+        } catch (Exception e) {
+            flag = false;
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
         return flag;
     }
     private void addElements(ArrayList<SalaryTable> dList, ResultSet rs) {
-            try {
+        try {
             if (rs.next()) {
                 rs.previous();
                 while (rs.next()) {
@@ -122,22 +140,22 @@ public class SalaryDao {
     public ArrayList<SalaryTable> returnAllSalaryTableById(int employeeid) {
         conn = new ConnDB();
         ArrayList<SalaryTable> dList = new ArrayList<SalaryTable>();
-        sql = "select * from salary where employeeid="+"\'"+employeeid+"\'";
+        sql = "select * from salary where employeeid=" + "\'" + employeeid + "\'";
         ResultSet rs = conn.executeQuery(sql);
         addElements(dList, rs);
         System.out.println("查询salary的语句：" + sql);
         conn.close();
         return dList;
     }
-    public SalaryTable getSalarytableByIdAndTimeRencently(int employeeid)
-    {
+
+    public SalaryTable getSalarytableByIdAndTimeRencently(int employeeid) {
         conn = new ConnDB();
-        sql="select * from salary where employeeid="+"\'"+employeeid+"\'"+
+        sql = "select * from salary where employeeid=" + "\'" + employeeid + "\'" +
                 "and year=(select max(year)from salary) and month=(select max(month)from salary)";
         ResultSet rs = conn.executeQuery(sql);
-        SalaryTable salaryTable=new SalaryTable();
+        SalaryTable salaryTable = new SalaryTable();
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 rs.previous();
                 while (rs.next()) {
                     salaryTable.setJobSalary(rs.getDouble(1));
@@ -148,10 +166,10 @@ public class SalaryDao {
                     salaryTable.setYear(rs.getInt(6));
                     salaryTable.setEmployeeID(rs.getInt(7));
                 }
-            }else{
+            } else {
                 salaryTable.setEmployeeID(-1);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         conn.close();

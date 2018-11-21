@@ -21,9 +21,9 @@ public class TreeServiceImp {
         ArrayList<TreeNode> rootDep = departmentTreeDAO.selectAllDep();
 
         // 查看结果
-        for (TreeNode dep : rootDep) {
-            System.out.println(dep);
-        }
+//        for (TreeNode dep : rootDep) {
+//            System.out.println(dep);
+//        }
         // 最后的结果
         ArrayList<TreeNode> depList = new ArrayList<TreeNode>();
         // 先找到所有的一级菜单
@@ -40,6 +40,10 @@ public class TreeServiceImp {
         // 为一级菜单设置子菜单，getChild是递归调用的
         for (TreeNode dep : depList) {
             dep.setChildren(getChild(dep.getId(), rootDep));
+        }
+
+        for (TreeNode dep : depList) {
+            System.out.println(dep);
         }
 
         return depList;

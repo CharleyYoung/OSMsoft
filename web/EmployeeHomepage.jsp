@@ -4,8 +4,8 @@
     Date: 2018/11/16
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -41,9 +41,6 @@
                     <i class="lnr lnr-arrow-left-circle"></i>
                 </button>
             </div>
-            <div align="right">
-                <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i> <span>修改密码</span></a></li>
-            </div>
             <form class="navbar-form navbar-left"></form>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
@@ -60,12 +57,17 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
-                    <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
-                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看工资记录</span></a></li>
-                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="EmployeeHomepage.jsp" class="active"><i class="active"></i> <span>主页</span></a></li>
+                    <li><a href="ManageInformation.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>管理个人信息</span></a></li>
+                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>查看工资记录</span></a></li>
+                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a>
+                    </li>
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -81,7 +83,8 @@
                     <div class="profile-header">
                         <div class="overlay"></div>
                         <div class="profile-main">
-                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle" alt="Avatar">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
                             <h3 class="name" id="name">${sessionScope.Employee.getName()}</h3>
                             <span>${sessionScope.Employee.getName()}</span>
                         </div>
@@ -89,44 +92,57 @@
                     <div class="panel-body">
                         <div class="profile-detail"></div>
                         <h1 align="center" class="page-title">欢迎您，${sessionScope.Employee.getName()}！</h1>
+                        <div align="right">
+                            <li><a href="ChangePasswordForEmployee.jsp" class="active"><i class=""></i>
+                                <span>修改密码</span></a></li>
+                        </div>
                     </div>
                 </div>
                 <!-- END OVERVIEW -->
                 <div class="panel-body">
                     工号：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}" name="Account">
+                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Account}"
+                           name="Account">
                     姓名：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getName()}" name="name">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getName()}" name="name">
                     <br>
                     工龄：
                     <br>
-                    <input type="text"  readonly="readonly" class="form-control" value="${sessionScope.Employee.getWorkAge()}"name="workage">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getWorkAge()}" name="workage">
                     <br>
                     年龄：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getAge()}" name="age">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getAge()}" name="age">
                     <br>
                     性别：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getGender()}"name="gender">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getGender()}" name="gender">
                     <br>
                     电话：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getPhoneNumber()}" name="tele">
                     <br>
                     邮箱：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getEmail()}"name="email">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getEmail()}" name="email">
                     <br>
                     职务：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getJob()}"name="job">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getJob()}" name="job">
                     <br>
                     岗位：
                     <br>
-                    <input type="text" readonly="readonly" class="form-control" value="${sessionScope.Employee.getDepartmentName()}"name="department">
+                    <input type="text" readonly="readonly" class="form-control"
+                           value="${sessionScope.Employee.getDepartmentName()}" name="department">
                 </div>
             </div>
         </div>

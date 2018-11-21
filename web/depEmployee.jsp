@@ -63,7 +63,7 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class="active"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="AdminHomepage.jsp" class="collapse"><i class=""></i> <span>个人信息</span></a></li>
 
                     <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -80,14 +80,14 @@
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
-                                <li><a href="" class="">查询工资</a></li>
-                                <li><a href="" class="">添加工资信息</a></li>
+                                <li><a href="AdminSalary.jsp" class="">查询工资</a></li>
+                                <li><a href="AdminSalary2.jsp" class="">管理工资信息</a></li>
                             </ul>
                         </div>
                     </li>
 
                     <!--显示树状部门列表，由saulzhang维护-->
-                    <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
+                    <li><a href="##subPages3" data-toggle="collapse" class="active"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages3" class="collapse ">
@@ -157,7 +157,8 @@
                     </li>
 
 
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
                     </li>
                     </a>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 /**
  * @author zzh187
  * ChangePassword 该Servlet负责处理Employee修改密码
@@ -26,11 +27,11 @@ public class ChangePassword extends HttpServlet {
         HttpSession session = request.getSession(true);
         //获取页面Account信息
         int account = 0;
-        try{
+        try {
             String account1 = session.getAttribute("Account").toString();
             account = Integer.parseInt(account1);
-        }catch(Exception e){
-            account=0;
+        } catch (Exception e) {
+            account = 0;
         }
         //创建DAO变量
         EmployeeDAO employeeDAO = new EmployeeDAO();
@@ -38,19 +39,22 @@ public class ChangePassword extends HttpServlet {
         EmployeeTable employeeTable = employeeDAO.searchEmployeeByID(account);
         String password = employeeTable.getPassword();
         //判断所有输入框是否填满
-        if(request.getParameter("oldpassword")=="" || request.getParameter("newpassword")==""
-                || request.getParameter("againnewpassword")==""){
+        if (request.getParameter("oldpassword") == "" || request.getParameter("newpassword") == ""
+                || request.getParameter("againnewpassword") == "") {
             out.print("<script language='javascript' charset='UTF-8'>alert('输入内容不能为空！');" +
                     "window.location.href='ChangePasswordForEmployee.jsp';</script>");
         }//判断旧密码是否填写正确
-        else if(!String.valueOf(request.getParameter("oldpassword")).equals(password)){
+        else if (!String.valueOf(request.getParameter("newpassword")).equals(String.valueOf(request.getParameter("againnewpassword")))) {
+            out.print("<script language='javascript' charset='UTF-8'>alert('两次新密码不匹配');" +
+                    "window.location.href='ChangePasswordForEmployee.jsp';</script>");
+        } else if (!String.valueOf(request.getParameter("oldpassword")).equals(password)) {
             out.print("<script language='javascript' charset='UTF-8'>alert('旧密码输入错误');" +
                     "window.location.href='ChangePasswordForEmployee.jsp';</script>");
-        } else{
+        } else {
             employeeTable.setPassword(String.valueOf(request.getParameter("newpassword")));
             employeeDAO.updateEmployeePassword(employeeTable);
-            session.setAttribute("Employee",employeeTable);
-            session.setAttribute("Account",account);
+            session.setAttribute("Employee", employeeTable);
+            session.setAttribute("Account", account);
             response.sendRedirect("EmployeeHomepage.jsp");
         }
     }

@@ -59,6 +59,7 @@ public class AddDepartment extends HttpServlet {
 
             int parentdepid = 0;
             boolean isParent = false;//标记是否为合法的上级部门
+            String depurl = "null";//记录待添加部门的url
             String parentdepname = String.valueOf(request.getParameter("parentdepname"));
             DepartmentTable parentdepartmentTable = departmentDAO.queryDepartmentByDepname(parentdepname).get(0);
             if (parentdepartmentTable.getDepartmentName().equals(parentdepname)) {//判断是否存在输入的上级部门
@@ -87,7 +88,12 @@ public class AddDepartment extends HttpServlet {
                         flag = false;
                         System.out.println("超过层次结构");
                         out.print("<script>alert('该部门以下无法再添加子部门（部门层次结构最多为三层），请重新添加');window.location='AddDepartment.jsp';</script>");
+                    } else {
+                        depurl = "depEmployee.jsp";
+                        out.print("<script>alert('该部门已经位于部门层次结构第三层，不允许含有子部门，已默添加为不含子部门');window.location='AddDepartment.jsp';</script>");
+
                     }
+
                 }
             }
             if (isParent && flag) {//如果输入的上级部门合法且未超出层级结构即可进行添加子部门
@@ -99,9 +105,15 @@ public class AddDepartment extends HttpServlet {
                 departmentTable.setParentDepartmentID(parentdepid);
                 System.out.println("havason: " + haveson);
                 if (haveson.equals("nothave")) {
-                    departmentTable.setUrl("depEmployee.jsp");
+                    depurl = "depEmployee.jsp";
                 }
-                departmentDAO.addDepartment(departmentTable);
+                if (depurl.equals("depEmployee.jsp")) {
+                    departmentTable.setUrl(depurl);
+                    departmentDAO.addNotHaveSonDepartment(departmentTable);
+                } else {
+                    departmentDAO.addHaveSonDepartment(departmentTable);
+                }
+
                 //request.setAttribute("newDepartment",departmentTable);
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("depList");

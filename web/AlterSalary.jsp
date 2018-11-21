@@ -1,21 +1,18 @@
-<%--
-    Created by IntelliJ IDEA.
-    User: Taiho
-    Date: 2018/11/15
+<%@ page import="OSMsoft.Table.SalaryTable" %><%--
+  Created by IntelliJ IDEA.
+  User: 82533
+  Date: 2018/11/17
+  Time: 20:05
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="MyFirstTag" prefix="mytag" %>
-<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-<!--调用自定义标签-->
-<mytag:DepartmentReader></mytag:DepartmentReader>
-<!--利用JSTL生成一个数组-->
-<c:set var="departmentList" scope="page" value="${departmentInformation}"/>
+<html lang="en">
 <head>
-    <title>添加员工</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -67,18 +64,18 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="AdminHomepage.jsp" class=""><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
+                    <li><a href="AdminHomepage.jsp" class="collapsed"><i class=""></i> <span>个人信息</span></a></li>
+                    <li><a href="#subPages1" data-toggle="collapse" class="collapsed"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
-                                <li><a href="AddEmployee.jsp" class="active">添加员工</a></li>
+                                <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
                                 <li><a href="OperateEmployeeForAdmin.jsp" class="">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#subPages2" data-toggle="collapse" class="collapsed"><i class=""></i>
+                        <a href="#subPages2" data-toggle="collapse" class="active"><i class=""></i>
                             <span>薪酬管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages2" class="collapse">
                             <ul class="nav">
@@ -88,7 +85,7 @@
                         </div>
                     </li>
 
-                    <!--显示树状部门列表，由saulzhang维护-->
+
                     <li><a href="##subPages3" data-toggle="collapse" class="collapsed"><i
                             class="images/dep.png fa-fw"></i>
                         <span>部门管理</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -158,6 +155,7 @@
                         </div>
                     </li>
 
+
                     <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
                             class="collapsed"></i><span>帮助</span></a></li>
                     <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
@@ -174,51 +172,107 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title">添加员工</h3>
-                <div class="row">
-                    <div class="col-md-12">
+                <!-- OVERVIEW -->
+                <div class="panel panel-headline">
+                    <div class="profile-header">
+                        <div class="overlay"></div>
+                        <div class="profile-main">
+                            <img src="assets/img/Taiho_medium.png" width="80" height="80" class="img-circle"
+                                 alt="Avatar">
+                            <h3 class="name" id="name">${sessionScope.Account}</h3>
+                            <span>${sessionScope.Account}</span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="profile-detail"></div>
+                        <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
+                        <style type="text/css">
+                            table.gridtable {
+                                font-family: verdana, arial, sans-serif;
+                                font-size: 11px;
+                                color: #333333;
+                                border-width: 1px;
+                                border-color: #666666;
+                                border-collapse: collapse;
+                            }
 
-                        <!-- INPUTS -->
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">输入</h3>
-                            </div>
+                            table.gridtable th {
+                                border-width: 1px;
+                                padding: 8px;
+                                border-style: solid;
+                                border-color: #666666;
+                                background-color: #dedede;
+                            }
 
-                            <form method="POST" action="AddEmployee">
-                                <div class="panel-body">
-                                    <input type="text" class="form-control" placeholder="姓名" name="name">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="年龄" name="age">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="电话号码" name="tele">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="电子邮箱" name="email">
-                                    <br>
-                                    <input type="text" class="form-control" placeholder="职位" name="job">
-                                    <br>
-                                    <select id="部门" name="department" size="value" style="width: 100px;">
-                                        <c:forEach var="department" items="${departmentList}">
-                                            <option name="department"
-                                                    value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <br>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="male" type="radio">
-                                        <span><i></i>男</span>
-                                    </label>
-                                    <label class="fancy-radio">
-                                        <input name="gender" value="female" type="radio">
-                                        <span><i></i>女</span>
-                                    </label>
-                                    <p class="demo-button">
-                                        <button id="submit" type="submit" class="btn btn-success">添加</button>
-                                    </p>
-                                </div>
-                            </form>
+                            table.gridtable td {
+                                border-width: 1px;
+                                padding: 8px;
+                                border-style: solid;
+                                border-color: #666666;
+                                background-color: #ffffff;
+                            }
+                        </style>
+                        <c:set var="DeservedSalary" scope="page" value="${sessionScope.DeservedSalary}"/>
+                        <!--调用自定义标签-->
+                        <mytag:ObtainPersonalIncomeTaxAndActualSalary></mytag:ObtainPersonalIncomeTaxAndActualSalary>
+                        <!--利用JSTL获取员工的个人所得税和实得工资-->
+                        <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}"/>
+                        <c:set var="ActualSalary1" scope="page" value="${ActualSalary}"/>
+                        <div align="center">
+                            <table align="center">
+                                <tr>
+                                    <td width=350px height=64px>
+                                        <table class="gridtable">
+                                            <tr>
+                                                <th>EmloyeeID</th>
+                                                <th>JobSalary</th>
+                                                <th>PerformanceSalary</th>
+                                                <th>WorkageSalary</th>
+                                                <th>SubsidyAllowance</th>
+                                                <th>Tax</th>
+                                                <th>Year</th>
+                                                <th>Month</th>
+                                                <th>Alter</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            <c:forEach items="${time}" var="item">
+                                                <c:set var="item" scope="session" value="${items}"></c:set>
+                                                <tr>
+                                                    <td>${item.employeeID} </td>
+                                                    <td>${item.jobSalary}</td>
+                                                    <td>${item.performanceSalary}</td>
+                                                    <td>${item.workAgeSalary} </td>
+                                                    <td>${item.subsideAllowance}</td>
+                                                    <td>${sessionScope.DeservedSalary}</td>
+                                                    <td>${PersonalIncomeTax1}</td>
+                                                    <td>${ActualSalary1}</td>
+                                                    <td>${item.year} </td>
+                                                    <td>${item.month} </td>
+                                                    <th>
+                                                        <button class="btn btn-primary"
+                                                                onclick="Update(${item.employeeID},${item.jobSalary},${item.performanceSalary},${item.workAgeSalary},${item.subsideAllowance},${item.month},${item.year})">
+                                                            <i class="fa fa-refresh"></i> 更新信息
+                                                        </button>
+                                                    </th>
+                                                    <th>
+                                                        <button class="btn btn-danger"
+                                                                onclick="Delete(${item.employeeID},${item.year},${item.month})">
+                                                            <i class="fa fa-refresh"></i> 删除
+                                                        </button>
+                                                    </th>
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="btn btn-danger" onclick="DeleteAll(${account})"><i class="fa fa-refresh"></i>
+                                清空
+                            </button>
                         </div>
                     </div>
                 </div>
+                <!-- END OVERVIEW -->
             </div>
         </div>
     </div>
@@ -251,6 +305,38 @@
         }
     }
 </script>
-</body>
+<script type="text/javascript">
+    function Delete(account, year, month) {
+        var result = confirm("确定要删除这个Salary吗？");
+        if (result == true) {
+            window.location.href = "DeleteSalary?account=" + account + "&year=" + year + "&month=" + month;
+        } else {
 
+        }
+    }
+</script>
+<script type="text/javascript">
+    function Update(employeeID, jobSalary, performanceSalary, workAgeSalary, subsideAllowance, month, year) {
+        var result = confirm("更新该Salary信息？");
+        if (result == true) {
+            window.location.href = "UpdateSalaryForAdmin?account=" + employeeID + "&jobSalary=" + jobSalary + "&performanceSalary=" + performanceSalary
+                + "&workAgeSalary=" + workAgeSalary + "&subsideAllowance=" + subsideAllowance + "&month=" + month + "&year=" + year;
+        } else {
+
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function DeleteAll(account) {
+        var result = confirm("清空该员工所有的Salary？");
+        if (result == true) {
+            window.location.href = "DeleteAllSalary?account=" + account;
+        } else {
+
+        }
+    }
+</script>
+</body>
 </html>
+

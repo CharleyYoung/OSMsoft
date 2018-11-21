@@ -4,7 +4,7 @@
     Date: 2018/11/16
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -57,12 +57,18 @@
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <li><a href="EmployeeHomepage.jsp" class="active"><i class=""></i> <span>主页</span></a></li>
-                    <li><a href="ManageInformation.jsp" class="active"><i class=""></i><span>管理个人信息</span></a></li>
-                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看工资记录</span></a></li>
-                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a></li>
-                    <li><a href="#" class="collapsed"><i class="collapsed"></i><span>帮助</span></a></li>
-                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a></li>
+                    <li><a href="EmployeeHomepage.jsp" class="collapsed"><i class="collapsed"></i> <span>主页</span></a>
+                    </li>
+                    <li><a href="ManageInformation.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>管理个人信息</span></a></li>
+                    <li><a href="PayrollRecordForEmployee.jsp" class="collapsed"><i
+                            class="collapsed"></i><span>查看工资记录</span></a></li>
+                    <li><a href="DepartmentInformationForEmployee.jsp" class="collapsed"><i class="collapsed"></i><span>查看部门信息</span></a>
+                    </li>
+                    <li><a href="https://blog.csdn.net/qq_37053885/article/details/84262573" class="collapsed"><i
+                            class="collapsed"></i><span>帮助</span></a></li>
+                    <li><a href="#" onclick="logout()" class="collapsed"><i class="collapsed"></i> <span>退出登录</span></a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -75,13 +81,13 @@
             <div class="container-fluid">
                 <h3 class="page-title">修改密码</h3>
                 <div class="row">
-                    <div class="col-md-12" >
+                    <div class="col-md-12">
 
                         <!-- INPUTS -->
                         <div class="panel">
                             <div class="panel-heading">
                             </div>
-                            <form method="POST" action="ChangePassword" >
+                            <form method="POST" action="ChangePassword">
                                 <div class="panel-body">
                                     输入旧密码：
                                     <br>
@@ -96,7 +102,7 @@
                                     <input type="password" class="form-control" name="againnewpassword">
                                     <br>
                                     <p class="demo-button">
-                                        <button id="submit" type="submit"  class="btn btn-success">确认修改</button>
+                                        <button id="submit" type="submit" class="btn btn-success">确认修改</button>
                                     </p>
                                 </div>
                             </form>
