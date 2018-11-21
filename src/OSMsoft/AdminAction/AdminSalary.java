@@ -14,7 +14,11 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+/**
+ * 通过员工号搜索Salary的主界面
+ *
+ * @author 82533
+ */
 public class AdminSalary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
