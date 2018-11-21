@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+/**
+ * 搜索得到的结果页面
+ *
+ * @author 82533
+ */
 public class AdminSalary1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
