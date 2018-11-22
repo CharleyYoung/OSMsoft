@@ -190,19 +190,21 @@
                             <div style="text-align:center; vertical-align:middle;">
                                 <table align="center">
                                     <tr>
-                                        <td width=350px height=64px>
+                                        <td width=300px height=64px>
                                             <input type="text" name="salary1" id="salary1"
                                                    style="color:#CCC; font-size:18px" size=35 placeholder="员工工号"
                                                    maxlength="32"/>
                                         </td>
                                         <td width=100px height=64px>
-                                            <button type="submit">查询</button>
+                                            <button type="submit" class="btn btn-success">查询</button>
+                                        </td>
+                                        <td width="100px" height="64px">
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="window.location.href='AddSalary.jsp'">添加Salary
+                                            </button>
                                         </td>
                                     </tr>
                                 </table>
-                                <button type="button" class="btn btn-danger"
-                                        onclick="window.location.href='AddSalary.jsp'">添加Salary
-                                </button>
                                 </i>
                                 <%--<input type="button" name="register" value ="添加Salary" onclick="window.location.href='AddSalary.jsp'"/>--%>
                             </div>
