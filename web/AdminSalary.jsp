@@ -198,7 +198,7 @@
                                                    maxlength="32"/>
                                         </td>
                                         <td width=100px height=64px>
-                                            <button type="submit">查询</button>
+                                            <button type="submit" class="btn btn-success">查询</button>
                                         </td>
                                     </tr>
                                 </table>

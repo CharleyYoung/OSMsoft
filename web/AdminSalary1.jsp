@@ -263,15 +263,17 @@
                                             </table>
                                         </td>
                                         <td width="100px" height=64p>
-                                            <button type="submit">查询</button>
+                                            <button type="submit" class="btn btn-success">查询</button>
                                         </td>
                                     </tr>
-
                                 </table>
+                            </div>
+                                </form>
                             </div>
                         </form>
                     </div>
                 <!-- END OVERVIEW -->
+            </div>
             </div>
         </div>
     </div>
