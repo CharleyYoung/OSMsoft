@@ -186,57 +186,35 @@
                     <div class="panel-body">
                         <div class="profile-detail"></div>
                         <h1 align="center" class="page-title"><strong>查询结果</strong></h1>
-                        <style type="text/css">
-                            table.gridtable {
-                                font-family: verdana, arial, sans-serif;
-                                font-size: 11px;
-                                color: #333333;
-                                border-width: 1px;
-                                border-color: #666666;
-                                border-collapse: collapse;
-                            }
-
-                            table.gridtable th {
-                                border-width: 1px;
-                                padding: 8px;
-                                border-style: solid;
-                                border-color: #666666;
-                                background-color: #dedede;
-                            }
-
-                            table.gridtable td {
-                                border-width: 1px;
-                                padding: 8px;
-                                border-style: solid;
-                                border-color: #666666;
-                                background-color: #ffffff;
-                            }
-                        </style>
                         <c:set var="DeservedSalary" scope="page" value="${sessionScope.DeservedSalary}"/>
                         <!--调用自定义标签-->
                         <mytag:ObtainPersonalIncomeTaxAndActualSalary></mytag:ObtainPersonalIncomeTaxAndActualSalary>
                         <!--利用JSTL获取员工的个人所得税和实得工资-->
                         <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}"/>
                         <c:set var="ActualSalary1" scope="page" value="${ActualSalary}"/>
-                        <div align="center">
-                            <table align="center">
-                                <tr>
-                                    <td width=350px height=64px>
-                                        <table class="gridtable">
+                    </div>
+                    <div class="panel-body">
+                        <div class="profile-detail"></div>
+                        <form class="form-auth-small" method="post" action="CheckSalaryRecord">
+                            <div class="panel-body no-padding">
+                                        <table class="table">
+                                            <thead>
                                             <tr>
-                                                <th>EmloyeeID</th>
-                                                <th>JobSalary</th>
-                                                <th>PerformanceSalary</th>
-                                                <th>WorkageSalary</th>
-                                                <th>SubsidyAllowance</th>
-                                                <th>DeservedSalary</th>
-                                                <th>PersonalIncomeTax</th>
-                                                <th>ActualSalary</th>
-                                                <th>Year</th>
-                                                <th>Month</th>
-                                                <th>Alter</th>
-                                                <th>Delete</th>
+                                                <th>工号</th>
+                                                <th>岗位工资</th>
+                                                <th>绩效工资</th>
+                                                <th>工龄工资</th>
+                                                <th>津贴补助</th>
+                                                <th>应得工资</th>
+                                                <th>个人所得税</th>
+                                                <th>实得工资</th>
+                                                <th>年</th>
+                                                <th>月</th>
+                                                <th>修改</th>
+                                                <th>删除</th>
                                             </tr>
+                                            <thead>
+                                            <tbody>
                                             <c:forEach items="${time}" var="item">
                                                 <c:set var="item" scope="session" value="${items}"></c:set>
                                                 <tr>
@@ -264,14 +242,19 @@
                                                     </th>
                                                 </tr>
                                             </c:forEach>
+                                            </tbody>
                                         </table>
                                     </td>
                                 </tr>
                             </table>
+                                <div align="center">
                             <button class="btn btn-danger" onclick="DeleteAll(${account})"><i class="fa fa-refresh"></i>
                                 清空
                             </button>
+                                </div>
                         </div>
+                    </form>
+                </div>
                     </div>
                 </div>
                 <!-- END OVERVIEW -->

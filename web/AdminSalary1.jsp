@@ -230,19 +230,23 @@
                                         <!--利用JSTL获取员工的个人所得税和实得工资-->
                                         <c:set var="PersonalIncomeTax1" scope="page" value="${PersonalIncomeTax}"/>
                                         <c:set var="ActualSalary1" scope="page" value="${ActualSalary}"/>
-                                        <td width=350px height=64px>
-                                            <table class="gridtable">
+                            </div>
+                            <div class="panel-body">
+                                <div class="profile-detail"></div>
+                                <form class="form-auth-small" method="post" action="CheckSalaryRecord">
+                                    <div class="panel-body no-padding">
+                                            <table class="table">
                                                 <tr>
-                                                    <th>EmloyeeID</th>
-                                                    <th>JobSalary</th>
-                                                    <th>PerformanceSalary</th>
-                                                    <th>WorkageSalary</th>
-                                                    <th>SubsidyAllowance</th>
-                                                    <th>DeservedSalary</th>
-                                                    <th>PersonalIncomeTax</th>
-                                                    <th>ActualSalary</th>
-                                                    <th>Year</th>
-                                                    <th>Month</th>
+                                                    <th>工号</th>
+                                                    <th>岗位工资</th>
+                                                    <th>绩效工资</th>
+                                                    <th>工龄工资</th>
+                                                    <th>津贴补助</th>
+                                                    <th>应得工资</th>
+                                                    <th>个人所得税</th>
+                                                    <th>实得工资</th>
+                                                    <th>年</th>
+                                                    <th>月</th>
                                                 </tr>
                                                 <tr>
                                                     <td>${salary.employeeID} </td>
@@ -262,11 +266,11 @@
                                             <button type="submit">查询</button>
                                         </td>
                                     </tr>
+
                                 </table>
                             </div>
                         </form>
                     </div>
-                </div>
                 <!-- END OVERVIEW -->
             </div>
         </div>
