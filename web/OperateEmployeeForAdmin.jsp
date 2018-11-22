@@ -62,12 +62,12 @@
             <nav>
                 <ul class="nav">
                     <li><a href="AdminHomepage.jsp" class="collapsed"><i class=""></i> <span>个人信息</span></a></li>
-                    <li><a href="#subPages1" data-toggle="collapsed" class="active"><i class=""></i>
+                    <li><a href="#subPages1" data-toggle="collapse" class="active"><i class=""></i>
                         <span>员工管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="subPages1" class="collapse ">
                             <ul class="nav">
                                 <li><a href="AddEmployee.jsp" class="">添加员工</a></li>
-                                <li><a href="OperateEmployeeForAdmin.jsp" class="collapsed">管理员工信息</a></li>
+                                <li><a href="OperateEmployeeForAdmin.jsp" class="active">管理员工信息</a></li>
                             </ul>
                         </div>
                     </li>
@@ -96,7 +96,7 @@
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
                                                 <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
-                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                            <a href="<c:url value='depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
@@ -135,7 +135,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>
