@@ -96,7 +96,7 @@
                                     <c:if test="${ dep.parentId eq '0' and not dep.url eq 'no resources'}">
                                         <li>
                                                 <%--<c:out value="/depEmployee.do?depid=${dep.id}&departmentName=${dep.name}"></c:out>--%>
-                                            <a href="<c:url value='/depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
+                                            <a href="<c:url value='depEmployeeInfo?depid=${dep.id}&departmentName=${dep.name}'/>">
                                                 <i class="${dep.icon } fa-fw"></i> ${dep.name }
                                             </a>
                                         </li>
@@ -135,7 +135,7 @@
                                                                         <c:forEach items="${secondChild.children}"
                                                                                    var="thirdChild" varStatus="status">
                                                                             <li>
-                                                                                <a href="<c:url value='/depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
+                                                                                <a href="<c:url value='depEmployeeInfo?depid=${thirdChild.id}&departmentName=${thirdChild.name}'/>">${thirdChild.name }</a>
                                                                             </li>
                                                                         </c:forEach>
                                                                     </ul>

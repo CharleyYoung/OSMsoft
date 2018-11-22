@@ -50,7 +50,7 @@ public class DepEmployeeServlet extends HttpServlet {
 
         session.setAttribute("departmentName", departmentName);
 
-        res.sendRedirect("/depEmployee.jsp");
+        res.sendRedirect("depEmployee.jsp");
 
     }
 
