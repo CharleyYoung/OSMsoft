@@ -38,5 +38,5 @@ OSMsoft薪资管理系统提供两种用户类型
 
 本项目组由四个人组成，其中有两人不提供Github链接，故只展示两人  
 
-[Charley yang](https://github.com/CharleyYoung)
+[Charley yang](https://github.com/CharleyYoung)  
 [SaulZhang](https://github.com/SaulZhang)  
